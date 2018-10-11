@@ -15,12 +15,15 @@ public class Movement : MonoBehaviour {
 
     private bool zoom;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         // get controller script
         con = GetComponent<Controller>();
-	}
+
+        // Lock the mouse
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,6 +60,11 @@ public class Movement : MonoBehaviour {
         Vector3 vecUP = new Vector3(0f, jump, 0f) * Sensitivity;
 
         con.Jump(vecUP);
+
+        // Fire weapon
+        float fire = Input.GetAxisRaw("Fire1");
+
+        con.Shoot(fire);
 
         // change FOV
         if (Input.GetKeyDown("c"))

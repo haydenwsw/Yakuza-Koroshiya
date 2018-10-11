@@ -26,7 +26,7 @@ public class Pickup : MonoBehaviour {
         RaycastHit hit;
 
         // if currently holding nothing and if button is down and the raycast is hitting an object
-        if (currentlyHolding == null && Input.GetButtonDown("Fire1") && Physics.Raycast(con.cam.transform.position, con.cam.transform.forward, out hit, 100) && toggle == false)
+        if (currentlyHolding == null && Input.GetButtonDown("Use") && Physics.Raycast(con.cam.transform.position, con.cam.transform.forward, out hit, 100) && toggle == false)
         {
             // if the raycast hit an object that is able to be carried
             if (hit.transform.gameObject.tag == "Block")
@@ -43,7 +43,7 @@ public class Pickup : MonoBehaviour {
             }
         }
         // if you drop the object
-        else if (Input.GetButtonDown("Fire1") && toggle == true && currentlyHolding != null)
+        else if (Input.GetButtonDown("Use") && toggle == true && currentlyHolding != null)
         {
             toggle = !toggle;
             // set hand gameobject to parenting to null
@@ -54,7 +54,7 @@ public class Pickup : MonoBehaviour {
             currentlyHolding = null;
         }
         // through an object
-        else if (Input.GetButtonDown("Fire2") && currentlyHolding != null)
+        else if (Input.GetButtonDown("Fire1") && currentlyHolding != null)
         {
             toggle = !toggle;
             // set hand gameobject to parenting to null
@@ -66,11 +66,5 @@ public class Pickup : MonoBehaviour {
             // set the gameobject vatable back to null
             currentlyHolding = null;
         }
-        if (Input.GetButtonDown("Fire3") && currentlyHolding != null)
-        {
-            Quaternion quat = new Quaternion(100,100,100,0);
-            currentlyHolding.GetComponent<Rigidbody>().MoveRotation(quat);
-        }
-
     }
 }
