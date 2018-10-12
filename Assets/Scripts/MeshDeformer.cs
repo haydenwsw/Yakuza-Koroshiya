@@ -66,6 +66,9 @@ public class MeshDeformer : MonoBehaviour
         // set the position to zero
         transform.position = Vector3.zero;
 
+        // set the rotation to zero
+        transform.rotation = new Quaternion();
+
         // set childs scale to the percentage of the parents scale
         Vector3 Scale = new Vector3(1, 1, 1);
         Scale.x /= transform.lossyScale.x;
@@ -85,6 +88,9 @@ public class MeshDeformer : MonoBehaviour
 
             //doing transform.position
             Verts[i] += objPos;
+
+            //doing transform.rotation
+            //Verts[i] = objRot * (Verts[i] - objPos) + objPos;
         }
         
         // set the verties to the mesh filter
