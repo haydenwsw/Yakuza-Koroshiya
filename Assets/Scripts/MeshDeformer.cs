@@ -14,8 +14,8 @@ public class MeshDeformer : MonoBehaviour
     public float maxiumDepth;
 
     // setting up the verties varables
-    public List<Vector3> ORIGINALVERTS;
-    public List<Vector3> modifiedVerts;
+    private List<Vector3> ORIGINALVERTS;
+    private List<Vector3> modifiedVerts;
 
     // getting the MeshFilter class
     private MeshFilter meshFilter;
@@ -59,15 +59,14 @@ public class MeshDeformer : MonoBehaviour
 
         // getting some useful varables we will use later
         Vector3 objPos = transform.position;
-        Quaternion objRot = new Quaternion();
-        objRot.eulerAngles = transform.rotation.eulerAngles;
+        Quaternion objRot = new Quaternion { eulerAngles = transform.rotation.eulerAngles };
         Vector3 objScale = transform.lossyScale;
 
         // set the position to zero
         transform.position = Vector3.zero;
 
-        // set the rotation to zero
-        transform.rotation = new Quaternion();
+        // set the childs rotation to the parents rotation then inverse it
+        transform.localRotation = Quaternion.Inverse(transform.rotation);
 
         // set childs scale to the percentage of the parents scale
         Vector3 Scale = new Vector3(1, 1, 1);
@@ -86,11 +85,11 @@ public class MeshDeformer : MonoBehaviour
             vertex.z *= objScale.z;
             Verts[i] = vertex;
 
+            //doing transform.rotation
+            Verts[i] = objRot * (Verts[i] - objPos) + objPos;
+
             //doing transform.position
             Verts[i] += objPos;
-
-            //doing transform.rotation
-            //Verts[i] = objRot * (Verts[i] - objPos) + objPos;
         }
         
         // set the verties to the mesh filter
