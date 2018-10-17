@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Deleter : MonoBehaviour {
 
+    private float time = 0;
+
 	void Update ()
     {
-        if(this.transform.position.y < -50)
+        time += Time.deltaTime;
+        if (time >= 2)
         {
             Destroy(this.gameObject);
         }
-
-        
-        //if ()
-        //{
-
-        //}
-	}
+    }
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        Destroy(this.gameObject);
+        if (collision.gameObject.tag != this.gameObject.tag)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
