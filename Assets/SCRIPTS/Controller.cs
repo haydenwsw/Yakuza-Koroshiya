@@ -7,41 +7,62 @@ using System.Reflection;
 [RequireComponent(typeof(Rigidbody))]
 public class Controller : MonoBehaviour {
 
+    // camera
     public Camera cam;
 
+    // global bulet speed
+    [Header("Global bullet speed")]
+    public float BulletSpeed;
+
+    [Header("Rifle varables")]
+    public float RifleFireRate;
+    public float RifleSpread;
+    
+    [Header("Shotgun varables")]
+    public float ShotgunFireRate;
+    public float ShotgunSpread;
+    public int ShotgunPellets;
+
+    // Gun projectiles
+    [Header("Gun projectiles prefabs")]
+    public GameObject Bullet;
+    public GameObject Laser;
+    public GameObject Pellet;
+
+    // real world positioning objects
+    [Header("Real world positions for objects")]
+    public Transform Barrel;
+    public Transform Weapon;
+
+    // all the weapons
+    [Header ("All weapons prefabs")]
+    public GameObject KendoStick;
+    public GameObject LaserPistol;
+    public GameObject AssultRifle;   
+    public GameObject AutoShotty;
+
+    // movement varables
     private Vector3 velocity = Vector3.zero;
     private Vector3 MouseY = Vector3.zero;
     private Vector3 MouseX = Vector3.zero;
     private Vector3 jump = Vector3.zero;
-
-    float shoot = 0;
-    public float BulletSpeed;
-
+    private float shoot = 0;
+    
     private Rigidbody rb;
 
-    public GameObject Bullet;
-    public Transform Barrel;
-
-    public GameObject Laser;
-
-    public Transform Weapon;
     private GameObject currentlyHolding;
-
-    public float aimOffset;
-
-    public GameObject Weapon1;
-    public GameObject Weapon2;
-    public GameObject Weapon3;
-    public GameObject Weapon4;
 
     private Vector3 weaponPos;
 
     private bool Hasweapon = false;
 
     private int firingMode;
+
     private bool fired = true;
 
-    Animator Anime;
+    private float time = 0;
+
+    private Animator Anime;
 
     // Use this for initialization
     void Start ()
@@ -55,10 +76,10 @@ public class Controller : MonoBehaviour {
         weaponPos = Weapon.transform.localPosition;
 
         // spawn with kendo stick
-        currentlyHolding = Instantiate(Weapon2, Weapon.position, Weapon.rotation);
+        currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = Weapon2.transform.position;
-        currentlyHolding.transform.localRotation = Weapon2.transform.rotation;
+        currentlyHolding.transform.localPosition = KendoStick.transform.position;
+        currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
         Hasweapon = false;
         firingMode = 0;
     }
@@ -172,12 +193,30 @@ public class Controller : MonoBehaviour {
                 }
                 else
                 {
-                    pos = inputRay.GetPoint(200);
+                    pos = inputRay.GetPoint(10);
                 }
 
-                Vector3 dir = (pos - Barrel.transform.position);
-                GameObject bullet = Instantiate(Bullet, Barrel.position, Quaternion.LookRotation(dir)) as GameObject;
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
+                Debug.DrawLine(cam.transform.position, hit.point);
+
+                time += Time.deltaTime;
+
+                if (time >= RifleFireRate)
+                {
+                    Vector3 Offset = new Vector3(
+                            Random.Range(-RifleSpread, RifleSpread),
+                            Random.Range(-RifleSpread, RifleSpread),
+                            Random.Range(-RifleSpread, RifleSpread));
+
+                    Vector3 dir = (pos - Barrel.transform.position);
+
+                    Quaternion rot = Quaternion.LookRotation(dir + Offset);
+                  
+                    // Quaternion.LookRotation(dir)
+                    GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
+                    bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
+                    bullet.transform.localRotation = Barrel.rotation;
+                    time = 0;
+                }
             }
             if (firingMode == 2)
             {
@@ -226,14 +265,28 @@ public class Controller : MonoBehaviour {
                     pos = inputRay.GetPoint(200);
                 }
 
-                Vector3 dir = (pos - Barrel.transform.position);
+                Debug.DrawLine(cam.transform.position, hit.point);
 
-                Vector3 Offset = new Vector3(Random.Range(-aimOffset, aimOffset), Random.Range(-aimOffset, aimOffset), Random.Range(-aimOffset, aimOffset));
+                Vector3 dir = (inputRay.GetPoint(200) - Barrel.transform.position);
 
-                Quaternion rot = Quaternion.LookRotation(dir + Offset);
+                time += Time.deltaTime;
 
-                GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
+                if (time >= ShotgunFireRate)
+                {
+                    for (int i = 0; i < ShotgunPellets; i++)
+                    {
+                        Vector3 Offset = new Vector3(
+                            Random.Range(-ShotgunSpread, ShotgunSpread),
+                            Random.Range(-ShotgunSpread, ShotgunSpread),
+                            Random.Range(-ShotgunSpread, ShotgunSpread));
+
+                        Quaternion rot = Quaternion.LookRotation(dir + Offset);
+
+                        GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
+                        pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
+                    }
+                    time = 0;
+                }
             }
         }
         else if (shoot == 0)
@@ -247,43 +300,47 @@ public class Controller : MonoBehaviour {
         //Switch weapons
         if (Input.GetKeyDown("1"))
         {
+            // sword
             Destroy(currentlyHolding);
-            currentlyHolding = Instantiate(Weapon2, Weapon.position, Weapon.rotation);
+            currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = Weapon2.transform.position;
-            currentlyHolding.transform.localRotation = Weapon2.transform.rotation;
+            currentlyHolding.transform.localPosition = KendoStick.transform.position;
+            currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
             Hasweapon = false;
             firingMode = 0;
         }
 
         if (Input.GetKeyDown("2"))
         {
+            // rifel
             Destroy(currentlyHolding);
             Weapon.transform.localPosition = weaponPos;
             Weapon.transform.localRotation = new Quaternion();
-            currentlyHolding = Instantiate(Weapon1, Weapon.position, Weapon.rotation);
+            currentlyHolding = Instantiate(AssultRifle, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             Hasweapon = true;
             firingMode = 1;
         }
         if (Input.GetKeyDown("3"))
         {
+            // laser pistol
             Destroy(currentlyHolding);
             Weapon.transform.localPosition = weaponPos;
-            Weapon.transform.localRotation = Weapon3.transform.rotation;
-            currentlyHolding = Instantiate(Weapon3, Weapon.position, Weapon.rotation);
+            Weapon.transform.localRotation = LaserPistol.transform.rotation;
+            currentlyHolding = Instantiate(LaserPistol, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = Weapon3.transform.position;
-            currentlyHolding.transform.localRotation = Weapon3.transform.rotation;
+            currentlyHolding.transform.localPosition = LaserPistol.transform.position;
+            currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
             Hasweapon = true;
             firingMode = 2;
         }
         if (Input.GetKeyDown("4"))
         {
+            // auto shotty
             Destroy(currentlyHolding);
             Weapon.transform.localPosition = weaponPos;
             Weapon.transform.localRotation = new Quaternion();
-            currentlyHolding = Instantiate(Weapon4, Weapon.position, Weapon.rotation);
+            currentlyHolding = Instantiate(AutoShotty, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             Hasweapon = true;
             firingMode = 3;
