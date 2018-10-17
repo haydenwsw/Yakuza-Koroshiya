@@ -279,7 +279,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: ea29bec70c04b7c439c060db4f4feb92, type: 2}
+  - {fileID: 2100000, guid: 996c65836786f9c42a183e8894c44228, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -305,7 +305,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850223136791254}
-  m_Mesh: {fileID: 4300000, guid: 4ace88eaede83024f878f811e62ab103, type: 3}
+  m_Mesh: {fileID: 4300000, guid: c063bd3ec85f0f4419322a64b7963071, type: 3}
 --- !u!54 &54539504334929846
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -334,7 +334,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 4ace88eaede83024f878f811e62ab103, type: 3}
+  m_Mesh: {fileID: 4300000, guid: c063bd3ec85f0f4419322a64b7963071, type: 3}
 --- !u!81 &81783384334507460
 AudioListener:
   m_ObjectHideFlags: 1
@@ -369,7 +369,7 @@ Animator:
   m_GameObject: {fileID: 1890005343881380}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 880b377cb34db0d45ad61d15db87f07a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -386,20 +386,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956758304220622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95cf3cece5e89549a43f3fac20c9261, type: 3}
+  m_Script: {fileID: 11500000, guid: d0e424dc1f931754ba8b565db220dc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 20594403128389432}
-  BulletSpeed: 1000
-  Prefab: {fileID: 54924581894333566, guid: 708f4970c8d01564a9dc5f996a47d23b, type: 2}
-  Barrel: {fileID: 4910919328184956}
-  Laser: {fileID: 0}
-  Weapon: {fileID: 4240303781119652}
-  aimOffset: 0
-  Weapon1: {fileID: 1219482193290964, guid: fcdbbf8cb6db9fd4ea0da0ff780a9824, type: 2}
-  Weapon2: {fileID: 1018094144129008, guid: f9a6dd3a77eef064fa0e843d3ad96ec0, type: 2}
-  Weapon3: {fileID: 0}
-  Weapon4: {fileID: 0}
+  Speed: 5
+  Sensitivity: 10
 --- !u!114 &114531252737963298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -408,7 +399,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956758304220622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a76f63e5ef4a9fe4f8f5ed585c4ae780, type: 3}
+  m_Script: {fileID: 11500000, guid: 3790cca6b2b20e54ba7caf52d4d343eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onhand: {fileID: 4865546760588190}
@@ -421,8 +412,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1956758304220622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbe6ba7709a450d4a9de3f04cfdc4080, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c9da366a7593fa42b3221c22c55b85a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  Sensitivity: 10
+  cam: {fileID: 20594403128389432}
+  BulletSpeed: 1000
+  Bullet: {fileID: 1376597009366104, guid: 648198c3aa3869f48a9d5d86d75d96cf, type: 2}
+  Barrel: {fileID: 4910919328184956}
+  Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
+  Weapon: {fileID: 4240303781119652}
+  aimOffset: 10
+  Weapon1: {fileID: 1219482193290964, guid: ccd6ef728db26e54783b65b1fab08084, type: 2}
+  Weapon2: {fileID: 1018094144129008, guid: 119230fcc3bbe1c4487f1aa484ef73ff, type: 2}
+  Weapon3: {fileID: 1409499912637712, guid: 92505b1e33eb4e344b2a1a92597690b2, type: 2}
+  Weapon4: {fileID: 1104133928664820, guid: b656b3111e609bf47b7ce450f6bef006, type: 2}
