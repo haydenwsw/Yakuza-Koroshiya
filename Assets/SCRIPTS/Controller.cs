@@ -19,7 +19,7 @@ public class Controller : MonoBehaviour {
 
     private Rigidbody rb;
 
-    public GameObject Prefab;
+    public GameObject Bullet;
     public Transform Barrel;
 
     public GameObject Laser;
@@ -176,7 +176,7 @@ public class Controller : MonoBehaviour {
                 }
 
                 Vector3 dir = (pos - Barrel.transform.position);
-                GameObject bullet = Instantiate(Prefab, Barrel.position, Quaternion.LookRotation(dir)) as GameObject;
+                GameObject bullet = Instantiate(Bullet, Barrel.position, Quaternion.LookRotation(dir)) as GameObject;
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
             }
             if (firingMode == 2)
@@ -232,7 +232,7 @@ public class Controller : MonoBehaviour {
 
                 Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
-                GameObject bullet = Instantiate(Prefab, Barrel.position, rot) as GameObject;
+                GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
             }
         }

@@ -10,6 +10,12 @@ public class Deleter : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+
+        
+        //if ()
+        //{
+
+        //}
 	}
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
