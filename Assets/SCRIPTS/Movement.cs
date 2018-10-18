@@ -66,6 +66,11 @@ public class Movement : MonoBehaviour {
 
         con.Shoot(fire);
 
+        // reload weapon
+        float reload = Input.GetAxisRaw("Reload");
+
+        con.Reload(reload);
+
         // change FOV
         if (Input.GetKeyDown("c"))
         {

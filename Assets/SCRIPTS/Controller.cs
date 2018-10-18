@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using System.Reflection;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Controller : MonoBehaviour {
@@ -17,10 +16,14 @@ public class Controller : MonoBehaviour {
     [Header("Rifle varables")]
     public float RifleFireRate;
     public float RifleSpread;
+    public int RifleClipSize;
+    public int RifleSpareAmmo;
     
     [Header("Shotgun varables")]
     public float ShotgunFireRate;
     public float ShotgunSpread;
+    public int ShotgunClipSize;
+    public int ShotgunSpareAmmo;
     public int ShotgunPellets;
 
     // Gun projectiles
@@ -38,8 +41,18 @@ public class Controller : MonoBehaviour {
     [Header ("All weapons prefabs")]
     public GameObject KendoStick;
     public GameObject LaserPistol;
-    public GameObject AssultRifle;   
+    public GameObject AssultRifle;
     public GameObject AutoShotty;
+
+    // UI stuff
+    [Header("UI objects")]
+    public Text AmmoText;
+    public Text SpareAmmoText;
+    public Image HealthBar;
+    public Image AmourBar;
+
+    [Header("Players values")]
+    public float AmourPerentage;
 
     // movement varables
     private Vector3 velocity = Vector3.zero;
@@ -47,7 +60,11 @@ public class Controller : MonoBehaviour {
     private Vector3 MouseX = Vector3.zero;
     private Vector3 jump = Vector3.zero;
     private float shoot = 0;
-    
+    private float reload = 0;
+
+    private int rifleAmmo;
+    private int shotgunAmmo;
+
     private Rigidbody rb;
 
     private GameObject currentlyHolding;
@@ -61,6 +78,10 @@ public class Controller : MonoBehaviour {
     private bool fired = true;
 
     private float time = 0;
+
+    private float health;
+
+    private float amour;
 
     private Animator Anime;
 
@@ -82,6 +103,18 @@ public class Controller : MonoBehaviour {
         currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
         Hasweapon = false;
         firingMode = 0;
+
+        // setting the ammo varables
+        rifleAmmo = RifleClipSize;
+        shotgunAmmo = ShotgunClipSize;
+
+        // setting the viability of the ammo texts
+        AmmoText.enabled = false;
+        SpareAmmoText.enabled = false;
+
+        // setting the health and amour values
+        health = 1;
+        amour = 1;
     }
 
     // set Velocity
@@ -113,6 +146,11 @@ public class Controller : MonoBehaviour {
         shoot = s;
     }
 
+    public void Reload(float r)
+    {
+        reload = r;
+    }
+
     // update
     void FixedUpdate()
     {
@@ -122,6 +160,7 @@ public class Controller : MonoBehaviour {
         if (Hasweapon)
             PreformShoot();
         PreformWeaponSwitch();
+        PreformReload();
     }
 
     // movement function
@@ -176,13 +215,15 @@ public class Controller : MonoBehaviour {
         {
             if (firingMode == 0)
             {
-                // sword
+                // sword              
 
             }
             if (firingMode == 1)
             {
-                // rifel
-                Anime.SetTrigger("Fire");
+                // rifle
+                if (rifleAmmo > 0)
+                    Anime.SetTrigger("Fire");
+
                 Vector3 pos = Vector3.zero;
                 Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -193,14 +234,12 @@ public class Controller : MonoBehaviour {
                 }
                 else
                 {
-                    pos = inputRay.GetPoint(10);
+                    pos = inputRay.GetPoint(20);
                 }
-
-                Debug.DrawLine(cam.transform.position, hit.point);
 
                 time += Time.deltaTime;
 
-                if (time >= RifleFireRate)
+                if (time >= RifleFireRate && rifleAmmo > 0)
                 {
                     Vector3 Offset = new Vector3(
                             Random.Range(-RifleSpread, RifleSpread),
@@ -210,12 +249,15 @@ public class Controller : MonoBehaviour {
                     Vector3 dir = (pos - Barrel.transform.position);
 
                     Quaternion rot = Quaternion.LookRotation(dir + Offset);
-                  
-                    // Quaternion.LookRotation(dir)
+
                     GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
                     bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
                     bullet.transform.localRotation = Barrel.rotation;
+
                     time = 0;
+ 
+                    rifleAmmo--;
+                    AmmoText.text = rifleAmmo.ToString();
                 }
             }
             if (firingMode == 2)
@@ -250,7 +292,8 @@ public class Controller : MonoBehaviour {
             if (firingMode == 3)
             { 
                 // auto shot gun
-                Anime.SetTrigger("Fire");
+                if (shotgunAmmo != 0)
+                    Anime.SetTrigger("Fire");
 
                 Vector3 pos = Vector3.zero;
                 Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -262,16 +305,14 @@ public class Controller : MonoBehaviour {
                 }
                 else
                 {
-                    pos = inputRay.GetPoint(200);
+                    pos = inputRay.GetPoint(20);
                 }
 
-                Debug.DrawLine(cam.transform.position, hit.point);
-
-                Vector3 dir = (inputRay.GetPoint(200) - Barrel.transform.position);
+                Vector3 dir = (inputRay.GetPoint(20) - Barrel.transform.position);
 
                 time += Time.deltaTime;
 
-                if (time >= ShotgunFireRate)
+                if (time >= ShotgunFireRate && shotgunAmmo > 0)
                 {
                     for (int i = 0; i < ShotgunPellets; i++)
                     {
@@ -286,6 +327,9 @@ public class Controller : MonoBehaviour {
                         pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
                     }
                     time = 0;
+
+                    shotgunAmmo--;
+                    AmmoText.text = shotgunAmmo.ToString();
                 }
             }
         }
@@ -308,6 +352,9 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
             Hasweapon = false;
             firingMode = 0;
+
+            AmmoText.enabled = false;
+            SpareAmmoText.enabled = false;
         }
 
         if (Input.GetKeyDown("2"))
@@ -320,6 +367,11 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             Hasweapon = true;
             firingMode = 1;
+
+            AmmoText.enabled = true;
+            AmmoText.text = rifleAmmo.ToString();
+            SpareAmmoText.enabled = true;
+            SpareAmmoText.text = RifleSpareAmmo.ToString();
         }
         if (Input.GetKeyDown("3"))
         {
@@ -333,6 +385,10 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
             Hasweapon = true;
             firingMode = 2;
+
+            AmmoText.enabled = true;
+            AmmoText.text = "∞";
+            SpareAmmoText.enabled = false;
         }
         if (Input.GetKeyDown("4"))
         {
@@ -344,6 +400,81 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             Hasweapon = true;
             firingMode = 3;
+
+            AmmoText.enabled = true;
+            AmmoText.text = shotgunAmmo.ToString();
+            SpareAmmoText.enabled = true;
+            SpareAmmoText.text = ShotgunSpareAmmo.ToString();
+        }
+    }
+
+    void PreformReload()
+    {
+        if (reload == 1)
+        {
+            if (firingMode == 1)
+            {
+                if (rifleAmmo != RifleClipSize)
+                {
+                    if (RifleSpareAmmo - (RifleClipSize - rifleAmmo) < 0)
+                    {
+                        rifleAmmo += RifleSpareAmmo;
+                        RifleSpareAmmo = 0;
+                    }
+                    else
+                    {
+                        RifleSpareAmmo = RifleSpareAmmo - (RifleClipSize - rifleAmmo);
+                        rifleAmmo = RifleClipSize;
+                    }
+                    AmmoText.text = rifleAmmo.ToString();
+                    SpareAmmoText.text = RifleSpareAmmo.ToString();
+                }
+            }
+            else if (firingMode == 3)
+            {
+                if (shotgunAmmo != ShotgunClipSize)
+                {
+                    if (ShotgunSpareAmmo - (ShotgunClipSize - shotgunAmmo) < 0)
+                    {
+                        shotgunAmmo += ShotgunSpareAmmo;
+                        ShotgunSpareAmmo = 0;
+                    }
+                    else
+                    {
+                        ShotgunSpareAmmo = ShotgunSpareAmmo - (ShotgunClipSize - shotgunAmmo);
+                        shotgunAmmo = ShotgunClipSize;
+                    }
+                    AmmoText.text = shotgunAmmo.ToString();
+                    SpareAmmoText.text = ShotgunSpareAmmo.ToString();
+                }
+            }
+        }
+    }
+
+    private void TakeDamge(float damage)
+    {
+        if (amour > 0)
+        {
+            amour -= damage;
+            health -= damage * AmourPerentage;
+            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+        }
+        else
+        {
+            AmourBar.rectTransform.localScale = new Vector3(0, 1, 1);
+            health -= damage;
+        }
+        if (health > 0)
+            HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);       
+        else
+            HealthBar.rectTransform.localScale = new Vector3(0, 1, 1);
+    }
+
+    private void OnCollisionStay(UnityEngine.Collision collision)
+    {
+        if (collision.gameObject.tag == "Block")
+        {
+            TakeDamge(0.01f);
         }
     }
 

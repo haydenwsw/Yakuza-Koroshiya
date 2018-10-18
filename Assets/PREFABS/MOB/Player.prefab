@@ -164,8 +164,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222013527787236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5599999, y: -0.314, z: 0.447}
-  m_LocalScale: {x: 0.0032353778, y: 0.0032353795, z: 0.0032353795}
+  m_LocalPosition: {x: 0.07, y: -0.314, z: 0.447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4910919328184956}
   m_Father: {fileID: 4140045620525056}
@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.74, y: 2.87, z: -1.17}
+  m_LocalPosition: {x: -4.25, y: 0.851, z: -3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127554678773518}
@@ -218,8 +218,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729896325555342}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 21, z: 71}
-  m_LocalScale: {x: 257.56906, y: 257.569, z: 257.569}
+  m_LocalPosition: {x: 0, y: 0, z: 0.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4240303781119652}
   m_RootOrder: 0
@@ -316,7 +316,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -417,17 +417,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20594403128389432}
   BulletSpeed: 1000
-  RifleFireRate: 0
-  RifleSpread: 0
-  ShotgunFireRate: 0
-  ShotgunSpread: 0
-  ShotgunPellets: 0
+  RifleFireRate: 0.05
+  RifleSpread: 0.1
+  RifleClipSize: 30
+  RifleSpareAmmo: 90
+  ShotgunFireRate: 0.15
+  ShotgunSpread: 5
+  ShotgunClipSize: 20
+  ShotgunSpareAmmo: 60
+  ShotgunPellets: 10
   Bullet: {fileID: 1376597009366104, guid: 648198c3aa3869f48a9d5d86d75d96cf, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
-  Pellet: {fileID: 0}
+  Pellet: {fileID: 1793765493058572, guid: c82b7443b86ca6a40b7264457acf9572, type: 2}
   Barrel: {fileID: 4910919328184956}
   Weapon: {fileID: 4240303781119652}
-  KendoStick: {fileID: 0}
-  LaserPistol: {fileID: 0}
-  AssultRifle: {fileID: 0}
-  AutoShotty: {fileID: 0}
+  KendoStick: {fileID: 1018094144129008, guid: 119230fcc3bbe1c4487f1aa484ef73ff, type: 2}
+  LaserPistol: {fileID: 1409499912637712, guid: 92505b1e33eb4e344b2a1a92597690b2,
+    type: 2}
+  AssultRifle: {fileID: 1219482193290964, guid: ccd6ef728db26e54783b65b1fab08084,
+    type: 2}
+  AutoShotty: {fileID: 1104133928664820, guid: b656b3111e609bf47b7ce450f6bef006, type: 2}
+  AmmoText: {fileID: 0}
+  SpareAmmoText: {fileID: 0}
+  HealthBar: {fileID: 0}
+  AmourBar: {fileID: 0}
+  AmourPerentage: 0.3
