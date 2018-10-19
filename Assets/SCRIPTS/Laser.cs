@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
 
-    private float time = 0;
+    public float LenghtScale;
+    public float DeleteTime;
 
-	void Update ()
+    private float time = 0;
+    private float laserIncrease = 1;
+
+    void Update ()
     {
         time += Time.deltaTime;
 
-        if (time >= 0.1)
+        laserIncrease += time * LenghtScale;
+
+        transform.localScale = new Vector3(0.5f, 0.5f, -laserIncrease);
+
+        if (time >= DeleteTime)
         {
             Destroy(this.gameObject);
             time = 0;

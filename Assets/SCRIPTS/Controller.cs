@@ -13,6 +13,10 @@ public class Controller : MonoBehaviour {
     [Header("Global bullet speed")]
     public float BulletSpeed;
 
+    [Header("Laser Pistol varables")]
+    public float LaserDecayRate;
+    public float LaserHeatRate;
+
     [Header("Rifle varables")]
     public float RifleFireRate;
     public float RifleSpread;
@@ -50,6 +54,8 @@ public class Controller : MonoBehaviour {
     public Text SpareAmmoText;
     public Image HealthBar;
     public Image AmourBar;
+    public Image LaserHearBarBack;
+    public Image LaserHeatBar;
 
     [Header("Players values")]
     public float AmourPerentage;
@@ -64,6 +70,7 @@ public class Controller : MonoBehaviour {
 
     private int rifleAmmo;
     private int shotgunAmmo;
+    private float laserHeat = 0;
 
     private Rigidbody rb;
 
@@ -84,6 +91,8 @@ public class Controller : MonoBehaviour {
     private float amour;
 
     private Animator Anime;
+
+    private bool tooHot = false;
 
     // Use this for initialization
     void Start ()
@@ -111,6 +120,8 @@ public class Controller : MonoBehaviour {
         // setting the viability of the ammo texts
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
+        LaserHeatBar.enabled = false;
+        LaserHearBarBack.enabled = false;
 
         // setting the health and amour values
         health = 1;
@@ -161,6 +172,12 @@ public class Controller : MonoBehaviour {
             PreformShoot();
         PreformWeaponSwitch();
         PreformReload();
+        UpdateLaserHeat();
+
+        if (Input.GetKeyDown("q"))
+        {
+            amour = 1;
+        }
     }
 
     // movement function
@@ -283,9 +300,10 @@ public class Controller : MonoBehaviour {
                     Vector3 dir = (Barrel.transform.position - pos);
 
                     GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
-                    Vector3 laserScale = new Vector3(1, 1, -dir.magnitude);
-                    beam.transform.localScale = laserScale;
+                    beam.transform.parent = GameObject.Find("Weapon").transform;
 
+                    laserHeat += LaserHeatRate;
+                    
                     fired = false;
                 }
             }
@@ -335,8 +353,7 @@ public class Controller : MonoBehaviour {
         }
         else if (shoot == 0)
         {
-            fired = true;
-        }
+            fired = true;        }
     }
 
     void PreformWeaponSwitch()
@@ -355,6 +372,9 @@ public class Controller : MonoBehaviour {
 
             AmmoText.enabled = false;
             SpareAmmoText.enabled = false;
+
+            LaserHearBarBack.enabled = false;
+            LaserHeatBar.enabled = false;
         }
 
         if (Input.GetKeyDown("2"))
@@ -372,6 +392,9 @@ public class Controller : MonoBehaviour {
             AmmoText.text = rifleAmmo.ToString();
             SpareAmmoText.enabled = true;
             SpareAmmoText.text = RifleSpareAmmo.ToString();
+
+            LaserHearBarBack.enabled = false;
+            LaserHeatBar.enabled = false;
         }
         if (Input.GetKeyDown("3"))
         {
@@ -386,9 +409,11 @@ public class Controller : MonoBehaviour {
             Hasweapon = true;
             firingMode = 2;
 
-            AmmoText.enabled = true;
-            AmmoText.text = "∞";
+            AmmoText.enabled = false;
             SpareAmmoText.enabled = false;
+
+            LaserHearBarBack.enabled = true;
+            LaserHeatBar.enabled = true;
         }
         if (Input.GetKeyDown("4"))
         {
@@ -405,6 +430,9 @@ public class Controller : MonoBehaviour {
             AmmoText.text = shotgunAmmo.ToString();
             SpareAmmoText.enabled = true;
             SpareAmmoText.text = ShotgunSpareAmmo.ToString();
+
+            LaserHearBarBack.enabled = false;
+            LaserHeatBar.enabled = false;
         }
     }
 
@@ -472,11 +500,38 @@ public class Controller : MonoBehaviour {
 
     private void OnCollisionStay(UnityEngine.Collision collision)
     {
-        if (collision.gameObject.tag == "Block")
+        if (collision.gameObject.tag == "Armour")
         {
+            amour = 1;
+            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+            Destroy(collision.collider.gameObject);
+        }
+        if (collision.gameObject.tag == "Block")
             TakeDamge(0.01f);
+    }
+
+    private void UpdateLaserHeat()
+    {
+        if (firingMode == 2)
+        {
+            laserHeat -= Time.deltaTime / LaserDecayRate;
+
+            if (laserHeat < 0)
+            {
+                laserHeat = 0;
+                tooHot = false;
+            }
+
+            LaserHeatBar.transform.localScale = new Vector3(1, laserHeat, 1);
+
+            if (laserHeat > 1)
+                tooHot = true;
+            
+            if (tooHot == true)
+                fired = false;
         }
     }
+
 
     // Optifine meme
     public void cameraZoom(bool b)
