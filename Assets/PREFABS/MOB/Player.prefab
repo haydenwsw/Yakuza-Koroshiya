@@ -417,6 +417,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20594403128389432}
   BulletSpeed: 1000
+  LaserDecayRate: 4
+  LaserHeatRate: 0.1
   RifleFireRate: 0.05
   RifleSpread: 0.1
   RifleClipSize: 30
@@ -432,7 +434,7 @@ MonoBehaviour:
   Barrel: {fileID: 4910919328184956}
   Weapon: {fileID: 4240303781119652}
   KendoStick: {fileID: 1018094144129008, guid: 119230fcc3bbe1c4487f1aa484ef73ff, type: 2}
-  LaserPistol: {fileID: 1409499912637712, guid: 92505b1e33eb4e344b2a1a92597690b2,
+  LaserPistol: {fileID: 1106804930091368, guid: 2f9838bb0084d3243878043ebf56dd1a,
     type: 2}
   AssultRifle: {fileID: 1219482193290964, guid: ccd6ef728db26e54783b65b1fab08084,
     type: 2}
@@ -441,4 +443,6 @@ MonoBehaviour:
   SpareAmmoText: {fileID: 0}
   HealthBar: {fileID: 0}
   AmourBar: {fileID: 0}
+  LaserHearBarBack: {fileID: 0}
+  LaserHeatBar: {fileID: 0}
   AmourPerentage: 0.3

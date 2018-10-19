@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/ART/VISUAL/Models/WEAPON_laserpistol/Pistol_WeaponV2.fbx.meta
 guid: 10dc4cc013150534fa7129d137615d3c
+=======
+guid: 41ebd789de2e6ce4e9127910b7492603
+>>>>>>> e1902c06696aa23bf3f220808f88d922f4685a77:Assets/ART/VISUAL/Models/WEAPON_laserpistol/Pistol_WeaponV2.fbx.meta
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
