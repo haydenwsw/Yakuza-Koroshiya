@@ -18,6 +18,8 @@ ModelImporter:
     3300002: wallPanel2Meter
     4300000: wallFrame2Meter
     4300002: wallPanel2Meter
+    6400000: wallFrame2Meter
+    6400002: wallPanel2Meter
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -51,7 +53,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

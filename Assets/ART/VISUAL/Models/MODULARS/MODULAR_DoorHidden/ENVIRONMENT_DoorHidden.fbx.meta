@@ -16,6 +16,8 @@ ModelImporter:
     3300002: doorPanel1
     4300000: doorPanel
     4300002: doorPanel1
+    6400000: doorPanel
+    6400002: doorPanel1
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +51,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

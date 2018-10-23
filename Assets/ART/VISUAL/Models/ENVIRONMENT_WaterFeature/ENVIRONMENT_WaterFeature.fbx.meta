@@ -1,25 +1,46 @@
 fileFormatVersion: 2
-guid: a4823555aa8205343abaea9446c86eb3
+guid: 5232b652ccf495c459d60ef3e3edd4ef
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: wall1Meter
-    100004: wallFrame
-    100006: wallPanel
+    100002: fountainPillar
+    100004: fountainPool
+    100006: fountainToob
+    100008: rock0
+    100010: rock1
+    100012: rock2
+    100014: rock3
     400000: //RootNode
-    400002: wall1Meter
-    400004: wallFrame
-    400006: wallPanel
+    400002: fountainPillar
+    400004: fountainPool
+    400006: fountainToob
+    400008: rock0
+    400010: rock1
+    400012: rock2
+    400014: rock3
     2100000: lambert1
-    2300000: wallFrame
-    2300002: wallPanel
-    3300000: wallFrame
-    3300002: wallPanel
-    4300000: wallFrame
-    4300002: wallPanel
-    6400000: wallFrame
-    6400002: wallPanel
+    2300000: fountainPillar
+    2300002: fountainPool
+    2300004: fountainToob
+    2300006: rock0
+    2300008: rock1
+    2300010: rock2
+    2300012: rock3
+    3300000: fountainPillar
+    3300002: fountainPool
+    3300004: fountainToob
+    3300006: rock0
+    3300008: rock1
+    3300010: rock2
+    3300012: rock3
+    4300000: fountainPool
+    4300002: rock0
+    4300004: rock1
+    4300006: rock2
+    4300008: rock3
+    4300010: fountainPillar
+    4300012: fountainToob
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -53,7 +74,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

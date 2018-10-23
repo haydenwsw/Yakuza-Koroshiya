@@ -10,12 +10,15 @@ ModelImporter:
     400002: doorFramePanel
     400004: //RootNode
     2100000: lambert1
+    2100002: lambert2
     2300000: doorFrame
     2300002: doorFramePanel
     3300000: doorFrame
     3300002: doorFramePanel
     4300000: doorFramePanel
     4300002: doorFrame
+    6400000: doorFrame
+    6400002: doorFramePanel
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +52,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
