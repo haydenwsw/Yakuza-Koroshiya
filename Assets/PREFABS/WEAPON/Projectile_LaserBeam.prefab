@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 114753186288467522}
   m_Layer: 0
   m_Name: Projectile_LaserBeam
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

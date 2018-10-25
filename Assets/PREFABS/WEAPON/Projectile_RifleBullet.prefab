@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 33762851840194382}
   - component: {fileID: 23319580301862116}
   - component: {fileID: 54889297105326802}
-  - component: {fileID: 64884845333257558}
   - component: {fileID: 114912285583268212}
+  - component: {fileID: 64204227293412062}
   m_Layer: 0
   m_Name: Projectile_RifleBullet
-  m_TagString: Block
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!64 &64884845333257558
+--- !u!64 &64204227293412062
 MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}

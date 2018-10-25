@@ -6,7 +6,7 @@ public class Deleter : MonoBehaviour {
 
     private float time = 0;
 
-	void Update ()
+    void Update ()
     {
         time += Time.deltaTime;
         if (time >= 2)
@@ -16,9 +16,12 @@ public class Deleter : MonoBehaviour {
     }
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (collision.gameObject.tag != this.gameObject.tag)
+        if (collision.gameObject.tag != "Player")
         {
-            Destroy(this.gameObject);
+            if (collision.gameObject.tag != this.gameObject.tag)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

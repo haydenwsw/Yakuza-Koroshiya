@@ -396,6 +396,7 @@ public class Controller : MonoBehaviour {
             LaserHearBarBack.enabled = false;
             LaserHeatBar.enabled = false;
         }
+
         if (Input.GetKeyDown("3"))
         {
             // laser pistol
@@ -415,6 +416,7 @@ public class Controller : MonoBehaviour {
             LaserHearBarBack.enabled = true;
             LaserHeatBar.enabled = true;
         }
+
         if (Input.GetKeyDown("4"))
         {
             // auto shotty
@@ -479,7 +481,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    private void TakeDamge(float damage)
+    public void TakeDamge(float damage)
     {
         if (amour > 0)
         {
@@ -498,7 +500,7 @@ public class Controller : MonoBehaviour {
             HealthBar.rectTransform.localScale = new Vector3(0, 1, 1);
     }
 
-    private void OnCollisionStay(UnityEngine.Collision collision)
+    private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (collision.gameObject.tag == "Armour")
         {
@@ -506,30 +508,31 @@ public class Controller : MonoBehaviour {
             AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
             Destroy(collision.collider.gameObject);
         }
-        if (collision.gameObject.tag == "Block")
+
+        if (collision.gameObject.tag == "Bullet")
+        {
             TakeDamge(0.01f);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void UpdateLaserHeat()
     {
-        if (firingMode == 2)
+        laserHeat -= Time.deltaTime / LaserDecayRate;
+
+        if (laserHeat < 0)
         {
-            laserHeat -= Time.deltaTime / LaserDecayRate;
-
-            if (laserHeat < 0)
-            {
-                laserHeat = 0;
-                tooHot = false;
-            }
-
-            LaserHeatBar.transform.localScale = new Vector3(1, laserHeat, 1);
-
-            if (laserHeat > 1)
-                tooHot = true;
-            
-            if (tooHot == true)
-                fired = false;
+            laserHeat = 0;
+            tooHot = false;
         }
+
+        LaserHeatBar.transform.localScale = new Vector3(1, laserHeat, 1);
+
+        if (laserHeat > 1)
+            tooHot = true;
+            
+        if (tooHot == true)
+            fired = false;
     }
 
 
