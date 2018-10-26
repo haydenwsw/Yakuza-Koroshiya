@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: 7621772f6a09f3d4ca85763e2749465b
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: bentoBeef
+    100002: bentoBeef1
+    100004: bentoFoodGroup
+    100006: bentoLid
+    100008: bentoPrawn
+    100010: bentoPrawn1
+    100012: bentoRice
+    100014: bentoSushi
+    100016: bentoSushi1
+    100018: bentoSushi2
+    100020: bentoSushi3
+    100022: bentoTray
+    100024: //RootNode
+    400000: bentoBeef
+    400002: bentoBeef1
+    400004: bentoFoodGroup
+    400006: bentoLid
+    400008: bentoPrawn
+    400010: bentoPrawn1
+    400012: bentoRice
+    400014: bentoSushi
+    400016: bentoSushi1
+    400018: bentoSushi2
+    400020: bentoSushi3
+    400022: bentoTray
+    400024: //RootNode
+    2100000: blinn1
+    2100002: lambert1
+    2300000: bentoBeef
+    2300002: bentoBeef1
+    2300004: bentoLid
+    2300006: bentoPrawn
+    2300008: bentoPrawn1
+    2300010: bentoRice
+    2300012: bentoSushi
+    2300014: bentoSushi1
+    2300016: bentoSushi2
+    2300018: bentoSushi3
+    2300020: bentoTray
+    3300000: bentoBeef
+    3300002: bentoBeef1
+    3300004: bentoLid
+    3300006: bentoPrawn
+    3300008: bentoPrawn1
+    3300010: bentoRice
+    3300012: bentoSushi
+    3300014: bentoSushi1
+    3300016: bentoSushi2
+    3300018: bentoSushi3
+    3300020: bentoTray
+    4300000: bentoLid
+    4300002: bentoTray
+    4300004: bentoRice
+    4300006: bentoBeef1
+    4300008: bentoBeef
+    4300010: bentoPrawn
+    4300012: bentoPrawn1
+    4300014: bentoSushi3
+    4300016: bentoSushi2
+    4300018: bentoSushi1
+    4300020: bentoSushi
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

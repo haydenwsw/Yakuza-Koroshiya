@@ -8,6 +8,8 @@ TagManager:
   - Armour
   - Bullet
   - AI
+  - Pellet
+  - Laser
   layers:
   - Default
   - TransparentFX

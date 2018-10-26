@@ -34,6 +34,7 @@ public class Controller : MonoBehaviour {
     [Header("Gun projectiles prefabs")]
     public GameObject Bullet;
     public GameObject Laser;
+    public GameObject LaserHit;
     public GameObject Pellet;
 
     // real world positioning objects
@@ -291,10 +292,12 @@ public class Controller : MonoBehaviour {
                     if (Physics.Raycast(inputRay, out hit))
                     {
                         pos = hit.point;
+                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                     }
                     else
                     {
                         pos = inputRay.GetPoint(200);
+                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                     }
 
                     Vector3 dir = (Barrel.transform.position - pos);

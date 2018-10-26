@@ -12,7 +12,7 @@ public class Collision : MonoBehaviour
 
     void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (collision.transform.gameObject.tag == "Block")
+        //if (collision.transform.gameObject.tag == "Block")
         {
             Hits++;
             foreach (var contact in collision.contacts)
