@@ -8,22 +8,42 @@ public class AI : MonoBehaviour {
     [Header("Radius Values")]
     public float OuterRadius;
     public float InnerRadius;
+
+    [Header("AI Values")]
     public float AIBulletSpeed;
     public float AISpeed;
     public float AIFireRate;
     public float AIHealth;
+
+    [Header("Damage Values")]
+    public float BulletDamage;
+    public float PelletDamage;
+    public float SwordDamage;
+    public float LaserDamage;
 
     [Header("Game Objects")]
     public GameObject Player;
     public Transform Barrel;
     public GameObject Bullet;
 
+    [Header("UI Objects")]
+    public GameObject AIHealthBar;
+
     private float time;
 
     private Transform target;
     private NavMeshAgent agent;
 
-	void Start ()
+    //transform
+    //Enemy prefab
+    //int waveCounter
+    //float waveDelay
+    //float time
+    //List<List<GameObject>> enemey
+    //List<int> enemiesRemain
+    //enemiesRemainNextWave
+
+    void Start ()
     {
         target = Player.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -59,11 +79,28 @@ public class AI : MonoBehaviour {
                 agent.SetDestination(transform.position);
             }
         }
+
+        if (AIHealth < 0)
+        {
+            Destroy(this.gameObject);
+        }
 	}
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        
+        if (collision.collider.tag == "Bullet")
+            AIHealth -= BulletDamage;
+
+        if (collision.collider.tag == "Pellet")
+            AIHealth -= PelletDamage;
+
+        if (collision.collider.tag == "Laser")
+            AIHealth -= LaserDamage;
+
+        if (collision.collider.tag == "Block")
+            AIHealth -= SwordDamage;
+
+        AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
     }
 
     private void OnDrawGizmosSelected()
