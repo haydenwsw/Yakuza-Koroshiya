@@ -12,6 +12,8 @@ ModelImporter:
     400004: wallFrame
     400006: wallPanel
     2100000: lambert1
+    2100002: wood
+    2100004: panel
     2300000: wallFrame
     2300002: wallPanel
     3300000: wallFrame

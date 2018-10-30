@@ -77,6 +77,7 @@ public class AI : MonoBehaviour {
             if (distance <= InnerRadius)
             {
                 agent.SetDestination(transform.position);
+                FaceTarget();
             }
         }
 
@@ -85,6 +86,13 @@ public class AI : MonoBehaviour {
             Destroy(this.gameObject);
         }
 	}
+
+    private void FaceTarget()
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+    }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {

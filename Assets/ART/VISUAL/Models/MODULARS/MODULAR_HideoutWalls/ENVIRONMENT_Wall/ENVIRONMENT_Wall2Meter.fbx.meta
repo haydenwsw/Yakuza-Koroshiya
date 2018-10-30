@@ -7,19 +7,49 @@ ModelImporter:
     100002: wall2Meter
     100004: wallFrame2Meter
     100006: wallPanel2Meter
+    100008: wall1Meter
+    100010: wall1Meter1
+    100012: wallFrame
+    100014: wallFrame 1
+    100016: wallPanel
+    100018: wallPanel 1
     400000: //RootNode
     400002: wall2Meter
     400004: wallFrame2Meter
     400006: wallPanel2Meter
+    400008: wall1Meter
+    400010: wall1Meter1
+    400012: wallFrame
+    400014: wallFrame 1
+    400016: wallPanel
+    400018: wallPanel 1
     2100000: lambert1
+    2100002: wood
+    2100004: panel
     2300000: wallFrame2Meter
     2300002: wallPanel2Meter
+    2300004: wallFrame
+    2300006: wallFrame 1
+    2300008: wallPanel
+    2300010: wallPanel 1
     3300000: wallFrame2Meter
     3300002: wallPanel2Meter
+    3300004: wallFrame
+    3300006: wallFrame 1
+    3300008: wallPanel
+    3300010: wallPanel 1
     4300000: wallFrame2Meter
     4300002: wallPanel2Meter
+    4300004: wallFrame
+    4300006: wallPanel
+    4300008: wallFrame
+    4300010: wallPanel
     6400000: wallFrame2Meter
     6400002: wallPanel2Meter
+    6400004: wallFrame
+    6400006: wallFrame 1
+    6400008: wallPanel
+    6400010: wallPanel 1
   externalObjects: {}
   materials:
     importMaterials: 1
