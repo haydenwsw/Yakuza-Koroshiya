@@ -10,6 +10,9 @@ TagManager:
   - AI
   - Pellet
   - Laser
+  - AIBullet
+  - AIPellet
+  - AILaser
   layers:
   - Default
   - TransparentFX

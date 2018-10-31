@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 95078882797256844}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: 0.851, z: -3.1}
+  m_LocalPosition: {x: -4.25, y: 0.837, z: -3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127554678773518}
@@ -313,7 +313,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -417,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20594403128389432}
   BulletSpeed: 1000
+  ReloadDelay: 1.5
   LaserDecayRate: 4
   LaserHeatRate: 0.1
   RifleFireRate: 0.05
@@ -428,8 +429,13 @@ MonoBehaviour:
   ShotgunClipSize: 20
   ShotgunSpareAmmo: 60
   ShotgunPellets: 10
+  SwordDamage: 0.01
+  LaserDamage: 0.01
+  RifleDamage: 0.01
+  ShotgunDamage: 0.01
   Bullet: {fileID: 1376597009366104, guid: 648198c3aa3869f48a9d5d86d75d96cf, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
+  LaserHit: {fileID: 1894534823233034, guid: e1ef045832d58f14fa3d87100298a61f, type: 2}
   Pellet: {fileID: 1793765493058572, guid: c82b7443b86ca6a40b7264457acf9572, type: 2}
   Barrel: {fileID: 4910919328184956}
   Weapon: {fileID: 4240303781119652}
@@ -445,4 +451,5 @@ MonoBehaviour:
   AmourBar: {fileID: 0}
   LaserHearBarBack: {fileID: 0}
   LaserHeatBar: {fileID: 0}
+  Reloading: {fileID: 0}
   AmourPerentage: 0.3

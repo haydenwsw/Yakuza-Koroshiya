@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +11,9 @@ public class Controller : MonoBehaviour {
     public Camera cam;
 
     // global bulet speed
-    [Header("Global bullet speed")]
+    [Header("Global Gun Varables")]
     public float BulletSpeed;
+    public float ReloadDelay;
 
     [Header("Laser Pistol varables")]
     public float LaserDecayRate;
@@ -22,13 +24,19 @@ public class Controller : MonoBehaviour {
     public float RifleSpread;
     public int RifleClipSize;
     public int RifleSpareAmmo;
-    
+
     [Header("Shotgun varables")]
     public float ShotgunFireRate;
     public float ShotgunSpread;
     public int ShotgunClipSize;
     public int ShotgunSpareAmmo;
     public int ShotgunPellets;
+
+    [Header("Damage Values")]
+    public float SwordDamage;
+    public float LaserDamage;
+    public float RifleDamage;
+    public float ShotgunDamage;
 
     // Gun projectiles
     [Header("Gun projectiles prefabs")]
@@ -43,7 +51,7 @@ public class Controller : MonoBehaviour {
     public Transform Weapon;
 
     // all the weapons
-    [Header ("All weapons prefabs")]
+    [Header("All weapons prefabs")]
     public GameObject KendoStick;
     public GameObject LaserPistol;
     public GameObject AssultRifle;
@@ -57,6 +65,7 @@ public class Controller : MonoBehaviour {
     public Image AmourBar;
     public Image LaserHearBarBack;
     public Image LaserHeatBar;
+    public Text Reloading;
 
     [Header("Players values")]
     public float AmourPerentage;
@@ -95,8 +104,10 @@ public class Controller : MonoBehaviour {
 
     private bool tooHot = false;
 
+    private bool canShoot = true;
+
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         Anime = GetComponent<Animator>();
 
@@ -123,6 +134,7 @@ public class Controller : MonoBehaviour {
         SpareAmmoText.enabled = false;
         LaserHeatBar.enabled = false;
         LaserHearBarBack.enabled = false;
+        Reloading.enabled = false;
 
         // setting the health and amour values
         health = 1;
@@ -130,7 +142,7 @@ public class Controller : MonoBehaviour {
     }
 
     // set Velocity
-    public void Move (Vector3 vel)
+    public void Move(Vector3 vel)
     {
         velocity = vel;
     }
@@ -174,11 +186,6 @@ public class Controller : MonoBehaviour {
         PreformWeaponSwitch();
         PreformReload();
         UpdateLaserHeat();
-
-        if (Input.GetKeyDown("q"))
-        {
-            amour = 1;
-        }
     }
 
     // movement function
@@ -209,7 +216,7 @@ public class Controller : MonoBehaviour {
             newRot.x = angle;
             //if (newRot.z > 1)
             //    newRot.z = 0;
-            
+
             //if (newRot.y > 1)
             //    newRot.y = 0;
             //newRot.z = 0;
@@ -239,43 +246,46 @@ public class Controller : MonoBehaviour {
             if (firingMode == 1)
             {
                 // rifle
-                if (rifleAmmo > 0)
-                    Anime.SetTrigger("Fire");
+                if (canShoot)
+                { 
+                    if (rifleAmmo > 0)
+                        Anime.SetTrigger("Fire");
 
-                Vector3 pos = Vector3.zero;
-                Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+                    Vector3 pos = Vector3.zero;
+                    Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
 
-                if (Physics.Raycast(inputRay, out hit))
-                {
-                    pos = hit.point;
-                }
-                else
-                {
-                    pos = inputRay.GetPoint(20);
-                }
+                    if (Physics.Raycast(inputRay, out hit))
+                    {
+                        pos = hit.point;
+                    }
+                    else
+                    {
+                        pos = inputRay.GetPoint(20);
+                    }
 
-                time += Time.deltaTime;
+                    time += Time.deltaTime;
 
-                if (time >= RifleFireRate && rifleAmmo > 0)
-                {
-                    Vector3 Offset = new Vector3(
-                            Random.Range(-RifleSpread, RifleSpread),
-                            Random.Range(-RifleSpread, RifleSpread),
-                            Random.Range(-RifleSpread, RifleSpread));
+                    if (time >= RifleFireRate && rifleAmmo > 0)
+                    {
+                        Vector3 Offset = new Vector3(
+                                UnityEngine.Random.Range(-RifleSpread, RifleSpread),
+                                UnityEngine.Random.Range(-RifleSpread, RifleSpread),
+                                UnityEngine.Random.Range(-RifleSpread, RifleSpread));
 
-                    Vector3 dir = (pos - Barrel.transform.position);
+                        Vector3 dir = (pos - Barrel.transform.position);
 
-                    Quaternion rot = Quaternion.LookRotation(dir + Offset);
+                        Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
-                    GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
-                    bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
-                    bullet.transform.localRotation = Barrel.rotation;
+                        GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
+                        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
+                        bullet.transform.localRotation = Barrel.rotation;
 
-                    time = 0;
- 
-                    rifleAmmo--;
-                    AmmoText.text = rifleAmmo.ToString();
+                        time = 0;
+
+                        rifleAmmo--;
+                        AmmoText.text = rifleAmmo.ToString();
+                    }
                 }
             }
             if (firingMode == 2)
@@ -311,52 +321,56 @@ public class Controller : MonoBehaviour {
                 }
             }
             if (firingMode == 3)
-            { 
+            {
                 // auto shot gun
-                if (shotgunAmmo != 0)
+                if (canShoot)
+                {
+                    if (shotgunAmmo != 0)
                     Anime.SetTrigger("Fire");
 
-                Vector3 pos = Vector3.zero;
-                Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
+                    Vector3 pos = Vector3.zero;
+                    Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
 
-                if (Physics.Raycast(inputRay, out hit))
-                {
-                    pos = hit.point;
-                }
-                else
-                {
-                    pos = inputRay.GetPoint(20);
-                }
-
-                Vector3 dir = (inputRay.GetPoint(20) - Barrel.transform.position);
-
-                time += Time.deltaTime;
-
-                if (time >= ShotgunFireRate && shotgunAmmo > 0)
-                {
-                    for (int i = 0; i < ShotgunPellets; i++)
+                    if (Physics.Raycast(inputRay, out hit))
                     {
-                        Vector3 Offset = new Vector3(
-                            Random.Range(-ShotgunSpread, ShotgunSpread),
-                            Random.Range(-ShotgunSpread, ShotgunSpread),
-                            Random.Range(-ShotgunSpread, ShotgunSpread));
-
-                        Quaternion rot = Quaternion.LookRotation(dir + Offset);
-
-                        GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
-                        pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
+                        pos = hit.point;
                     }
-                    time = 0;
+                    else
+                    {
+                        pos = inputRay.GetPoint(20);
+                    }
 
-                    shotgunAmmo--;
-                    AmmoText.text = shotgunAmmo.ToString();
+                    Vector3 dir = (inputRay.GetPoint(20) - Barrel.transform.position);
+
+                    time += Time.deltaTime;
+
+                    if (time >= ShotgunFireRate && shotgunAmmo > 0)
+                    {
+                        for (int i = 0; i < ShotgunPellets; i++)
+                        {
+                            Vector3 Offset = new Vector3(
+                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
+                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
+                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread));
+
+                            Quaternion rot = Quaternion.LookRotation(dir + Offset);
+
+                            GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
+                            pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
+                        }
+                        time = 0;
+
+                        shotgunAmmo--;
+                        AmmoText.text = shotgunAmmo.ToString();
+                    }
                 }
             }
         }
         else if (shoot == 0)
         {
-            fired = true;        }
+            fired = true;
+        }
     }
 
     void PreformWeaponSwitch()
@@ -380,9 +394,9 @@ public class Controller : MonoBehaviour {
             LaserHeatBar.enabled = false;
         }
 
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("3"))
         {
-            // rifel
+            // rifle
             Destroy(currentlyHolding);
             Weapon.transform.localPosition = weaponPos;
             Weapon.transform.localRotation = new Quaternion();
@@ -400,7 +414,7 @@ public class Controller : MonoBehaviour {
             LaserHeatBar.enabled = false;
         }
 
-        if (Input.GetKeyDown("3"))
+        if (Input.GetKeyDown("2"))
         {
             // laser pistol
             Destroy(currentlyHolding);
@@ -443,8 +457,33 @@ public class Controller : MonoBehaviour {
 
     void PreformReload()
     {
-        if (reload == 1)
+        if (Reloading.enabled)
+            time += Time.deltaTime;
+
+        int spareAmmo = Int32.Parse(SpareAmmoText.text);
+
+        int ammo = Int32.Parse(AmmoText.text);
+        int clip = 0;
+
+        if (firingMode == 1)
+            clip = RifleClipSize;
+        else if (firingMode == 3)
+            clip = ShotgunClipSize;
+
+        if (reload == 1 && spareAmmo != 0 && ammo != clip)
         {
+            Reloading.enabled = true;
+            canShoot = false;
+        }
+
+        if (time >= ReloadDelay)
+        {
+            time = 0;
+
+            Reloading.enabled = false;
+
+            canShoot = true;
+
             if (firingMode == 1)
             {
                 if (rifleAmmo != RifleClipSize)
@@ -512,9 +551,27 @@ public class Controller : MonoBehaviour {
             Destroy(collision.collider.gameObject);
         }
 
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "AISword")
         {
-            TakeDamge(0.01f);
+            TakeDamge(SwordDamage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "AILaser")
+        {
+            TakeDamge(LaserDamage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "AIBullet")
+        {
+            TakeDamge(RifleDamage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "AIPellet")
+        {
+            TakeDamge(ShotgunDamage);
             Destroy(collision.gameObject);
         }
     }

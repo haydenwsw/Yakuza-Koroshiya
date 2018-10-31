@@ -11,9 +11,9 @@ public class AI : MonoBehaviour {
 
     [Header("AI Values")]
     public float AIBulletSpeed;
-    public float AISpeed;
     public float AIFireRate;
     public float AIHealth;
+    public float AIRotationSpeed;
 
     [Header("Damage Values")]
     public float BulletDamage;
@@ -34,30 +34,19 @@ public class AI : MonoBehaviour {
     private Transform target;
     private NavMeshAgent agent;
 
-    //transform
-    //Enemy prefab
-    //int waveCounter
-    //float waveDelay
-    //float time
-    //List<List<GameObject>> enemey
-    //List<int> enemiesRemain
-    //enemiesRemainNextWave
-
     void Start ()
     {
         target = Player.transform;
         agent = GetComponent<NavMeshAgent>();
-
-        agent.speed = AISpeed;
     }
 	
 	void Update ()
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        agent.transform.Translate(0, 0.7f, 0);
-        agent.transform.Rotate(-90, 0, 0);
+        FaceTarget();
 
+        // follows player
         if (distance <= OuterRadius)
         {
             agent.SetDestination(target.position);
@@ -74,10 +63,10 @@ public class AI : MonoBehaviour {
                 time = 0;
             }
 
+            // personal space
             if (distance <= InnerRadius)
             {
                 agent.SetDestination(transform.position);
-                FaceTarget();
             }
         }
 
@@ -90,8 +79,8 @@ public class AI : MonoBehaviour {
     private void FaceTarget()
     {
         Vector3 dir = (target.position - transform.position).normalized;
-        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0f, dir.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * AIRotationSpeed);
     }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
