@@ -22,12 +22,13 @@ public class AI : MonoBehaviour {
     public float LaserDamage;
 
     [Header("Game Objects")]
-    public GameObject Player;
     public Transform Barrel;
     public GameObject Bullet;
 
     [Header("UI Objects")]
     public GameObject AIHealthBar;
+
+    private GameObject Player;
 
     private float time;
 
@@ -36,6 +37,10 @@ public class AI : MonoBehaviour {
 
     void Start ()
     {
+        // remove this later
+        Player = GameObject.FindGameObjectWithTag("Player");
+
+        // set target 
         target = Player.transform;
         agent = GetComponent<NavMeshAgent>();
     }

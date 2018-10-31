@@ -263,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1203396510828336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.15, y: 0, z: -3.81}
+  m_LocalPosition: {x: -7.56, y: -4.95, z: 69.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4469922886838162}
@@ -501,7 +501,6 @@ MonoBehaviour:
   PelletDamage: 0.07
   SwordDamage: 0.07
   LaserDamage: 0.07
-  Player: {fileID: 1956758304220622, guid: b4ca4085a3bdce94face61c1c4e07ea6, type: 2}
   Barrel: {fileID: 4004201775506236}
   Bullet: {fileID: 1919970842314540, guid: fd5c56e1d0d66fb4dbbd7d3deee78ef3, type: 2}
   AIHealthBar: {fileID: 1507550526652236}
