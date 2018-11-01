@@ -493,6 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OuterRadius: 10
   InnerRadius: 2
+  WaypointRadius: 10
   AIBulletSpeed: 1000
   AIFireRate: 0.1
   AIHealth: 1
