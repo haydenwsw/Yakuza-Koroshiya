@@ -57,7 +57,6 @@ public class AISpawner : MonoBehaviour {
         for (int i = 0; i < children; ++i)
         {
             spawnPoint.Add(transform.GetChild(i));
-// >>>>>>> 7b00fb2b0eb47fadd9ca2b279362f6fbe65679e0
 
             wayPoint.Add(spawnPoint[i].GetChild(0));
         }
@@ -107,19 +106,12 @@ public class AISpawner : MonoBehaviour {
             }
         }
     }
-/*
+
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         BoxCollider b = GetComponent<BoxCollider>();
         b.enabled = false;
-<<<<<<< HEAD
-        Instantiate(AI, Spawn1.transform.position, Spawn1.transform.rotation);
-        Instantiate(AI, Spawn2.transform.position, Spawn2.transform.rotation);
-        Instantiate(AI, Spawn3.transform.position, Spawn3.transform.rotation);
-    }
-=======
->>>>>>> 7b00fb2b0eb47fadd9ca2b279362f6fbe65679e0
 
         tripped = true;
-*/
+    }
 }
