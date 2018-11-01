@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AISpawner : MonoBehaviour {
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
     [Header("Spawn Locations")]
     public Transform Spawn1;
     public Transform Spawn2;
     public Transform Spawn3;
-=======
+// =======
     // AI spawner class
     struct Wave
     {
@@ -57,7 +57,7 @@ public class AISpawner : MonoBehaviour {
         for (int i = 0; i < children; ++i)
         {
             spawnPoint.Add(transform.GetChild(i));
->>>>>>> 7b00fb2b0eb47fadd9ca2b279362f6fbe65679e0
+// >>>>>>> 7b00fb2b0eb47fadd9ca2b279362f6fbe65679e0
 
             wayPoint.Add(spawnPoint[i].GetChild(0));
         }
@@ -107,7 +107,7 @@ public class AISpawner : MonoBehaviour {
             }
         }
     }
-
+/*
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         BoxCollider b = GetComponent<BoxCollider>();
@@ -121,5 +121,5 @@ public class AISpawner : MonoBehaviour {
 >>>>>>> 7b00fb2b0eb47fadd9ca2b279362f6fbe65679e0
 
         tripped = true;
-    }
+*/
 }
