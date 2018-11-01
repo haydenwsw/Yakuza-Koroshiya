@@ -6,8 +6,8 @@ public class AISpawner : MonoBehaviour {
 
     [Header("Spawn Locations")]
     public Transform Spawn1;
-    //public Transform Spawn2;
-    //public Transform Spawn3;
+    public Transform Spawn2;
+    public Transform Spawn3;
 
     [Header("AI Prefab")]
     public GameObject AI;
@@ -17,6 +17,8 @@ public class AISpawner : MonoBehaviour {
         BoxCollider b = GetComponent<BoxCollider>();
         b.enabled = false;
         Instantiate(AI, Spawn1.transform.position, Spawn1.transform.rotation);
+        Instantiate(AI, Spawn2.transform.position, Spawn2.transform.rotation);
+        Instantiate(AI, Spawn3.transform.position, Spawn3.transform.rotation);
     }
 
 }

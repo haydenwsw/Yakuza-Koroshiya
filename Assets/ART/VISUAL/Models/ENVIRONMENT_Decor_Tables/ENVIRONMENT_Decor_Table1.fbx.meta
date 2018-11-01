@@ -41,6 +41,13 @@ ModelImporter:
     4300008: tableLongLeg3
     4300010: tableLongLeg4
     4300012: tableLongLeg5
+    6400000: tableLongBase
+    6400002: tableLongLeg
+    6400004: tableLongLeg1
+    6400006: tableLongLeg2
+    6400008: tableLongLeg3
+    6400010: tableLongLeg4
+    6400012: tableLongLeg5
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -75,7 +82,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
