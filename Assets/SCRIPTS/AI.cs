@@ -8,6 +8,7 @@ public class AI : MonoBehaviour {
     [Header("Radius Values")]
     public float OuterRadius;
     public float InnerRadius;
+    public float WaypointRadius;
 
     [Header("AI Values")]
     public float AIBulletSpeed;
@@ -30,6 +31,10 @@ public class AI : MonoBehaviour {
 
     private GameObject Player;
 
+    private Transform Waypoint;
+
+    bool point = false;
+
     private float time;
 
     private Transform target;
@@ -47,31 +52,46 @@ public class AI : MonoBehaviour {
 	
 	void Update ()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-
-        FaceTarget();
-
-        // follows player
-        if (distance <= OuterRadius)
+        if (point == false)
         {
-            agent.SetDestination(target.position);
+            float dist = Vector3.Distance(Waypoint.transform.position, transform.position);
 
-            time += Time.deltaTime;
+            FaceTarget(Waypoint.transform.position);
 
-            // attack the player
-            if (time >= AIFireRate)
+            agent.SetDestination(Waypoint.transform.position);
+
+            if (dist < WaypointRadius)
+                point = true;
+        }
+
+        if (point)
+        {
+            float distance = Vector3.Distance(target.position, transform.position);
+
+            FaceTarget(target.position);
+
+            // follows player
+            if (distance <= OuterRadius)
             {
-                GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
-                bullet.transform.Rotate(90, 0, 0);
+                agent.SetDestination(target.position);
 
-                time = 0;
-            }
+                time += Time.deltaTime;
 
-            // personal space
-            if (distance <= InnerRadius)
-            {
-                agent.SetDestination(transform.position);
+                // attack the player
+                if (time >= AIFireRate)
+                {
+                    GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
+                    bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
+                    bullet.transform.Rotate(90, 0, 0);
+
+                    time = 0;
+                }
+
+                // personal space
+                if (distance <= InnerRadius)
+                {
+                    agent.SetDestination(transform.position);
+                }
             }
         }
 
@@ -81,11 +101,16 @@ public class AI : MonoBehaviour {
         }
 	}
 
-    private void FaceTarget()
+    private void FaceTarget(Vector3 face)
     {
-        Vector3 dir = (target.position - transform.position).normalized;
+        Vector3 dir = (face - transform.position).normalized;
         Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0f, dir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * AIRotationSpeed);
+    }
+
+    public void SetTarget(Transform way)
+    {
+        Waypoint = way;
     }
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
