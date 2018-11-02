@@ -24,18 +24,18 @@ public class Consumeable : MonoBehaviour
 
     private void Rotate()
     {
-        transform.Rotate(0, 0, Speed);
+        transform.Rotate(0, Speed, 0);
     }
 
     private void Bob()
     {
         if (time >= 1)
         {
-            transform.Translate(0, 0, -bob);
+            transform.Translate(0, -bob, 0);
         }
         else
         {
-            transform.Translate(0, 0, bob);
+            transform.Translate(0, bob, 0);
         }
 
         if (time >= 2)

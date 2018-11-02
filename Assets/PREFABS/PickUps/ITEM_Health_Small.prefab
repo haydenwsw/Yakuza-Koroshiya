@@ -9,73 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1018094144129008}
+  m_RootGameObject: {fileID: 1166890369113190}
   m_IsPrefabAsset: 1
---- !u!1 &1018094144129008
+--- !u!1 &1166890369113190
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4016557798494964}
+  - component: {fileID: 4790437394973230}
+  - component: {fileID: 33198349188230038}
+  - component: {fileID: 23465406110717942}
+  - component: {fileID: 65521399115842874}
+  - component: {fileID: 114662526688836976}
   m_Layer: 0
-  m_Name: PLACEHOLDER_KendoStick
-  m_TagString: Untagged
+  m_Name: ITEM_Health_Small
+  m_TagString: HealthSmall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1205466160699726
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4683072732893470}
-  - component: {fileID: 33177044615805920}
-  - component: {fileID: 23097832658698264}
-  m_Layer: 0
-  m_Name: default
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4016557798494964
+--- !u!4 &4790437394973230
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1018094144129008}
-  m_LocalRotation: {x: -0.6532816, y: -0.65328145, z: -0.27059788, w: 0.27059823}
-  m_LocalPosition: {x: 0, y: -0.42, z: -0.36}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4683072732893470}
+  m_GameObject: {fileID: 1166890369113190}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.055, y: -4.246, z: 53.223}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -45, y: -179.99998, z: 90.00001}
---- !u!4 &4683072732893470
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1205466160699726}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4016557798494964}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23097832658698264
+--- !u!23 &23465406110717942
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1205466160699726}
+  m_GameObject: {fileID: 1166890369113190}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: da9f2f5510072394c83ac5990c298d69, type: 2}
+  - {fileID: 2100000, guid: a38709bfc0e349e4e858af909c99d67e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,10 +78,35 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33177044615805920
+--- !u!33 &33198349188230038
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1205466160699726}
-  m_Mesh: {fileID: 4300000, guid: 1d49bd6ebdc737643abd2239379bb13a, type: 3}
+  m_GameObject: {fileID: 1166890369113190}
+  m_Mesh: {fileID: 4300000, guid: a38709bfc0e349e4e858af909c99d67e, type: 3}
+--- !u!65 &65521399115842874
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166890369113190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.03, z: 0.04}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114662526688836976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166890369113190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e285800bda00f124897a78b205cd64c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 2
+  bob: 0.005

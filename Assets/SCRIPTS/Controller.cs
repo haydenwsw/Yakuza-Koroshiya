@@ -69,6 +69,9 @@ public class Controller : MonoBehaviour {
 
     [Header("Players values")]
     public float AmourPerentage;
+    public float SmallHealth;
+    public float MediumHealth;
+    public float LargeHealth;
 
     // movement varables
     private Vector3 velocity = Vector3.zero;
@@ -186,6 +189,11 @@ public class Controller : MonoBehaviour {
         PreformWeaponSwitch();
         PreformReload();
         UpdateLaserHeat();
+
+        if (Input.GetKey("q"))
+        {
+            firingMode = 0;
+        }
     }
 
     // movement function
@@ -240,8 +248,9 @@ public class Controller : MonoBehaviour {
         {
             if (firingMode == 0)
             {
-                // sword              
+                // sword
 
+                Debug.Log("swing");              
             }
             if (firingMode == 1)
             {
@@ -402,6 +411,8 @@ public class Controller : MonoBehaviour {
             Weapon.transform.localRotation = new Quaternion();
             currentlyHolding = Instantiate(AssultRifle, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+            currentlyHolding.transform.localPosition = AssultRifle.transform.position;
+            currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
             Hasweapon = true;
             firingMode = 1;
 
@@ -442,6 +453,8 @@ public class Controller : MonoBehaviour {
             Weapon.transform.localRotation = new Quaternion();
             currentlyHolding = Instantiate(AutoShotty, Weapon.position, Weapon.rotation);
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+            currentlyHolding.transform.localPosition = AutoShotty.transform.position;
+            currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
             Hasweapon = true;
             firingMode = 3;
 
@@ -542,13 +555,44 @@ public class Controller : MonoBehaviour {
             HealthBar.rectTransform.localScale = new Vector3(0, 1, 1);
     }
 
+    private void Heal(float food, GameObject obj)
+    {
+        if (health != 1)
+        {
+            health += food;
+            if (health >= 1)
+                health = 1;
+
+            HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+            Destroy(obj);
+        }
+    }
+
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (collision.gameObject.tag == "Armour")
         {
-            amour = 1;
-            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-            Destroy(collision.collider.gameObject);
+            if (amour != 1)
+            {
+                amour = 1;
+                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+                Destroy(collision.collider.gameObject);
+            }
+        }
+
+        if (collision.gameObject.tag == "HealthSmall")
+        {
+            Heal(SmallHealth, collision.collider.gameObject);
+        }
+
+        if (collision.gameObject.tag == "HealthMedium")
+        {
+            Heal(MediumHealth, collision.collider.gameObject);
+        }
+
+        if (collision.gameObject.tag == "HealthLarge")
+        {
+            Heal(LargeHealth, collision.collider.gameObject);
         }
 
         if (collision.gameObject.tag == "AISword")

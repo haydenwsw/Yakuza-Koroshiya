@@ -11,23 +11,6 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1254252111023304}
   m_IsPrefabAsset: 1
---- !u!1 &1115159041756864
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4173294859652680}
-  - component: {fileID: 33925083070780960}
-  - component: {fileID: 23551869196158104}
-  m_Layer: 0
-  m_Name: default
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1254252111023304
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,7 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4353790685635378}
-  - component: {fileID: 64282094591357236}
+  - component: {fileID: 33559042312436134}
+  - component: {fileID: 23601305161922270}
+  - component: {fileID: 65879392940470786}
   - component: {fileID: 114806839243923674}
   m_Layer: 0
   m_Name: LeatherJacket
@@ -45,39 +30,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4173294859652680
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115159041756864}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4353790685635378}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4353790685635378
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254252111023304}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.459, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 4173294859652680}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.544395, y: -5.37, z: 57.595634}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
---- !u!23 &23551869196158104
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23601305161922270
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115159041756864}
+  m_GameObject: {fileID: 1254252111023304}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6498498818fd13b488acf84a30f71849, type: 2}
+  - {fileID: 2100000, guid: 15af78ef40fc1c04b86bdd78f859c76a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,15 +78,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33925083070780960
+--- !u!33 &33559042312436134
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115159041756864}
-  m_Mesh: {fileID: 4300000, guid: cd7d1a32db2901947bc448049e029655, type: 3}
---- !u!64 &64282094591357236
-MeshCollider:
+  m_GameObject: {fileID: 1254252111023304}
+  m_Mesh: {fileID: 4300000, guid: 15af78ef40fc1c04b86bdd78f859c76a, type: 3}
+--- !u!65 &65879392940470786
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -123,11 +94,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.7224726, y: 0.613681, z: 0.3092215}
+  m_Center: {x: 0, y: 1.2452668, z: 0.011338562}
 --- !u!114 &114806839243923674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,5 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e285800bda00f124897a78b205cd64c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 2
   bob: 0.01

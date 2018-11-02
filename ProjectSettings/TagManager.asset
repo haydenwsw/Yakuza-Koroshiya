@@ -13,6 +13,9 @@ TagManager:
   - AIBullet
   - AIPellet
   - AILaser
+  - HealthSmall
+  - HealthMedium
+  - HealthLarge
   layers:
   - Default
   - TransparentFX
