@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222013527787236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.314, z: 0.447}
+  m_LocalPosition: {x: 0.07, y: 0, z: 0.447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4910919328184956}
@@ -191,7 +191,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78, y: 1.1, z: -9.55}
+  m_LocalPosition: {x: -11, y: -3.9, z: 50.668}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127554678773518}
@@ -439,12 +439,12 @@ MonoBehaviour:
   Pellet: {fileID: 1793765493058572, guid: c82b7443b86ca6a40b7264457acf9572, type: 2}
   Barrel: {fileID: 4910919328184956}
   Weapon: {fileID: 4240303781119652}
-  KendoStick: {fileID: 1018094144129008, guid: 119230fcc3bbe1c4487f1aa484ef73ff, type: 2}
-  LaserPistol: {fileID: 1106804930091368, guid: 2f9838bb0084d3243878043ebf56dd1a,
+  KendoStick: {fileID: 1691512340086530, guid: 9fc01ee54b90af849a94ade2023e8f88, type: 2}
+  LaserPistol: {fileID: 1470604625557212, guid: 2f9838bb0084d3243878043ebf56dd1a,
     type: 2}
-  AssultRifle: {fileID: 1219482193290964, guid: ccd6ef728db26e54783b65b1fab08084,
+  AssultRifle: {fileID: 1216438338210416, guid: 987bf22520caa9a4e9dcd177988721a7,
     type: 2}
-  AutoShotty: {fileID: 1104133928664820, guid: b656b3111e609bf47b7ce450f6bef006, type: 2}
+  AutoShotty: {fileID: 1384631071872374, guid: b295ef3b8e4cdd942947d76e87dd0b3c, type: 2}
   AmmoText: {fileID: 0}
   SpareAmmoText: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -453,3 +453,6 @@ MonoBehaviour:
   LaserHeatBar: {fileID: 0}
   Reloading: {fileID: 0}
   AmourPerentage: 0.3
+  SmallHealth: 0.2
+  MediumHealth: 0.5
+  LargeHealth: 1
