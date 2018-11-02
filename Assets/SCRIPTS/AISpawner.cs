@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class AISpawner : MonoBehaviour {
 
-// <<<<<<< HEAD
-    [Header("Spawn Locations")]
-    public Transform Spawn1;
-    public Transform Spawn2;
-    public Transform Spawn3;
-// =======
     // AI spawner class
     struct Wave
     {
@@ -25,10 +19,6 @@ public class AISpawner : MonoBehaviour {
         }
     }
 
-    // 0 = Laser Pistol
-    // 1 = Rifle
-    // 2 = Auto Shotgun
-    // 3 = Boss
 
     [Header("AI Prefabs")]
     public GameObject[] Enemies = new GameObject[4];
@@ -60,17 +50,72 @@ public class AISpawner : MonoBehaviour {
 
             wayPoint.Add(spawnPoint[i].GetChild(0));
         }
+        /// <summary>
+        /// WAVE DESIGN by Ervin Nunez
+        /// SCRIPTED by Hayden Swift
+        // 
+        /// Mob Id                  
+        ///     0 = Laser Pistol
+        ///     1 = Rifle
+        ///     2 = Auto Shotgun
+        ///     3 = Boss
+        /// Spawn Location          
+        ///     0 = A1
+        ///     1 = A2
+        ///     2 = A3
+        ///     3 = A4
+        /// Delay from Wave Start
+        ///     Time = [x]f (Float)
+        /// </summary>
 
         {
             waveList.Add(new List<Wave>());
-            waveList[0].Add(new Wave(1, 0, 0.5f));
-            waveList[0].Add(new Wave(1, 0, 1f));
-            waveList[0].Add(new Wave(1, 0, 1.5f));
+            waveList[0].Add(new Wave(1, 0, 0f));
+            waveList[0].Add(new Wave(1, 1, 0f));
+            waveList[0].Add(new Wave(1, 0, 3f));
+            waveList[0].Add(new Wave(1, 1, 3f));
 
             waveList.Add(new List<Wave>());
+            waveList[1].Add(new Wave(1, 0, 0f));
+            waveList[1].Add(new Wave(1, 1, 0f));
             waveList[1].Add(new Wave(1, 0, 0.5f));
-            waveList[1].Add(new Wave(1, 0, 1f));
-            waveList[1].Add(new Wave(1, 0, 1.5f));
+            waveList[1].Add(new Wave(1, 1, 0.5f));
+            waveList[1].Add(new Wave(1, 2, 0.5f));
+            waveList[1].Add(new Wave(1, 3, 0.5f));
+
+            waveList.Add(new List<Wave>());
+            waveList[2].Add(new Wave(1, 0, 0f));
+            waveList[2].Add(new Wave(1, 1, 0f));
+            waveList[2].Add(new Wave(1, 2, 0f));
+            waveList[2].Add(new Wave(1, 3, 0f));
+            waveList[2].Add(new Wave(1, 0, 4f));
+            waveList[2].Add(new Wave(1, 1, 4f));
+            waveList[2].Add(new Wave(1, 2, 3f));
+            waveList[2].Add(new Wave(1, 3, 3f));
+
+            waveList.Add(new List<Wave>());
+            waveList[3].Add(new Wave(1, 0, 0f));
+            waveList[3].Add(new Wave(1, 1, 0f));
+            waveList[3].Add(new Wave(1, 2, 0f));
+            waveList[3].Add(new Wave(1, 3, 0f));
+            waveList[3].Add(new Wave(1, 0, 0.5f));
+            waveList[3].Add(new Wave(1, 1, 0.5f));
+            waveList[3].Add(new Wave(1, 0, 3f));
+            waveList[3].Add(new Wave(1, 1, 3f));
+            waveList[3].Add(new Wave(1, 2, 3f));
+            waveList[3].Add(new Wave(1, 3, 3f));
+
+            waveList.Add(new List<Wave>());
+            waveList[4].Add(new Wave(1, 0, 0f));
+            waveList[4].Add(new Wave(1, 1, 0f));
+            waveList[4].Add(new Wave(1, 2, 0f));
+            waveList[4].Add(new Wave(1, 3, 0f));
+            waveList[4].Add(new Wave(1, 0, 0.5f));
+            waveList[4].Add(new Wave(1, 1, 0.5f));
+            waveList[4].Add(new Wave(1, 2, 0.5f));
+            waveList[4].Add(new Wave(1, 3, 0.5f));
+            waveList[4].Add(new Wave(1, 2, 2.5f));
+            waveList[4].Add(new Wave(1, 3, 2.5f));
         }
     }
 
@@ -99,6 +144,8 @@ public class AISpawner : MonoBehaviour {
                 {
                     wave++;
                     i = 0;
+
+                    Debug.Log("Wave: " + wave);
 
                     if (wave >= waveList.Count)
                         tripped = false;

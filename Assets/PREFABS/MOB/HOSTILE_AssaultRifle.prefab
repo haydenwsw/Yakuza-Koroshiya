@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114680774580010402}
   - component: {fileID: 195532797540538022}
   m_Layer: 0
-  m_Name: Enemy 1
+  m_Name: HOSTILE_AssaultRifle
   m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +313,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1252144113209616}
-  m_Mesh: {fileID: 4300000, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
+  m_Mesh: {fileID: 4300002, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
 --- !u!33 &33846710015235554
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -349,7 +349,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
+  m_Mesh: {fileID: 4300002, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
 --- !u!95 &95568805458743038
 Animator:
   serializedVersion: 3
@@ -379,11 +379,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe2226e086829d40951d2ca1380e49b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OuterRadius: 10
+  OuterRadius: 20
   InnerRadius: 2
   WaypointRadius: 10
-  AIBulletSpeed: 1000
-  AIFireRate: 0.1
+  AIBulletSpeed: 800
+  AIFireRate: 0.15
   AIHealth: 1
   AIRotationSpeed: 10
   BulletDamage: 0.07

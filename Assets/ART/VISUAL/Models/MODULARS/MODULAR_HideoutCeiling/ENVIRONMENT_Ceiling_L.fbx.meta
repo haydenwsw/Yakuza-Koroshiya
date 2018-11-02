@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: ba25f2f499f3b5b4788698acb4255da1
+guid: 58755a76268b47248b398692250074ae
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: lambert1
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: yakuza_decimate:Group17155
-    4300002: yakuza_decimate:Group46948
+    100000: ceilingBlockL
+    100002: //RootNode
+    400000: ceilingBlockL
+    400002: //RootNode
+    2100000: ceilingWood
+    2300000: ceilingBlockL
+    3300000: ceilingBlockL
+    4300000: ceilingBlockL
   externalObjects: {}
   materials:
     importMaterials: 1

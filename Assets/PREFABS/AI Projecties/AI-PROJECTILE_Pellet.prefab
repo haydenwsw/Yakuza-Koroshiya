@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114995402279952312}
   - component: {fileID: 64322081637731836}
   m_Layer: 0
-  m_Name: Pellet_Shotgun
+  m_Name: AI-PROJECTILE_Pellet
   m_TagString: AIPellet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

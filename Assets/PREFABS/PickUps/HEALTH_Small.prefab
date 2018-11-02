@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65521399115842874}
   - component: {fileID: 114662526688836976}
   m_Layer: 0
-  m_Name: ITEM_Health_Small
+  m_Name: HEALTH_Small
   m_TagString: HealthSmall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
