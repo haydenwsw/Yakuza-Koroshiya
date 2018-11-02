@@ -13,4 +13,9 @@ public class MainMenu : MonoBehaviour {
         Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation);
         gameObject.SetActive(false);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

@@ -75,16 +75,25 @@ public class AI : MonoBehaviour {
             {
                 agent.SetDestination(target.position);
 
-                time += Time.deltaTime;
+                Vector3 pos = Vector3.zero;
+                RaycastHit hit;
 
-                // attack the player
-                if (time >= AIFireRate)
+                if (Physics.Raycast(transform.position, transform.forward, out hit))
                 {
-                    GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
-                    bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
-                    bullet.transform.Rotate(90, 0, 0);
+                    if (hit.transform.gameObject.tag == "Player")
+                    {
+                        time += Time.deltaTime;
 
-                    time = 0;
+                        // attack the player
+                        if (time >= AIFireRate)
+                        {
+                            GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
+                            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
+                            bullet.transform.Rotate(90, 0, 0);
+
+                            time = 0;
+                        }
+                    }
                 }
 
                 // personal space
