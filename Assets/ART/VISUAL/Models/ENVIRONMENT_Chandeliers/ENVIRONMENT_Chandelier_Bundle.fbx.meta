@@ -32,6 +32,11 @@ ModelImporter:
     4300004: chandelierBase7
     4300006: chandelierBase6
     4300008: chandelierBase
+    6400000: chandelierBase
+    6400002: chandelierBase4
+    6400004: chandelierBase5
+    6400006: chandelierBase6
+    6400008: chandelierBase7
   externalObjects: {}
   materials:
     importMaterials: 1

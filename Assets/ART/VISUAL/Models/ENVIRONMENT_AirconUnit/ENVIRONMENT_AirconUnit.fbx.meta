@@ -16,6 +16,8 @@ ModelImporter:
     3300002: ariconFan
     4300000: ariconFan
     4300002: airconBase
+    6400000: airconBase
+    6400002: ariconFan
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:

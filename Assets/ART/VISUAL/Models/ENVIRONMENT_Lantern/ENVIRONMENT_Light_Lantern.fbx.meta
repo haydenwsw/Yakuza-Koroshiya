@@ -18,6 +18,8 @@ ModelImporter:
     3300002: lampMount
     4300000: lamp
     4300002: lampMount
+    6400000: lamp
+    6400002: lampMount
   externalObjects: {}
   materials:
     importMaterials: 1

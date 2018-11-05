@@ -64,6 +64,17 @@ ModelImporter:
     4300016: bentoSushi2
     4300018: bentoSushi1
     4300020: bentoSushi
+    6400000: bentoBeef
+    6400002: bentoBeef1
+    6400004: bentoLid
+    6400006: bentoPrawn
+    6400008: bentoPrawn1
+    6400010: bentoRice
+    6400012: bentoSushi
+    6400014: bentoSushi1
+    6400016: bentoSushi2
+    6400018: bentoSushi3
+    6400020: bentoTray
     9500000: //RootNode
   externalObjects: {}
   materials:
