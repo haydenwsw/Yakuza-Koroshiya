@@ -607,6 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   Sensitivity: 10
+  JumpHeight: 50000
 --- !u!114 &114148201518697696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -803,6 +804,7 @@ MonoBehaviour:
   cam: {fileID: 20594403128389432}
   BulletSpeed: 1000
   ReloadDelay: 1.5
+  GunsPersonalSpace: 1
   LaserDecayRate: 4
   LaserHeatRate: 0.1
   RifleFireRate: 0.05

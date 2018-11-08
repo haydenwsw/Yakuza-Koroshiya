@@ -133,10 +133,15 @@ public class AI : MonoBehaviour {
         if (collision.collider.tag == "Laser")
             AIHealth -= LaserDamage;
 
-        if (collision.collider.tag == "Block")
+        if (collision.collider.tag == "Sword")
             AIHealth -= SwordDamage;
 
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
+    }
+
+    private void OnDestroy()
+    {
+        GetComponentInParent<AISpawner>().AIDead();
     }
 
     private void OnDrawGizmosSelected()
