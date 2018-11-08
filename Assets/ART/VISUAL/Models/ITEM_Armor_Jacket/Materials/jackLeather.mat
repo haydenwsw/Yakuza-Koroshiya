@@ -66,7 +66,7 @@ Material:
     - _FresnelVisibleOnDarkAmbientLight: 0
     - _GlossIntensity: 0.95
     - _GlossTextureIntensity: 0
-    - _Glossiness: 0.3
+    - _Glossiness: 0.425
     - _HardEdgeFresnel: 0
     - _MainTextureColorGloss: 0
     - _MainTextureColorSMixShadowColor: 0
@@ -76,17 +76,17 @@ Material:
     - _MainTextureColorShadowT: 0
     - _NormalIntensity: 1
     - _OutlineNoiseIntensity: 0.4
-    - _OutlineWidth: 0.25
+    - _OutlineWidth: 1
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
     - _Saturation: 1.37
-    - _SelfLitIntensity: 0
+    - _SelfLitIntensity: 0.015
     - _SelfLitPower: 1
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
     - _SelfShadowSize: 0.56
     - _SelfShadowatViewDirection: 0
-    - _ShadowIntensity: 1
+    - _ShadowIntensity: 0.4
     - _ShadowMaskGlossTexture: 1
     - _ShadowPTextureIntensity: 0
     - _ShadowTIntensity: 0

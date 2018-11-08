@@ -8,26 +8,40 @@ ModelImporter:
     100004: null1
     100006: pCube1
     100008: pCube2
+    100010: wallFrame
+    100012: wallPanel
     400000: //RootNode
     400002: Environment_Wall_2x1
     400004: null1
     400006: pCube1
     400008: pCube2
+    400010: wallFrame
+    400012: wallPanel
     2100000: lambert1
+    2100002: wallPanelSmall
+    2100004: wallFrameSmall
     2300000: pCube1
     2300002: pCube2
+    2300004: wallFrame
+    2300006: wallPanel
     3300000: pCube1
     3300002: pCube2
+    3300004: wallFrame
+    3300006: wallPanel
     4300000: pCube2
     4300002: pCube1
+    4300004: wallPanel
+    4300006: wallFrame
     6400000: pCube1
     6400002: pCube2
+    6400004: wallFrame
+    6400006: wallPanel
   externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
