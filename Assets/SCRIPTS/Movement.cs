@@ -6,10 +6,13 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
     [SerializeField]
-    private float Speed = 5f;
+    private float Speed;
 
     [SerializeField]
-    private float Sensitivity = 10f;
+    private float Sensitivity;
+
+    [SerializeField]
+    private float JumpHeight;
 
     private Controller con;
 
@@ -57,7 +60,7 @@ public class Movement : MonoBehaviour {
         // jump
         float jump = Input.GetAxisRaw("Jump");
 
-        Vector3 vecUP = new Vector3(0f, jump, 0f) * Sensitivity;
+        Vector3 vecUP = new Vector3(0f, jump, 0f) * JumpHeight;
 
         con.Jump(vecUP);
 

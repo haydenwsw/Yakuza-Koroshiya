@@ -21,20 +21,28 @@ public struct Wave
 [System.Serializable]
 public class list
 {
-    public List<Wave> ist = new List<Wave>();
+    public List<Wave> Enemies = new List<Wave>();
 }
 
 public class AISpawner : MonoBehaviour {
 
-    [Header("Wave List")]
     public List<list> waveList = new List<list>();
 
     [Header("AI Prefabs")]
     public GameObject[] Enemies = new GameObject[4];
 
+    [Header("Between Waves")]
+    public int EnemiesRemaining;
+
+    public int EnemiesRemainingTime;
+
+    public float TimeBeforeWave;
+
     private List<Transform> spawnPoint = new List<Transform>();
 
     private List<Transform> wayPoint = new List<Transform>();
+
+    private List<bool> enemiesRemain = new List<bool>();
 
     private float time = 0;
 
@@ -43,9 +51,6 @@ public class AISpawner : MonoBehaviour {
     private int wave = 0;
 
     private int i = 0;
-
-    // replace this with enemies remaining
-    public float timeBetweenWave = 5;
 
     private void Start()
     {
@@ -64,22 +69,26 @@ public class AISpawner : MonoBehaviour {
         {
             time += Time.deltaTime;
 
-            if (i < waveList[wave].ist.Count && time >= waveList[wave].ist[i].Delay)
+            if (i < waveList[wave].Enemies.Count && time >= waveList[wave].Enemies[i].Delay)
             {
                 time = 0;
 
-                GameObject Bot = Instantiate(Enemies[waveList[wave].ist[i].Mob],
-                    spawnPoint[waveList[wave].ist[i].Location].transform.position,
-                    spawnPoint[waveList[wave].ist[i].Location].transform.rotation) as GameObject;
+                GameObject Bot = Instantiate(Enemies[waveList[wave].Enemies[i].Mob],
+                    spawnPoint[waveList[wave].Enemies[i].Location].transform.position,
+                    spawnPoint[waveList[wave].Enemies[i].Location].transform.rotation) as GameObject;
 
-                Bot.GetComponent<AI>().SetTarget(wayPoint[waveList[wave].ist[i].Location]);
+                Bot.GetComponent<AI>().SetTarget(wayPoint[waveList[wave].Enemies[i].Location]);
+                Bot.transform.parent = transform;
+
+                enemiesRemain.Add(true);
+                Debug.Log(enemiesRemain.Count);
 
                 i++;
             }
 
-            if (i >= waveList[wave].ist.Count)
+            if (i >= waveList[wave].Enemies.Count)
             {
-                if (time >= timeBetweenWave)
+                if (EnemiesRemainingTime >= enemiesRemain.Count && time >= TimeBeforeWave || EnemiesRemaining >= enemiesRemain.Count)
                 {
                     wave++;
                     i = 0;
@@ -97,18 +106,23 @@ public class AISpawner : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            BoxCollider b = GetComponent<BoxCollider>();
-            b.enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
 
             tripped = true;
+
+            Debug.Log("Wave: " + 0);
         }
+    }
+
+    public void AIDead()
+    {
+        enemiesRemain.Remove(true);
     }
 }
 
   /// <summary>
         /// WAVE DESIGN by Ervin Nunez
         /// SCRIPTED by Hayden Swift
-        // 
         /// Mob Id                  
         ///     0 = Laser Pistol
         ///     1 = Rifle
@@ -123,7 +137,7 @@ public class AISpawner : MonoBehaviour {
         ///     Time = [x]f (Float)
         /// </summary>
 
-  //      {
+  //      { erv Plz remove
   //          waveList.Add(new List<Wave>());
   //          waveList[0].Add(new Wave(1, 0, 0f));
   //          waveList[0].Add(new Wave(1, 1, 0f));

@@ -14,6 +14,7 @@ public class Controller : MonoBehaviour {
     [Header("Global Gun Varables")]
     public float BulletSpeed;
     public float ReloadDelay;
+    public float GunsPersonalSpace;
 
     [Header("Laser Pistol varables")]
     public float LaserDecayRate;
@@ -109,6 +110,14 @@ public class Controller : MonoBehaviour {
 
     private bool canShoot = true;
 
+    private bool canJump = false;
+
+    private bool WeaponSwitching = false;
+
+    private bool WeaponSwitched = false;
+
+    private MeshCollider kendoCollider;
+
     // Use this for initialization
     void Start()
     {
@@ -125,7 +134,8 @@ public class Controller : MonoBehaviour {
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         currentlyHolding.transform.localPosition = KendoStick.transform.position;
         currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
-        Hasweapon = false;
+        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
+        kendoCollider.enabled = false;
         firingMode = 0;
 
         // setting the ammo varables
@@ -184,16 +194,11 @@ public class Controller : MonoBehaviour {
         PerformMovement();
         PerformRotation();
         PerformJump();
-        if (Hasweapon)
-            PreformShoot();
+        PreformShoot();
         PreformWeaponSwitch();
         PreformReload();
         UpdateLaserHeat();
-
-        if (Input.GetKey("q"))
-        {
-            firingMode = 0;
-        }
+        WeaponSwitchAnime();
     }
 
     // movement function
@@ -236,9 +241,10 @@ public class Controller : MonoBehaviour {
     // jumping function
     void PerformJump()
     {
-        if (jump != Vector3.zero)
+        if (jump != Vector3.zero && canJump)
         {
-            rb.MovePosition(rb.position + jump * Time.fixedDeltaTime);
+            //rb.MovePosition(rb.position + jump * Time.fixedDeltaTime);
+            rb.AddForce(jump);
         }
     }
 
@@ -249,8 +255,12 @@ public class Controller : MonoBehaviour {
             if (firingMode == 0)
             {
                 // sword
+                //Anime.SetTrigger("Fire");
 
-                Debug.Log("swing");              
+                //currentlyHolding.transform.Rotate(22.5f, 0, 0);
+                currentlyHolding.transform.Translate(0, 0, 0.1f);
+
+                kendoCollider.enabled = true;
             }
             if (firingMode == 1)
             {
@@ -277,12 +287,25 @@ public class Controller : MonoBehaviour {
 
                     if (time >= RifleFireRate && rifleAmmo > 0)
                     {
-                        Vector3 Offset = new Vector3(
+
+                        Vector3 dir = cam.transform.forward;
+
+                        Vector3 Offset = Vector3.zero;
+
+                        float Mag = (Barrel.transform.position - pos).magnitude;
+                        if (Mag < GunsPersonalSpace)
+                        {
+                            Debug.Log("Too Close personal space plz");
+                        }
+                        else
+                        {
+                            Offset = new Vector3(
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread),
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread),
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread));
 
-                        Vector3 dir = (pos - Barrel.transform.position);
+                            dir = (pos - Barrel.transform.position);
+                        }
 
                         Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
@@ -319,7 +342,15 @@ public class Controller : MonoBehaviour {
                         Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                     }
 
-                    Vector3 dir = (Barrel.transform.position - pos);
+                    Vector3 dir = -cam.transform.forward;
+
+                    float Mag = (Barrel.transform.position - pos).magnitude;
+                    if (Mag < GunsPersonalSpace)
+                    {
+                        Debug.Log("Too Close personal space plz");
+                    }
+                    else
+                        dir = (Barrel.transform.position - pos);
 
                     GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
                     beam.transform.parent = GameObject.Find("Weapon").transform;
@@ -365,6 +396,7 @@ public class Controller : MonoBehaviour {
 
                             Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
+
                             GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
                             pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
                         }
@@ -379,6 +411,9 @@ public class Controller : MonoBehaviour {
         else if (shoot == 0)
         {
             fired = true;
+
+            if (firingMode == 0)
+                kendoCollider.enabled = false;
         }
     }
 
@@ -388,19 +423,27 @@ public class Controller : MonoBehaviour {
         if (Input.GetKeyDown("1"))
         {
             // sword
-            Destroy(currentlyHolding);
-            currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
-            currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = KendoStick.transform.position;
-            currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
-            Hasweapon = false;
-            firingMode = 0;
+            WeaponSwitching = true;
 
-            AmmoText.enabled = false;
-            SpareAmmoText.enabled = false;
+            if (WeaponSwitched)
+            {
+                Destroy(currentlyHolding);
+                currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
+                currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+                currentlyHolding.transform.localPosition = KendoStick.transform.position;
+                currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
+                kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
+                kendoCollider.enabled = false;
+                firingMode = 0;
 
-            LaserHearBarBack.enabled = false;
-            LaserHeatBar.enabled = false;
+                AmmoText.enabled = false;
+                SpareAmmoText.enabled = false;
+
+                LaserHearBarBack.enabled = false;
+                LaserHeatBar.enabled = false;
+
+                WeaponSwitched = false;
+            }
         }
 
         if (Input.GetKeyDown("3"))
@@ -413,7 +456,6 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             currentlyHolding.transform.localPosition = AssultRifle.transform.position;
             currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
-            Hasweapon = true;
             firingMode = 1;
 
             AmmoText.enabled = true;
@@ -435,7 +477,6 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             currentlyHolding.transform.localPosition = LaserPistol.transform.position;
             currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
-            Hasweapon = true;
             firingMode = 2;
 
             AmmoText.enabled = false;
@@ -455,7 +496,6 @@ public class Controller : MonoBehaviour {
             currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
             currentlyHolding.transform.localPosition = AutoShotty.transform.position;
             currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
-            Hasweapon = true;
             firingMode = 3;
 
             AmmoText.enabled = true;
@@ -618,6 +658,15 @@ public class Controller : MonoBehaviour {
             TakeDamge(ShotgunDamage);
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.tag == "Floor")
+            canJump = true;
+    }
+
+    private void OnCollisionExit(UnityEngine.Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+            canJump = false;
     }
 
     private void UpdateLaserHeat()
@@ -639,6 +688,21 @@ public class Controller : MonoBehaviour {
             fired = false;
     }
 
+    private void WeaponSwitchAnime()
+    {
+        if (WeaponSwitching)
+        {
+            currentlyHolding.transform.Translate(0, 0, 0.01f);
+            time += Time.deltaTime;
+            if (time > 1)
+            {
+                WeaponSwitching = false;
+                time = 0;
+                Debug.Log("switched");
+                WeaponSwitched = true;
+            }
+        }
+    }
 
     // Optifine meme
     public void cameraZoom(bool b)

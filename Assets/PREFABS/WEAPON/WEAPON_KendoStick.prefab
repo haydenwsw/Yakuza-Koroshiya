@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4447361424369480}
   - component: {fileID: 33685385964046806}
   - component: {fileID: 23493207691829918}
+  - component: {fileID: 64398309664415534}
   m_Layer: 0
   m_Name: WEAPON_KendoStick
   m_TagString: Untagged
@@ -82,4 +83,18 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691512340086530}
+  m_Mesh: {fileID: 4300000, guid: 8d7d7c71dabae0349bc11745ad4bdd87, type: 3}
+--- !u!64 &64398309664415534
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691512340086530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 8d7d7c71dabae0349bc11745ad4bdd87, type: 3}

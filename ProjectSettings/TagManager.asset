@@ -16,6 +16,7 @@ TagManager:
   - HealthSmall
   - HealthMedium
   - HealthLarge
+  - Floor
   layers:
   - Default
   - TransparentFX
