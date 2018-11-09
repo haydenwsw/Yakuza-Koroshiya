@@ -459,6 +459,16 @@ Prefab:
       propertyPath: GunAnimeTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114540672905098292, guid: b4ca4085a3bdce94face61c1c4e07ea6,
+        type: 2}
+      propertyPath: RifleAmmoPickup
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114540672905098292, guid: b4ca4085a3bdce94face61c1c4e07ea6,
+        type: 2}
+      propertyPath: ShotgunAmmoPickup
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ca4085a3bdce94face61c1c4e07ea6, type: 2}
   m_IsPrefabAsset: 0
@@ -469,6 +479,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4908883089603434, guid: d98062faa29dee9499a7f25e5bc245fb, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.07
@@ -503,7 +523,52 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1090567033941844, guid: d98062faa29dee9499a7f25e5bc245fb, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[0].Enemies.Array.data[0].Delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[0].Enemies.Array.data[1].Delay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[0].Enemies.Array.data[2].Delay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[0].Mob
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[0].Delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[1].Mob
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[1].Delay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[2].Mob
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114526746732301278, guid: d98062faa29dee9499a7f25e5bc245fb,
+        type: 2}
+      propertyPath: waveList.Array.data[1].Enemies.Array.data[2].Delay
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98062faa29dee9499a7f25e5bc245fb, type: 2}
@@ -588,7 +653,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1674073694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.08, y: 0.58, z: 4.2401457}
+  m_LocalPosition: {x: -4.08, y: 0.6, z: 4.2401457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
