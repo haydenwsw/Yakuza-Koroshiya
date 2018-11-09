@@ -15,6 +15,8 @@ public class Controller : MonoBehaviour {
     public float BulletSpeed;
     public float ReloadDelay;
     public float GunsPersonalSpace;
+    public float GunAnimeSpeed;
+    public float GunAnimeTime;
 
     [Header("Laser Pistol varables")]
     public float LaserDecayRate;
@@ -92,7 +94,7 @@ public class Controller : MonoBehaviour {
 
     private Vector3 weaponPos;
 
-    private bool Hasweapon = false;
+    private bool Hasweapon = true;
 
     private int firingMode;
 
@@ -114,9 +116,13 @@ public class Controller : MonoBehaviour {
 
     private bool WeaponSwitching = false;
 
-    private bool WeaponSwitched = false;
+    private bool WeaponSwitched = true;
 
     private MeshCollider kendoCollider;
+
+    private bool Kendo = false;
+
+    private float translatedY = 0;
 
     // Use this for initialization
     void Start()
@@ -130,13 +136,9 @@ public class Controller : MonoBehaviour {
         weaponPos = Weapon.transform.localPosition;
 
         // spawn with kendo stick
-        currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = KendoStick.transform.position;
-        currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
-        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
-        kendoCollider.enabled = false;
         firingMode = 0;
+        SwitchSword();
+        currentlyHolding.transform.localPosition = KendoStick.transform.position;
 
         // setting the ammo varables
         rifleAmmo = RifleClipSize;
@@ -257,8 +259,7 @@ public class Controller : MonoBehaviour {
                 // sword
                 //Anime.SetTrigger("Fire");
 
-                //currentlyHolding.transform.Rotate(22.5f, 0, 0);
-                currentlyHolding.transform.Translate(0, 0, 0.1f);
+                currentlyHolding.transform.Rotate(22.5f, 0, 0);
 
                 kendoCollider.enabled = true;
             }
@@ -423,89 +424,178 @@ public class Controller : MonoBehaviour {
         if (Input.GetKeyDown("1"))
         {
             // sword
-            WeaponSwitching = true;
-
-            if (WeaponSwitched)
+            if (firingMode != 0)
             {
-                Destroy(currentlyHolding);
-                currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
-                currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-                currentlyHolding.transform.localPosition = KendoStick.transform.position;
-                currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
-                kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
-                kendoCollider.enabled = false;
-                firingMode = 0;
-
-                AmmoText.enabled = false;
-                SpareAmmoText.enabled = false;
-
-                LaserHearBarBack.enabled = false;
-                LaserHeatBar.enabled = false;
-
-                WeaponSwitched = false;
+                WeaponSwitching = true;
+                WeaponSwitchAnime();
+                Kendo = true;
             }
         }
 
         if (Input.GetKeyDown("3"))
         {
             // rifle
-            Destroy(currentlyHolding);
-            Weapon.transform.localPosition = weaponPos;
-            Weapon.transform.localRotation = new Quaternion();
-            currentlyHolding = Instantiate(AssultRifle, Weapon.position, Weapon.rotation);
-            currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = AssultRifle.transform.position;
-            currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
-            firingMode = 1;
-
-            AmmoText.enabled = true;
-            AmmoText.text = rifleAmmo.ToString();
-            SpareAmmoText.enabled = true;
-            SpareAmmoText.text = RifleSpareAmmo.ToString();
-
-            LaserHearBarBack.enabled = false;
-            LaserHeatBar.enabled = false;
+            if (firingMode != 1)
+            {
+                WeaponSwitching = true;
+                WeaponSwitchAnime();
+                firingMode = 1;
+            }
         }
 
         if (Input.GetKeyDown("2"))
         {
             // laser pistol
-            Destroy(currentlyHolding);
-            Weapon.transform.localPosition = weaponPos;
-            Weapon.transform.localRotation = LaserPistol.transform.rotation;
-            currentlyHolding = Instantiate(LaserPistol, Weapon.position, Weapon.rotation);
-            currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = LaserPistol.transform.position;
-            currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
-            firingMode = 2;
-
-            AmmoText.enabled = false;
-            SpareAmmoText.enabled = false;
-
-            LaserHearBarBack.enabled = true;
-            LaserHeatBar.enabled = true;
+            if (firingMode != 2)
+            {
+                WeaponSwitching = true;
+                WeaponSwitchAnime();
+                firingMode = 2;
+            }
         }
 
         if (Input.GetKeyDown("4"))
         {
             // auto shotty
-            Destroy(currentlyHolding);
-            Weapon.transform.localPosition = weaponPos;
-            Weapon.transform.localRotation = new Quaternion();
-            currentlyHolding = Instantiate(AutoShotty, Weapon.position, Weapon.rotation);
-            currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-            currentlyHolding.transform.localPosition = AutoShotty.transform.position;
-            currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
-            firingMode = 3;
-
-            AmmoText.enabled = true;
-            AmmoText.text = shotgunAmmo.ToString();
-            SpareAmmoText.enabled = true;
-            SpareAmmoText.text = ShotgunSpareAmmo.ToString();
-
-            LaserHearBarBack.enabled = false;
-            LaserHeatBar.enabled = false;
+            if (firingMode != 3)
+            {
+                WeaponSwitching = true;
+                WeaponSwitchAnime();
+                firingMode = 3;
+            }
         }
+    }
+
+    private void WeaponSwitchAnime()
+    {
+        if (WeaponSwitching)
+        { 
+            if (WeaponSwitched)
+            {
+                currentlyHolding.transform.Translate(0, -GunAnimeSpeed, 0);
+                translatedY += GunAnimeSpeed;
+            }
+            else
+                currentlyHolding.transform.Translate(0, GunAnimeSpeed, 0);
+
+            time += Time.deltaTime;
+
+            if (time > GunAnimeTime / 2)
+            {
+                WeaponSwitched = false;
+
+                if (Hasweapon)
+                {
+                    if (Kendo)
+                        SwitchSword();
+                    else if (firingMode == 1)
+                        SwitchRifle();
+                    else if (firingMode == 2)                       
+                        SwitchPistol();
+                    else if (firingMode == 3)
+                        SwitchShotgun();
+
+                    translatedY = 0;
+                }
+
+                Hasweapon = false;
+            }
+            if (time > GunAnimeTime)
+            {
+                WeaponSwitching = false;
+
+                Hasweapon = true;
+
+                WeaponSwitched = true;
+
+                if (Kendo)
+                {
+                    currentlyHolding.transform.localPosition = KendoStick.transform.position;
+                    Kendo = false;
+                }
+                else if (firingMode == 1)
+                    currentlyHolding.transform.localPosition = AssultRifle.transform.position;
+                else if (firingMode == 2)
+                    currentlyHolding.transform.localPosition = LaserPistol.transform.position;
+                else if (firingMode == 3)
+                    currentlyHolding.transform.localPosition = AutoShotty.transform.position;
+
+                time = 0;
+            }
+        }
+    }
+
+    private void SwitchSword()
+    {
+        Destroy(currentlyHolding);
+        currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.localPosition = new Vector3(KendoStick.transform.position.x, KendoStick.transform.position.y - translatedY / 1.4f, KendoStick.transform.position.z - translatedY / 2);
+        currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
+        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
+        kendoCollider.enabled = false;
+
+        firingMode = 0;
+
+        AmmoText.enabled = false;
+        SpareAmmoText.enabled = false;
+
+        LaserHearBarBack.enabled = false;
+        LaserHeatBar.enabled = false;
+    }
+
+    private void SwitchPistol()
+    {
+        Destroy(currentlyHolding);
+        Weapon.transform.localPosition = weaponPos;
+        Weapon.transform.localRotation = LaserPistol.transform.rotation;
+        currentlyHolding = Instantiate(LaserPistol, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.localPosition = new Vector3(LaserPistol.transform.position.x, LaserPistol.transform.position.y - translatedY, LaserPistol.transform.position.z);
+        currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
+        AmmoText.enabled = false;
+        SpareAmmoText.enabled = false;
+
+        LaserHearBarBack.enabled = true;
+        LaserHeatBar.enabled = true;
+    }
+
+    private void SwitchRifle()
+    {
+        Destroy(currentlyHolding);
+        Weapon.transform.localPosition = weaponPos;
+        Weapon.transform.localRotation = new Quaternion();
+        currentlyHolding = Instantiate(AssultRifle, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.localPosition = new Vector3(AssultRifle.transform.position.x, AssultRifle.transform.position.y - translatedY, AssultRifle.transform.position.z);
+        currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
+
+        AmmoText.enabled = true;
+        AmmoText.text = rifleAmmo.ToString();
+        SpareAmmoText.enabled = true;
+        SpareAmmoText.text = RifleSpareAmmo.ToString();
+
+        LaserHearBarBack.enabled = false;
+        LaserHeatBar.enabled = false;
+    }
+
+    private void SwitchShotgun()
+    {
+        Destroy(currentlyHolding);
+        Weapon.transform.localPosition = weaponPos;
+        Weapon.transform.localRotation = new Quaternion();
+        currentlyHolding = Instantiate(AutoShotty, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.localPosition = new Vector3(AutoShotty.transform.position.x, AutoShotty.transform.position.y - translatedY, AutoShotty.transform.position.z);
+        currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
+
+        AmmoText.enabled = true;
+        AmmoText.text = shotgunAmmo.ToString();
+        SpareAmmoText.enabled = true;
+        SpareAmmoText.text = ShotgunSpareAmmo.ToString();
+
+        LaserHearBarBack.enabled = false;
+        LaserHeatBar.enabled = false;
     }
 
     void PreformReload()
@@ -686,22 +776,6 @@ public class Controller : MonoBehaviour {
             
         if (tooHot == true)
             fired = false;
-    }
-
-    private void WeaponSwitchAnime()
-    {
-        if (WeaponSwitching)
-        {
-            currentlyHolding.transform.Translate(0, 0, 0.01f);
-            time += Time.deltaTime;
-            if (time > 1)
-            {
-                WeaponSwitching = false;
-                time = 0;
-                Debug.Log("switched");
-                WeaponSwitched = true;
-            }
-        }
     }
 
     // Optifine meme

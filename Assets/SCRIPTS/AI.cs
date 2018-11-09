@@ -11,10 +11,13 @@ public class AI : MonoBehaviour {
     public float WaypointRadius;
 
     [Header("AI Values")]
+    public int Weapon;
     public float AIBulletSpeed;
     public float AIFireRate;
     public float AIHealth;
     public float AIRotationSpeed;
+    public float AIShotgunSpread;
+    public float AIShotgunPellets;
 
     [Header("Damage Values")]
     public float BulletDamage;
@@ -25,6 +28,9 @@ public class AI : MonoBehaviour {
     [Header("Game Objects")]
     public Transform Barrel;
     public GameObject Bullet;
+    public GameObject Laser;
+    public GameObject LaserHit;
+    public GameObject Pellet;
 
     [Header("UI Objects")]
     public GameObject AIHealthBar;
@@ -84,12 +90,44 @@ public class AI : MonoBehaviour {
                     {
                         time += Time.deltaTime;
 
-                        // attack the player
                         if (time >= AIFireRate)
                         {
-                            GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
-                            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
-                            bullet.transform.Rotate(90, 0, 0);
+                            if (Weapon == 0)
+                            {
+                                // Rifle
+                                GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
+                                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
+                                bullet.transform.Rotate(90, 0, 0);
+
+                            }
+                            else if (Weapon == 1)
+                            {
+                                // Laser Pistol
+                                pos = hit.point;
+                                Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+
+                                Vector3 dir = Barrel.transform.position - pos;
+                                Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
+                            }
+                            else if (Weapon == 2)
+                            {
+                                // Shotgun
+                                for (int i = 0; i < AIShotgunPellets; i++)
+                                {
+      
+                                    Vector3 Offset = new Vector3(
+                                        UnityEngine.Random.Range(-AIShotgunSpread, AIShotgunSpread),
+                                        UnityEngine.Random.Range(-AIShotgunSpread, AIShotgunSpread),
+                                        UnityEngine.Random.Range(-AIShotgunSpread, AIShotgunSpread));
+
+                                    Vector3 dir = (hit.point - Barrel.transform.position);
+
+                                    Quaternion rot = Quaternion.LookRotation(dir + Offset);
+
+                                    GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
+                                    pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * AIBulletSpeed);
+                                }
+                            }
 
                             time = 0;
                         }

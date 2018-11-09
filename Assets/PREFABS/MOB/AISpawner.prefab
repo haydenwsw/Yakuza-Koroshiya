@@ -67,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1407519416411266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.09, z: 20.22}
+  m_LocalPosition: {x: 0.456, y: -0.283, z: -2.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4740082646206314}
@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548692948153760}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9.15}
+  m_LocalPosition: {x: 0, y: 0, z: -0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4712424686117530}
@@ -94,8 +94,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090567033941844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: -2.6, z: 44.89}
-  m_LocalScale: {x: 8.548404, y: 5.0269732, z: 1}
+  m_LocalPosition: {x: -10.07, y: 2.4, z: 0.78}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4712424686117530}
   m_Father: {fileID: 0}
@@ -166,8 +166,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0223ab916de70d478d9d4f4c0671125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveList:
+  - Enemies:
+    - Mob: 1
+      Location: 0
+      Delay: 0
+    - Mob: 1
+      Location: 0
+      Delay: 0
+    - Mob: 1
+      Location: 0
+      Delay: 0
   Enemies:
-  - {fileID: 1203396510828336, guid: 04dd697af7b84ad4c934ed5e784e85aa, type: 2}
-  - {fileID: 1203396510828336, guid: 04dd697af7b84ad4c934ed5e784e85aa, type: 2}
-  - {fileID: 1203396510828336, guid: 04dd697af7b84ad4c934ed5e784e85aa, type: 2}
-  - {fileID: 1203396510828336, guid: 04dd697af7b84ad4c934ed5e784e85aa, type: 2}
+  - {fileID: 0}
+  - {fileID: 1431135771429922, guid: 4623c673bda6c5142adb40eb3b2d82b9, type: 2}
+  - {fileID: 0}
+  EnemiesRemaining: 0
+  EnemiesRemainingTime: 0
+  TimeBeforeWave: 0
