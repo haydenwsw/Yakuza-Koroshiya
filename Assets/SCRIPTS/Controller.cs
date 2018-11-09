@@ -27,6 +27,7 @@ public class Controller : MonoBehaviour {
     public float RifleSpread;
     public int RifleClipSize;
     public int RifleSpareAmmo;
+    public int RifleAmmoPickup;
 
     [Header("Shotgun varables")]
     public float ShotgunFireRate;
@@ -34,9 +35,9 @@ public class Controller : MonoBehaviour {
     public int ShotgunClipSize;
     public int ShotgunSpareAmmo;
     public int ShotgunPellets;
+    public int ShotgunAmmoPickup;
 
     [Header("Damage Values")]
-    public float SwordDamage;
     public float LaserDamage;
     public float RifleDamage;
     public float ShotgunDamage;
@@ -102,6 +103,8 @@ public class Controller : MonoBehaviour {
 
     private float time = 0;
 
+    private float time2 = 0;
+
     private float health;
 
     private float amour;
@@ -123,6 +126,8 @@ public class Controller : MonoBehaviour {
     private bool Kendo = false;
 
     private float translatedY = 0;
+
+    private bool pressed = true;
 
     // Use this for initialization
     void Start()
@@ -180,14 +185,91 @@ public class Controller : MonoBehaviour {
         jump = j;
     }
 
+    // Set Shoot
     public void Shoot(float s)
     {
         shoot = s;
     }
 
+    // Set Reload
     public void Reload(float r)
     {
         reload = r;
+    }
+
+    public void Get1(bool b)
+    {
+        // sword
+        if (b)
+        {
+            if (pressed)
+            {
+                if (firingMode != 0)
+                {
+                    canShoot = false;
+                    WeaponSwitching = true;
+                    WeaponSwitchAnime();
+                    Kendo = true;
+                    pressed = false;
+                }
+            }
+        }
+    }
+
+    public void Get2(bool b)
+    {
+        // laser pistol
+        if (b)
+        {
+            if (pressed)
+            {
+                if (firingMode != 2)
+                {
+                    canShoot = false;
+                    WeaponSwitching = true;
+                    WeaponSwitchAnime();
+                    firingMode = 2;
+                    pressed = false;
+                }
+            }
+        }
+    }
+
+    public void Get3(bool b)
+    {
+        // rifle
+        if (b)
+        {
+            if (pressed)
+            {
+                if (firingMode != 1)
+                {
+                    canShoot = false;
+                    WeaponSwitching = true;
+                    WeaponSwitchAnime();
+                    firingMode = 1;
+                    pressed = false;
+                }
+            }
+        }
+    }
+    public void Get4(bool b)
+    {
+        // auto shotty
+        if (b)
+        {
+            if (pressed)
+            {
+                if (firingMode != 3)
+                {
+                    canShoot = false;
+                    WeaponSwitching = true;
+                    WeaponSwitchAnime();
+                    firingMode = 3;
+                    pressed = false;
+                }
+            }
+        }
     }
 
     // update
@@ -197,7 +279,6 @@ public class Controller : MonoBehaviour {
         PerformRotation();
         PerformJump();
         PreformShoot();
-        PreformWeaponSwitch();
         PreformReload();
         UpdateLaserHeat();
         WeaponSwitchAnime();
@@ -257,11 +338,12 @@ public class Controller : MonoBehaviour {
             if (firingMode == 0)
             {
                 // sword
-                //Anime.SetTrigger("Fire");
+                if (canShoot)
+                {
+                    currentlyHolding.transform.Rotate(22.5f, 0, 0);
 
-                currentlyHolding.transform.Rotate(22.5f, 0, 0);
-
-                kendoCollider.enabled = true;
+                    kendoCollider.enabled = true;
+                }
             }
             if (firingMode == 1)
             {
@@ -324,41 +406,44 @@ public class Controller : MonoBehaviour {
             if (firingMode == 2)
             {
                 // laser pistol
-                if (fired)
+                if (canShoot)
                 {
-                    Anime.SetTrigger("Fire");
-
-                    Vector3 pos = Vector3.zero;
-                    Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(inputRay, out hit))
+                    if (fired)
                     {
-                        pos = hit.point;
-                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+                        Anime.SetTrigger("Fire");
+
+                        Vector3 pos = Vector3.zero;
+                        Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(inputRay, out hit))
+                        {
+                            pos = hit.point;
+                            Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+                        }
+                        else
+                        {
+                            pos = inputRay.GetPoint(200);
+                            Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+                        }
+
+                        Vector3 dir = -cam.transform.forward;
+
+                        float Mag = (Barrel.transform.position - pos).magnitude;
+                        if (Mag < GunsPersonalSpace)
+                        {
+                            Debug.Log("Too Close personal space plz");
+                        }
+                        else
+                            dir = (Barrel.transform.position - pos);
+
+                        GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
+                        beam.transform.parent = GameObject.Find("Weapon").transform;
+
+                        laserHeat += LaserHeatRate;
+
+                        fired = false;
                     }
-                    else
-                    {
-                        pos = inputRay.GetPoint(200);
-                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
-                    }
-
-                    Vector3 dir = -cam.transform.forward;
-
-                    float Mag = (Barrel.transform.position - pos).magnitude;
-                    if (Mag < GunsPersonalSpace)
-                    {
-                        Debug.Log("Too Close personal space plz");
-                    }
-                    else
-                        dir = (Barrel.transform.position - pos);
-
-                    GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
-                    beam.transform.parent = GameObject.Find("Weapon").transform;
-
-                    laserHeat += LaserHeatRate;
-                    
-                    fired = false;
                 }
             }
             if (firingMode == 3)
@@ -418,54 +503,6 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    void PreformWeaponSwitch()
-    {
-        //Switch weapons
-        if (Input.GetKeyDown("1"))
-        {
-            // sword
-            if (firingMode != 0)
-            {
-                WeaponSwitching = true;
-                WeaponSwitchAnime();
-                Kendo = true;
-            }
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            // rifle
-            if (firingMode != 1)
-            {
-                WeaponSwitching = true;
-                WeaponSwitchAnime();
-                firingMode = 1;
-            }
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            // laser pistol
-            if (firingMode != 2)
-            {
-                WeaponSwitching = true;
-                WeaponSwitchAnime();
-                firingMode = 2;
-            }
-        }
-
-        if (Input.GetKeyDown("4"))
-        {
-            // auto shotty
-            if (firingMode != 3)
-            {
-                WeaponSwitching = true;
-                WeaponSwitchAnime();
-                firingMode = 3;
-            }
-        }
-    }
-
     private void WeaponSwitchAnime()
     {
         if (WeaponSwitching)
@@ -478,9 +515,9 @@ public class Controller : MonoBehaviour {
             else
                 currentlyHolding.transform.Translate(0, GunAnimeSpeed, 0);
 
-            time += Time.deltaTime;
+            time2 += Time.deltaTime;
 
-            if (time > GunAnimeTime / 2)
+            if (time2 > GunAnimeTime / 2)
             {
                 WeaponSwitched = false;
 
@@ -500,7 +537,7 @@ public class Controller : MonoBehaviour {
 
                 Hasweapon = false;
             }
-            if (time > GunAnimeTime)
+            if (time2 > GunAnimeTime)
             {
                 WeaponSwitching = false;
 
@@ -520,7 +557,9 @@ public class Controller : MonoBehaviour {
                 else if (firingMode == 3)
                     currentlyHolding.transform.localPosition = AutoShotty.transform.position;
 
-                time = 0;
+                canShoot = true;
+                pressed = true;
+                time2 = 0;
             }
         }
     }
@@ -601,7 +640,10 @@ public class Controller : MonoBehaviour {
     void PreformReload()
     {
         if (Reloading.enabled)
+        {
             time += Time.deltaTime;
+            //Anime.SetTrigger("Reload");
+        }
 
         int spareAmmo = Int32.Parse(SpareAmmoText.text);
 
@@ -700,37 +742,6 @@ public class Controller : MonoBehaviour {
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        if (collision.gameObject.tag == "Armour")
-        {
-            if (amour != 1)
-            {
-                amour = 1;
-                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-                Destroy(collision.collider.gameObject);
-            }
-        }
-
-        if (collision.gameObject.tag == "HealthSmall")
-        {
-            Heal(SmallHealth, collision.collider.gameObject);
-        }
-
-        if (collision.gameObject.tag == "HealthMedium")
-        {
-            Heal(MediumHealth, collision.collider.gameObject);
-        }
-
-        if (collision.gameObject.tag == "HealthLarge")
-        {
-            Heal(LargeHealth, collision.collider.gameObject);
-        }
-
-        if (collision.gameObject.tag == "AISword")
-        {
-            TakeDamge(SwordDamage);
-            Destroy(collision.gameObject);
-        }
-
         if (collision.gameObject.tag == "AILaser")
         {
             TakeDamge(LaserDamage);
@@ -751,6 +762,50 @@ public class Controller : MonoBehaviour {
 
         if (collision.gameObject.tag == "Floor")
             canJump = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Armour")
+        {
+            if (amour != 1)
+            {
+                amour = 1;
+                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+                Destroy(other.gameObject);
+            }
+        }
+
+        if (other.gameObject.tag == "HealthSmall")
+        {
+            Heal(SmallHealth, other.gameObject);
+        }
+
+        if (other.gameObject.tag == "HealthMedium")
+        {
+            Heal(MediumHealth, other.gameObject);
+        }
+
+        if (other.gameObject.tag == "HealthLarge")
+        {
+            Heal(LargeHealth, other.gameObject);
+        }
+
+        if (other.gameObject.tag == "RifleAmmo")
+        {
+            RifleSpareAmmo += RifleAmmoPickup;
+            if (firingMode == 1)
+                SpareAmmoText.text = RifleSpareAmmo.ToString();
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag == "ShotgunAmmo")
+        {
+            ShotgunSpareAmmo += ShotgunAmmoPickup;
+            if (firingMode == 3)
+                SpareAmmoText.text = ShotgunSpareAmmo.ToString();
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnCollisionExit(UnityEngine.Collision collision)

@@ -18,6 +18,14 @@ public class Movement : MonoBehaviour {
 
     private bool zoom;
 
+    private bool Weapon1;
+
+    private bool Weapon2;
+
+    private bool Weapon3;
+
+    private bool Weapon4;
+
     // Use this for initialization
     void Start ()
     {
@@ -74,13 +82,57 @@ public class Movement : MonoBehaviour {
 
         con.Reload(reload);
 
+        if (Input.GetKeyDown("1"))
+        {
+            Weapon1 = true;
+            con.Get1(Weapon1);
+        }
+        else if (Input.GetKeyUp("1"))
+        {
+            Weapon1 = false;
+            con.Get1(Weapon1);
+        }
+
+        if (Input.GetKeyDown("2"))
+        {
+            Weapon2 = true;
+            con.Get2(Weapon2);
+        }
+        else if (Input.GetKeyUp("2"))
+        {
+            Weapon2 = false;
+            con.Get2(Weapon2);
+        }
+
+        if (Input.GetKeyDown("3"))
+        {
+            Weapon3 = true;
+            con.Get3(Weapon3);
+        }
+        else if (Input.GetKeyUp("3"))
+        {
+            Weapon3 = false;
+            con.Get3(Weapon3);
+        }
+
+        if (Input.GetKeyDown("4"))
+        {
+            Weapon4 = true;
+            con.Get4(Weapon4);
+        }
+        else if (Input.GetKeyUp("4"))
+        {
+            Weapon4 = false;
+            con.Get4(Weapon4);
+        }
+
         // change FOV
         if (Input.GetKeyDown("c"))
         {
             zoom = true;
             con.cameraZoom(zoom);
         }
-        if (Input.GetKeyUp("c"))
+        else if (Input.GetKeyUp("c"))
         {
             zoom = false;
             con.cameraZoom(zoom);
