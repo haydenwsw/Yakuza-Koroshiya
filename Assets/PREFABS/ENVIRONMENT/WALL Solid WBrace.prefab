@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4740864913120004}
   - component: {fileID: 33263039107345024}
   - component: {fileID: 23011052661632976}
+  - component: {fileID: 64464344466560174}
   m_Layer: 0
   m_Name: ENVIRONMENT_WallSolid
   m_TagString: Untagged
@@ -50,8 +51,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422086443257244}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -16.025002, y: 0, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4740864913120004}
@@ -112,6 +113,20 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1693765837694160}
+  m_Mesh: {fileID: 4300000, guid: 52a79080b10577c419dd273180597630, type: 3}
+--- !u!64 &64464344466560174
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693765837694160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 52a79080b10577c419dd273180597630, type: 3}
 --- !u!208 &208723027082710760
 NavMeshObstacle:
