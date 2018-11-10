@@ -280,7 +280,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 954849b0acf522a4b993ed119cd2856c, type: 3}
+  - {fileID: 2100000, guid: c38334864f8ca454c943d06550f502a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -320,7 +320,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894440372112918}
-  m_Mesh: {fileID: 4300000, guid: 954849b0acf522a4b993ed119cd2856c, type: 3}
+  m_Mesh: {fileID: 4300002, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
 --- !u!54 &54079196765041970
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -349,7 +349,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 954849b0acf522a4b993ed119cd2856c, type: 3}
+  m_Mesh: {fileID: 4300002, guid: ba25f2f499f3b5b4788698acb4255da1, type: 3}
 --- !u!95 &95568805458743038
 Animator:
   serializedVersion: 3
@@ -398,6 +398,9 @@ MonoBehaviour:
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
   LaserHit: {fileID: 1024411476709226, guid: 671f4db6e17cb0e4cbaa62f832462d36, type: 2}
   Pellet: {fileID: 1402863615391544, guid: 621257c7739336c41955868d73be6cdf, type: 2}
+  RifleAmmo: {fileID: 1438402921254862, guid: f1eb06a1b4d15b74dba46e26ba420041, type: 2}
+  ShotgunAmmo: {fileID: 1926263742744516, guid: 6fa2d554d8d763140a4238e43672f0aa,
+    type: 2}
   AIHealthBar: {fileID: 1432990314237000}
 --- !u!195 &195532797540538022
 NavMeshAgent:

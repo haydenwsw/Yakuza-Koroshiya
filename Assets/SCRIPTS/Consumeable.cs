@@ -19,7 +19,8 @@ public class Consumeable : MonoBehaviour
     {
         Rotate();
 
-        Bob();
+        if (Time.timeScale != 0)
+            Bob();
     }
 
     private void Rotate()

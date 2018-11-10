@@ -31,6 +31,8 @@ public class AI : MonoBehaviour {
     public GameObject Laser;
     public GameObject LaserHit;
     public GameObject Pellet;
+    public GameObject RifleAmmo;
+    public GameObject ShotgunAmmo;
 
     [Header("UI Objects")]
     public GameObject AIHealthBar;
@@ -144,6 +146,13 @@ public class AI : MonoBehaviour {
 
         if (AIHealth < 0)
         {
+            GetComponentInParent<AISpawner>().AIDead();
+
+            if (Weapon == 0)
+                Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation);
+            if (Weapon == 2)
+                Instantiate(ShotgunAmmo, transform.position, ShotgunAmmo.transform.rotation);
+
             Destroy(this.gameObject);
         }
 	}
@@ -175,11 +184,6 @@ public class AI : MonoBehaviour {
             AIHealth -= SwordDamage;
 
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
-    }
-
-    private void OnDestroy()
-    {
-        GetComponentInParent<AISpawner>().AIDead();
     }
 
     private void OnDrawGizmosSelected()

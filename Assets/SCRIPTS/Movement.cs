@@ -14,6 +14,10 @@ public class Movement : MonoBehaviour {
     [SerializeField]
     private float JumpHeight;
 
+    public Canvas MainCanvas;
+
+    public Canvas PauseCanvas;
+
     private Controller con;
 
     private bool zoom;
@@ -25,6 +29,8 @@ public class Movement : MonoBehaviour {
     private bool Weapon3;
 
     private bool Weapon4;
+
+    private bool isPaused = false;
 
     // Use this for initialization
     void Start ()
@@ -124,6 +130,24 @@ public class Movement : MonoBehaviour {
         {
             Weapon4 = false;
             con.Get4(Weapon4);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                Time.timeScale = 1;
+                MainCanvas.enabled = true;
+                PauseCanvas.enabled = false;
+            }
+            else
+            {
+                Time.timeScale = 0;
+                MainCanvas.enabled = false;
+                PauseCanvas.enabled = true;
+            }
+
+            isPaused = !isPaused;
         }
 
         // change FOV
