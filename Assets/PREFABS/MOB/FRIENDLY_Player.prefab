@@ -338,7 +338,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1890005343881380}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.252, z: 0.445}
+  m_LocalPosition: {x: 0, y: 0.14, z: 0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4240303781119652}
@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.5, y: 1.6, z: -21.3}
+  m_LocalPosition: {x: -40.39, y: 1.2, z: -18.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127554678773518}
@@ -459,7 +459,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850223136791254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -608,6 +608,8 @@ MonoBehaviour:
   Speed: 5
   Sensitivity: 10
   JumpHeight: 15000
+  MainCanvas: {fileID: 0}
+  PauseCanvas: {fileID: 0}
 --- !u!114 &114148201518697696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -813,12 +815,13 @@ MonoBehaviour:
   RifleSpread: 0.1
   RifleClipSize: 30
   RifleSpareAmmo: 90
+  RifleAmmoPickup: 0
   ShotgunFireRate: 0.15
   ShotgunSpread: 5
   ShotgunClipSize: 20
   ShotgunSpareAmmo: 60
   ShotgunPellets: 10
-  SwordDamage: 0.01
+  ShotgunAmmoPickup: 0
   LaserDamage: 0.01
   RifleDamage: 0.01
   ShotgunDamage: 0.01
