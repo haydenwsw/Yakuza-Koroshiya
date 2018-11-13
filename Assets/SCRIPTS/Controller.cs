@@ -79,8 +79,8 @@ public class Controller : MonoBehaviour {
 
     // movement varables
     private Vector3 velocity = Vector3.zero;
-    private Vector3 MouseY = Vector3.zero;
-    private Vector3 MouseX = Vector3.zero;
+    private Quaternion MouseY;
+    private Quaternion MouseX;
     private Vector3 jump = Vector3.zero;
     private float shoot = 0;
     private float reload = 0;
@@ -168,13 +168,13 @@ public class Controller : MonoBehaviour {
     }
 
     // Set MouseY
-    public void moveMouseY(Vector3 rot)
+    public void moveMouseY(Quaternion rot)
     {
         MouseY = rot;
     }
 
     // Set mouseX
-    public void moveMouseX(Vector3 rot)
+    public void moveMouseX(Quaternion rot)
     {
         MouseX = rot;
     }
@@ -297,28 +297,8 @@ public class Controller : MonoBehaviour {
     // looking function
     void PerformRotation()
     {
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(MouseY));
-        if (cam != null)
-        {
-            cam.transform.Rotate(-MouseX);
-
-            float angle = cam.transform.localRotation.eulerAngles.x;
-            if (angle >= 180)
-            {
-                angle = Mathf.Clamp(angle, 0, 0);
-            }
-
-            Vector3 newRot = cam.transform.localRotation.eulerAngles;
-            newRot.x = angle;
-            //if (newRot.z > 1)
-            //    newRot.z = 0;
-
-            //if (newRot.y > 1)
-            //    newRot.y = 0;
-            //newRot.z = 0;
-            //newRot.y = 0;
-            cam.transform.localRotation = Quaternion.Euler(newRot);
-        }
+        rb.MoveRotation(MouseY.normalized);
+        cam.transform.localRotation = MouseX;
     }
 
     // jumping function
@@ -326,7 +306,6 @@ public class Controller : MonoBehaviour {
     {
         if (jump != Vector3.zero && canJump)
         {
-            //rb.MovePosition(rb.position + jump * Time.fixedDeltaTime);
             rb.AddForce(jump);
         }
     }

@@ -32,6 +32,9 @@ public class Movement : MonoBehaviour {
 
     private bool isPaused = false;
 
+    private Quaternion CameraRot;
+    private Quaternion CharacterRot;
+
     // Use this for initialization
     void Start ()
     {
@@ -40,6 +43,9 @@ public class Movement : MonoBehaviour {
 
         // Lock the mouse
         Cursor.lockState = CursorLockMode.Locked;
+
+        CameraRot = Camera.main.transform.localRotation;
+        CharacterRot = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -60,16 +66,16 @@ public class Movement : MonoBehaviour {
         // camera y axis
         float yRot = Input.GetAxisRaw("Mouse X");
 
-        Vector3 vecY = new Vector3(0f, yRot, 0f) * Sensitivity;
-
-        con.moveMouseY(vecY);
-
         // camera x axis
         float xRot = Input.GetAxisRaw("Mouse Y");
 
-        Vector3 vecX = new Vector3(xRot, 0f, 0f) * Sensitivity;
+        CharacterRot *= Quaternion.Euler(0f, yRot, 0f);
+        CameraRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
-        con.moveMouseX(vecX);
+        CameraRot = ClampRotationAroundXAxis(CameraRot);
+
+        con.moveMouseX(CameraRot);
+        con.moveMouseY(CharacterRot);
 
         // jump
         float jump = Input.GetAxisRaw("Jump");
@@ -139,12 +145,14 @@ public class Movement : MonoBehaviour {
                 Time.timeScale = 1;
                 MainCanvas.enabled = true;
                 PauseCanvas.enabled = false;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else
             {
                 Time.timeScale = 0;
                 MainCanvas.enabled = false;
                 PauseCanvas.enabled = true;
+                Cursor.lockState = CursorLockMode.None;
             }
 
             isPaused = !isPaused;
@@ -161,5 +169,21 @@ public class Movement : MonoBehaviour {
             zoom = false;
             con.cameraZoom(zoom);
         }
+    }
+
+    Quaternion ClampRotationAroundXAxis(Quaternion q)
+    {
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1.0f;
+
+        float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
+
+        angleX = Mathf.Clamp(angleX, -90, 90);
+
+        q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
+
+        return q;
     }
 }
