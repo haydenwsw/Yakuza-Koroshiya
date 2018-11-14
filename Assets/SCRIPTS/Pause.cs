@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour {
+public class Pause : MonoBehaviour {
 
-    public Canvas MenuCanvas;
+    public Canvas PauseCanvas;
 
     public Canvas OptionsCanvas;
 
@@ -18,31 +18,33 @@ public class MainMenu : MonoBehaviour {
     public Slider fovSlider;
     public Text FOVText;
 
-    public GameObject Player;
+    private Controller Control;
 
-    public Transform PlayerSpawn;
-
-    public void Play()
+    private void Awake()
     {
-        Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation);
-        Camera.main.fieldOfView = fovSlider.value;
-        gameObject.SetActive(false);
+        Control = GetComponentInParent<Controller>();
+        FOVText.text = fovSlider.value.ToString();
+    }
+
+    public void Resume()
+    {
+        GetComponentInParent<Movement>().Unpause();
+    }
+
+    public void Retry()
+    {
+
     }
 
     public void Options()
     {
-        MenuCanvas.enabled = false;
+        PauseCanvas.enabled = false;
         OptionsCanvas.enabled = true;
     }
 
-    public void Credits()
+    public void Exit()
     {
-
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
+        
     }
 
     public void Music()
@@ -57,7 +59,7 @@ public class MainMenu : MonoBehaviour {
 
     public void FOV()
     {
-        //Control.cam.fieldOfView = fovSlider.value;
+        Control.cam.fieldOfView = fovSlider.value;
         FOVText.text = fovSlider.value.ToString();
     }
 
@@ -68,7 +70,7 @@ public class MainMenu : MonoBehaviour {
 
     public void Back()
     {
-        MenuCanvas.enabled = true;
+        PauseCanvas.enabled = true;
         OptionsCanvas.enabled = false;
     }
 }

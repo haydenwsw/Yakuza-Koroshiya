@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour {
 
     public Canvas PauseCanvas;
 
+    public Canvas OptionsCanvas;
+
     private Controller con;
 
     private bool zoom;
@@ -142,10 +144,7 @@ public class Movement : MonoBehaviour {
         {
             if (isPaused)
             {
-                Time.timeScale = 1;
-                MainCanvas.enabled = true;
-                PauseCanvas.enabled = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                Unpause();
             }
             else
             {
@@ -153,9 +152,8 @@ public class Movement : MonoBehaviour {
                 MainCanvas.enabled = false;
                 PauseCanvas.enabled = true;
                 Cursor.lockState = CursorLockMode.None;
+                isPaused = !isPaused;
             }
-
-            isPaused = !isPaused;
         }
 
         // change FOV
@@ -185,5 +183,15 @@ public class Movement : MonoBehaviour {
         q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
         return q;
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+        MainCanvas.enabled = true;
+        PauseCanvas.enabled = false;
+        OptionsCanvas.enabled = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        isPaused = !isPaused;
     }
 }

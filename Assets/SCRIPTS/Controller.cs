@@ -403,7 +403,7 @@ public class Controller : MonoBehaviour {
                         else
                         {
                             pos = inputRay.GetPoint(200);
-                            Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+                            //Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                         }
 
                         Vector3 dir = -cam.transform.forward;
@@ -417,7 +417,7 @@ public class Controller : MonoBehaviour {
                             dir = (Barrel.transform.position - pos);
 
                         GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
-                        beam.transform.parent = GameObject.Find("Weapon").transform;
+                        //beam.transform.parent = GameObject.Find("Weapon").transform;
 
                         laserHeat += LaserHeatRate;
 
