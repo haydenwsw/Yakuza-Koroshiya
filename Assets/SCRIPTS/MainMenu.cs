@@ -18,6 +18,9 @@ public class MainMenu : MonoBehaviour {
     public Slider fovSlider;
     public Text FOVText;
 
+    public Slider SensSlider;
+    public Text SensText;
+
     public GameObject Player;
 
     public Transform PlayerSpawn;
@@ -26,6 +29,7 @@ public class MainMenu : MonoBehaviour {
     {
         Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation);
         Camera.main.fieldOfView = fovSlider.value;
+        GameObject.Find("Player").GetComponent<Movement>();//.Sensitivity = SensSlider.value;
         gameObject.SetActive(false);
     }
 
@@ -57,8 +61,12 @@ public class MainMenu : MonoBehaviour {
 
     public void FOV()
     {
-        //Control.cam.fieldOfView = fovSlider.value;
         FOVText.text = fovSlider.value.ToString();
+    }
+
+    public void Sensitivity()
+    {
+        SensText.text = SensSlider.value.ToString();
     }
 
     public void Controls()

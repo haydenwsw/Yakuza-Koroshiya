@@ -18,11 +18,18 @@ public class Pause : MonoBehaviour {
     public Slider fovSlider;
     public Text FOVText;
 
+    public Slider SensSlider;
+    public Text SensText;
+
     private Controller Control;
+
+    private Movement Move;
 
     private void Awake()
     {
         Control = GetComponentInParent<Controller>();
+        Move = GetComponentInParent<Movement>();
+        
         FOVText.text = fovSlider.value.ToString();
     }
 
@@ -61,6 +68,18 @@ public class Pause : MonoBehaviour {
     {
         Control.cam.fieldOfView = fovSlider.value;
         FOVText.text = fovSlider.value.ToString();
+
+        if (fovSlider.value == 120)
+            FOVText.text = "Quake Pro";
+
+        if (fovSlider.value == 60)
+            FOVText.text = "Console Player";
+    }
+
+    public void Sensitivity()
+    {
+        Move.Sensitivity = SensSlider.value;
+        SensText.text = SensSlider.value.ToString();
     }
 
     public void Controls()

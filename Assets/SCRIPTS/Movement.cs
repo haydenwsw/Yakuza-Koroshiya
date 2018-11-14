@@ -8,8 +8,7 @@ public class Movement : MonoBehaviour {
     [SerializeField]
     private float Speed;
 
-    [SerializeField]
-    private float Sensitivity;
+    public float Sensitivity;
 
     [SerializeField]
     private float JumpHeight;
@@ -71,8 +70,8 @@ public class Movement : MonoBehaviour {
         // camera x axis
         float xRot = Input.GetAxisRaw("Mouse Y");
 
-        CharacterRot *= Quaternion.Euler(0f, yRot, 0f);
-        CameraRot *= Quaternion.Euler(-xRot, 0f, 0f);
+        CharacterRot *= Quaternion.Euler(0f, yRot * Sensitivity, 0f);
+        CameraRot *= Quaternion.Euler(-xRot * Sensitivity, 0f, 0f);
 
         CameraRot = ClampRotationAroundXAxis(CameraRot);
 
