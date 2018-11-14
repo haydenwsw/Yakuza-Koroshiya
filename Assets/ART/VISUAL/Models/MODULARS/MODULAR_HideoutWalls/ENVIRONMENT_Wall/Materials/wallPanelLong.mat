@@ -118,7 +118,7 @@ Material:
     - _MainTextureColorShadowT: 0
     - _Metallic: 0
     - _Mode: 0
-    - _NormalIntensity: 0.2
+    - _NormalIntensity: 0.1
     - _OcclusionStrength: 1
     - _OutlineNoiseIntensity: 0
     - _OutlineWidth: 0.003

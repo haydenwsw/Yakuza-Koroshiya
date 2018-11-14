@@ -6,18 +6,28 @@ ModelImporter:
     100000: doorPanel
     100002: doorPanel1
     100004: //RootNode
+    100006: doorGroup
+    100008: doorPanel2
     400000: doorPanel
     400002: doorPanel1
     400004: //RootNode
+    400006: doorGroup
+    400008: doorPanel2
     2100000: lambert1
+    2100002: doorPanelMat
+    2100004: doorPanelWood
     2300000: doorPanel
     2300002: doorPanel1
+    2300004: doorPanel2
     3300000: doorPanel
     3300002: doorPanel1
+    3300004: doorPanel2
     4300000: doorPanel
     4300002: doorPanel1
+    4300004: doorPanel2
     6400000: doorPanel
     6400002: doorPanel1
+    6400004: doorPanel2
   externalObjects: {}
   materials:
     importMaterials: 1

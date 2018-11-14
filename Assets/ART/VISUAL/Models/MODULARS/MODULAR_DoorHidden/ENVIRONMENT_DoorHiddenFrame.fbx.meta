@@ -6,11 +6,15 @@ ModelImporter:
     100000: doorFrame
     100002: doorFramePanel
     100004: //RootNode
+    100006: doorframeGroup
     400000: doorFrame
     400002: doorFramePanel
     400004: //RootNode
+    400006: doorframeGroup
     2100000: lambert1
     2100002: lambert2
+    2100004: doorFramePanelMat
+    2100006: doorFrameMat
     2300000: doorFrame
     2300002: doorFramePanel
     3300000: doorFrame
