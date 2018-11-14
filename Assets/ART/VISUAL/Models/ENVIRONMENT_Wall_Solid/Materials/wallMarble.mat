@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskSelfLit:
-        m_Texture: {fileID: 2800000, guid: 029a12dc8af1e1c4fa08e6177d5a7fb9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -126,7 +126,7 @@ Material:
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
     - _Saturation: 1
-    - _SelfLitIntensity: 1
+    - _SelfLitIntensity: 0.3
     - _SelfLitPower: 1
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
@@ -146,7 +146,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TexturePatternStyle: 0
-    - _TextureWashout: 0
+    - _TextureWashout: 0.3
     - _Transparent: 0
     - _UVSec: 0
     - _ZWrite: 1
