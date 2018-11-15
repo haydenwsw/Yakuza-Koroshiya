@@ -823,6 +823,7 @@ public class Controller : MonoBehaviour {
         {
             DeathCanvas.enabled = true;
             GetComponent<Movement>().MainCanvas.enabled = false;
+            //GameObject.Find("")
 
             time2 += Time.deltaTime;
 
@@ -836,7 +837,6 @@ public class Controller : MonoBehaviour {
                 HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
                 DeathCanvas.enabled = false;
                 GetComponent<Movement>().MainCanvas.enabled = true;
-                GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
             }
         }
     }
