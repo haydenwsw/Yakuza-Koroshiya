@@ -108,10 +108,10 @@ Material:
     - _FresnelOnLight: 1
     - _FresnelOnShadow: 1
     - _FresnelVisibleOnDarkAmbientLight: 0
-    - _GlossIntensity: 0
+    - _GlossIntensity: 0.5
     - _GlossMapScale: 0.461
     - _GlossTextureIntensity: 0
-    - _Glossiness: 0.524
+    - _Glossiness: 0.3
     - _GlossyReflections: 1
     - _HardEdgeFresnel: 0
     - _MainTextureColorGloss: 0
@@ -122,15 +122,15 @@ Material:
     - _MainTextureColorShadowT: 0
     - _Metallic: 0
     - _Mode: 0
-    - _NormalIntensity: 1
+    - _NormalIntensity: 5
     - _OcclusionStrength: 1
-    - _OutlineNoiseIntensity: 0
-    - _OutlineWidth: 0.003
+    - _OutlineNoiseIntensity: 0.3
+    - _OutlineWidth: 0.002
     - _Parallax: 0.02
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
-    - _Saturation: 1
-    - _SelfLitIntensity: 0.5
+    - _Saturation: 2
+    - _SelfLitIntensity: 0.05
     - _SelfLitPower: 5
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
@@ -150,7 +150,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TexturePatternStyle: 0
-    - _TextureWashout: 0
+    - _TextureWashout: 0.3
     - _Transparent: 0
     - _UVSec: 0
     - _ZWrite: 1
