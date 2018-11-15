@@ -25,11 +25,21 @@ public class MainMenu : MonoBehaviour {
 
     public Transform PlayerSpawn;
 
+    public Camera cam;
+
     public void Play()
     {
-        Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation);
+        GameObject player = Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation) as GameObject;
+        Pause pause = player.GetComponentInChildren<Pause>();
+
+        player.GetComponent<Movement>().Sensitivity = SensSlider.value;
+        pause.SensSlider.value = SensSlider.value;
+        pause.SensText.text = SensSlider.value.ToString();
+
         Camera.main.fieldOfView = fovSlider.value;
-        GameObject.Find("Player").GetComponent<Movement>();//.Sensitivity = SensSlider.value;
+        pause.fovSlider.value = fovSlider.value;
+        pause.FOVText.text = fovSlider.value.ToString();
+
         gameObject.SetActive(false);
     }
 
@@ -62,6 +72,14 @@ public class MainMenu : MonoBehaviour {
     public void FOV()
     {
         FOVText.text = fovSlider.value.ToString();
+
+        cam.fieldOfView = fovSlider.value;
+
+        if (fovSlider.value == 120)
+            FOVText.text = "Quake Pro";
+
+        if (fovSlider.value == 60)
+            FOVText.text = "Console Player";
     }
 
     public void Sensitivity()

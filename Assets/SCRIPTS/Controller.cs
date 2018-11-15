@@ -416,8 +416,7 @@ public class Controller : MonoBehaviour {
                         else
                             dir = (Barrel.transform.position - pos);
 
-                        GameObject beam = Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir)) as GameObject;
-                        //beam.transform.parent = GameObject.Find("Weapon").transform;
+                        Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
 
                         laserHeat += LaserHeatRate;
 

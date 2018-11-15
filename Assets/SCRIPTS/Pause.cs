@@ -35,7 +35,7 @@ public class Pause : MonoBehaviour {
 
     public void Resume()
     {
-        GetComponentInParent<Movement>().Unpause();
+        Move.Unpause();
     }
 
     public void Retry()

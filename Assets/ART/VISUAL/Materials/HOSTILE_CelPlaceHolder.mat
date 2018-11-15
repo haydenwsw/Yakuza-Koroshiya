@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: HOSTILE_CelPlaceHolder
-  m_Shader: {fileID: 4800000, guid: de5e83de0d8fa8e45bfa3a69adeae480, type: 3}
+  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _FRESNELONLIGHT_ON _FRESNELONSHADOW_ON _SHADOWMASKGLOSSTEXTURE_ON
     _SHOWSHADOWTONLIGHT_ON
   m_LightmapFlags: 4
@@ -29,6 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _GlossTexture:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a8ad4b70d5ae7944990d2e24cd016712, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskFReflection:
@@ -100,7 +104,7 @@ Material:
     - _TextureWashout: 0
     - _Transparent: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.3673905, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

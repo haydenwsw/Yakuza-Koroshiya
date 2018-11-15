@@ -18,6 +18,8 @@ public class AI : MonoBehaviour {
     public float AIRotationSpeed;
     public float AIShotgunSpread;
     public float AIShotgunPellets;
+    public int PointGiven;
+    public float HeadshotMuilpler;
 
     [Header("Damage Values")]
     public float BulletDamage;
@@ -148,6 +150,8 @@ public class AI : MonoBehaviour {
         {
             GetComponentInParent<AISpawner>().AIDead();
 
+            GetComponentInParent<Score>().AddScore(PointGiven, transform.position, transform.rotation);
+
             if (Weapon == 0)
                 Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation);
             if (Weapon == 2)
@@ -184,6 +188,24 @@ public class AI : MonoBehaviour {
             AIHealth -= SwordDamage;
 
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bullet")
+            AIHealth -= BulletDamage * HeadshotMuilpler;
+
+        if (other.tag == "Pellet")
+            AIHealth -= PelletDamage * HeadshotMuilpler;
+
+        if (other.tag == "Laser")
+            AIHealth -= LaserDamage * HeadshotMuilpler;
+
+        if (other.tag == "Sword")
+            AIHealth -= SwordDamage * HeadshotMuilpler;
+
+        AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
+        Debug.Log("HEADSHOT");
     }
 
     private void OnDrawGizmosSelected()
