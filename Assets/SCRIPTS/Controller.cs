@@ -53,6 +53,7 @@ public class Controller : MonoBehaviour {
     [Header("Real world positions for objects")]
     public Transform Barrel;
     public Transform Weapon;
+    public Transform Spawn;
 
     // all the weapons
     [Header("All weapons prefabs")]
@@ -282,6 +283,7 @@ public class Controller : MonoBehaviour {
         PreformReload();
         UpdateLaserHeat();
         WeaponSwitchAnime();
+        IsPlayerAlive();
     }
 
     // movement function
@@ -737,7 +739,10 @@ public class Controller : MonoBehaviour {
             TakeDamge(ShotgunDamage);
             Destroy(collision.gameObject);
         }
+    }
 
+    private void OnCollisionStay(UnityEngine.Collision collision)
+    {
         if (collision.gameObject.tag == "Floor")
             canJump = true;
     }
@@ -809,6 +814,19 @@ public class Controller : MonoBehaviour {
             
         if (tooHot == true)
             fired = false;
+    }
+
+    private void IsPlayerAlive()
+    {
+        if (health < 0)
+        {
+            transform.position = Spawn.position;
+            health = 1;
+            amour = 1;
+            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+            HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+            Debug.Log("DEAD");
+        }
     }
 
     // Optifine meme

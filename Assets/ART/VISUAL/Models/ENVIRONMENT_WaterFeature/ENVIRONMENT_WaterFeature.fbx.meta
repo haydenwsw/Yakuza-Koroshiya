@@ -20,6 +20,10 @@ ModelImporter:
     400012: rock2
     400014: rock3
     2100000: lambert1
+    2100002: featurePool
+    2100004: rockMat
+    2100006: featureStone
+    2100008: featureBamboo
     2300000: fountainPillar
     2300002: fountainPool
     2300004: fountainToob
