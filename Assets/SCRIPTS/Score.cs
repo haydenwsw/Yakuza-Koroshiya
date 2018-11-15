@@ -23,12 +23,12 @@ public class Score : MonoBehaviour {
 
     public void DestroyAI()
     {
-        int children = transform.childCount;
+        int children = transform.GetChild(1).childCount;
         for (int i = 0; i < children; ++i)
         {         
-            if (transform.GetChild(i).tag == "AI")
+            if (transform.GetChild(1).GetChild(i).tag == "AI")
             {
-                Destroy(transform.GetChild(i));
+                Destroy(transform.GetChild(1).GetChild(i).gameObject);
             }
         }
 
