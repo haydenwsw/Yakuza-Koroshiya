@@ -117,4 +117,14 @@ public class AISpawner : MonoBehaviour {
     {
         enemiesRemain.Remove(true);
     }
+
+    public void ResetSpawner()
+    {
+        GetComponent<BoxCollider>().enabled = true;
+
+        tripped = false;
+
+        wave = 0;
+        i = 0;
+    }
 }
