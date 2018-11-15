@@ -20,18 +20,4 @@ public class Score : MonoBehaviour {
 
         Instantiate(plusTen, pos + (Vector3.up * 1.5f), rot);
     }
-
-    public void DestroyAI()
-    {
-        int children = transform.childCount;
-        for (int i = 0; i < children; ++i)
-        {         
-            if (transform.GetChild(i).tag == "AI")
-            {
-                Destroy(transform.GetChild(i));
-            }
-        }
-
-        GetComponentInChildren<AISpawner>().ResetSpawner();
-    }
 }

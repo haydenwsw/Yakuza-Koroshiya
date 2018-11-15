@@ -71,7 +71,6 @@ public class Controller : MonoBehaviour {
     public Image LaserHearBarBack;
     public Image LaserHeatBar;
     public Text Reloading;
-    public Canvas DeathCanvas;
 
     [Header("Players values")]
     public float AmourPerentage;
@@ -821,23 +820,12 @@ public class Controller : MonoBehaviour {
     {
         if (health < 0)
         {
-            DeathCanvas.enabled = true;
-            GetComponent<Movement>().MainCanvas.enabled = false;
-            //GameObject.Find("")
-
-            time2 += Time.deltaTime;
-
-            if (time2 > 2)
-            {
-                time = 0;
-                transform.position = Spawn.position;
-                health = 1;
-                amour = 1;
-                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-                HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
-                DeathCanvas.enabled = false;
-                GetComponent<Movement>().MainCanvas.enabled = true;
-            }
+            transform.position = Spawn.position;
+            health = 1;
+            amour = 1;
+            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+            HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+            Debug.Log("DEAD");
         }
     }
 
