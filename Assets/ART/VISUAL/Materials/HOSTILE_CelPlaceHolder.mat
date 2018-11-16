@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlossTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 39c03c425634a9e4c8b8c713ed205b75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9b12cc23e95d20b42b9e07b80a44cb12, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowPTexture:
@@ -69,7 +69,7 @@ Material:
     - _FresnelOnShadow: 1
     - _FresnelVisibleOnDarkAmbientLight: 0
     - _GlossIntensity: 0
-    - _GlossTextureIntensity: 0
+    - _GlossTextureIntensity: 0.467
     - _Glossiness: 0.5
     - _HardEdgeFresnel: 0
     - _MainTextureColorGloss: 0
@@ -80,7 +80,7 @@ Material:
     - _MainTextureColorShadowT: 0
     - _NormalIntensity: 1
     - _OutlineNoiseIntensity: 0
-    - _OutlineWidth: 0.01
+    - _OutlineWidth: 0.012
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
     - _Saturation: 2

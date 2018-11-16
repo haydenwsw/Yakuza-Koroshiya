@@ -71,6 +71,7 @@ public class Controller : MonoBehaviour {
     public Image LaserHearBarBack;
     public Image LaserHeatBar;
     public Text Reloading;
+    public Canvas DeathCanvas;
 
     [Header("Players values")]
     public float AmourPerentage;
@@ -129,6 +130,9 @@ public class Controller : MonoBehaviour {
     private float translatedY = 0;
 
     private bool pressed = true;
+
+    private bool hasShotgun = false;
+    private bool hasRifle = false;
 
     // Use this for initialization
     void Start()
@@ -243,13 +247,17 @@ public class Controller : MonoBehaviour {
         {
             if (pressed)
             {
-                if (firingMode != 1)
+                if (hasRifle)
                 {
-                    canShoot = false;
-                    WeaponSwitching = true;
-                    WeaponSwitchAnime();
-                    firingMode = 1;
-                    pressed = false;
+
+                    if (firingMode != 1)
+                    {
+                        canShoot = false;
+                        WeaponSwitching = true;
+                        WeaponSwitchAnime();
+                        firingMode = 1;
+                        pressed = false;
+                    }
                 }
             }
         }
@@ -261,13 +269,16 @@ public class Controller : MonoBehaviour {
         {
             if (pressed)
             {
-                if (firingMode != 3)
+                if (hasShotgun)
                 {
-                    canShoot = false;
-                    WeaponSwitching = true;
-                    WeaponSwitchAnime();
-                    firingMode = 3;
-                    pressed = false;
+                    if (firingMode != 3)
+                    {
+                        canShoot = false;
+                        WeaponSwitching = true;
+                        WeaponSwitchAnime();
+                        firingMode = 3;
+                        pressed = false;
+                    }
                 }
             }
         }
@@ -776,6 +787,7 @@ public class Controller : MonoBehaviour {
 
         if (other.gameObject.tag == "RifleAmmo")
         {
+            hasRifle = true;
             RifleSpareAmmo += RifleAmmoPickup;
             if (firingMode == 1)
                 SpareAmmoText.text = RifleSpareAmmo.ToString();
@@ -784,6 +796,7 @@ public class Controller : MonoBehaviour {
 
         if (other.gameObject.tag == "ShotgunAmmo")
         {
+            hasShotgun = true;
             ShotgunSpareAmmo += ShotgunAmmoPickup;
             if (firingMode == 3)
                 SpareAmmoText.text = ShotgunSpareAmmo.ToString();
@@ -820,12 +833,47 @@ public class Controller : MonoBehaviour {
     {
         if (health < 0)
         {
-            transform.position = Spawn.position;
-            health = 1;
-            amour = 1;
-            AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-            HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
-            Debug.Log("DEAD");
+            DeathCanvas.enabled = true;
+            GetComponent<Movement>().MainCanvas.enabled = false;
+
+            time2 += Time.deltaTime;
+
+            if (time2 > 2)
+            {
+                time = 0;
+
+                // setting the ammo varables
+                rifleAmmo = RifleClipSize;
+                shotgunAmmo = ShotgunClipSize;
+
+                // spawn with kendo stick
+                firingMode = 0;
+                SwitchSword();
+                Kendo = true;
+                currentlyHolding.transform.localPosition = KendoStick.transform.position;
+
+                // setting the viability of the ammo texts
+                AmmoText.enabled = false;
+                SpareAmmoText.enabled = false;
+                LaserHeatBar.enabled = false;
+                LaserHearBarBack.enabled = false;
+                Reloading.enabled = false;
+
+                RifleSpareAmmo = 0;
+                ShotgunSpareAmmo = 0;
+                hasRifle = false;
+                hasShotgun = false;
+
+                transform.position = Spawn.position;
+                health = 1;
+                amour = 1;
+                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+                HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+                DeathCanvas.enabled = false;
+                GetComponent<Movement>().MainCanvas.enabled = true;
+
+                GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
+            }
         }
     }
 

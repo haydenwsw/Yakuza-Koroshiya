@@ -193,19 +193,30 @@ public class AI : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Bullet")
+        {
             AIHealth -= BulletDamage * HeadshotMuilpler;
+            Debug.Log("HEADSHOT");
+        }
 
         if (other.tag == "Pellet")
+        {
             AIHealth -= PelletDamage * HeadshotMuilpler;
+            Debug.Log("HEADSHOT");
+        }
 
         if (other.tag == "Laser")
+        {
             AIHealth -= LaserDamage * HeadshotMuilpler;
+            Debug.Log("HEADSHOT");
+        }
 
         if (other.tag == "Sword")
+        {
             AIHealth -= SwordDamage * HeadshotMuilpler;
+            Debug.Log("HEADSHOT");
+        }
 
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
-        Debug.Log("HEADSHOT");
     }
 
     private void OnDrawGizmosSelected()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // AI spawner class
 [System.Serializable]
@@ -37,6 +38,8 @@ public class AISpawner : MonoBehaviour {
     public int EnemiesRemainingTime;
 
     public float TimeBeforeWave;
+
+    public Text WaveText;
 
     private List<Transform> spawnPoint = new List<Transform>();
 
@@ -92,7 +95,7 @@ public class AISpawner : MonoBehaviour {
                     wave++;
                     i = 0;
 
-                    Debug.Log("Wave: " + wave);
+                    WaveText.text = "Wave: " + wave.ToString();
 
                     if (wave >= waveList.Count)
                         tripped = false;
@@ -109,12 +112,24 @@ public class AISpawner : MonoBehaviour {
 
             tripped = true;
 
-            Debug.Log("Wave: " + 0);
+            WaveText.text = "Wave: 0";
         }
     }
 
     public void AIDead()
     {
         enemiesRemain.Remove(true);
+    }
+
+    public void ResetSpawner()
+    {
+        GetComponent<BoxCollider>().enabled = true;
+
+        tripped = false;
+
+        wave = 0;
+        i = 0;
+
+        WaveText.text = "Wave: ";
     }
 }
