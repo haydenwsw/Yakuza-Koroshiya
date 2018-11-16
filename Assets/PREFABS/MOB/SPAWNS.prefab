@@ -293,7 +293,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719986370513790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1740,6 +1740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 114411190953737602}
   plusTen: {fileID: 1297854029090148, guid: 9f91f58e7552a2c449742f8599df2dfe, type: 2}
+  plusOne: {fileID: 1675811094130116, guid: d9ffa59f2d8678642b48d20fcaf2839f, type: 2}
 --- !u!114 &114793829289877350
 MonoBehaviour:
   m_ObjectHideFlags: 1
