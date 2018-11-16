@@ -246,7 +246,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c38334864f8ca454c943d06550f502a5, type: 2}
+  - {fileID: 2100000, guid: d622715d8af4f9247af00909ab2894fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -402,7 +402,6 @@ MonoBehaviour:
   AIRotationSpeed: 10
   AIShotgunSpread: 0
   AIShotgunPellets: 0
-  PointGiven: 5
   HeadshotMuilpler: 2
   BulletDamage: 0.07
   PelletDamage: 0.07

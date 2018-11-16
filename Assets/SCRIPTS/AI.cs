@@ -18,7 +18,6 @@ public class AI : MonoBehaviour {
     public float AIRotationSpeed;
     public float AIShotgunSpread;
     public float AIShotgunPellets;
-    public int PointGiven;
     public float HeadshotMuilpler;
 
     [Header("Damage Values")]
@@ -50,14 +49,18 @@ public class AI : MonoBehaviour {
     private Transform target;
     private NavMeshAgent agent;
 
+    private Score S;
+
     void Start ()
     {
-        // remove this later
         Player = GameObject.FindGameObjectWithTag("Player");
 
         // set target 
         target = Player.transform;
         agent = GetComponent<NavMeshAgent>();
+
+        // get the refecen to the Score script
+        S = GetComponentInParent<Score>();
     }
 	
 	void Update ()
@@ -150,12 +153,17 @@ public class AI : MonoBehaviour {
         {
             GetComponentInParent<AISpawner>().AIDead();
 
-            GetComponentInParent<Score>().AddScore(PointGiven, transform.position, transform.rotation);
+            S.AddScore(0, transform.position, transform.rotation);
 
             if (Weapon == 0)
-                Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation);
+            {
+                Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation).transform.parent = transform.parent;
+            }
+
             if (Weapon == 2)
-                Instantiate(ShotgunAmmo, transform.position, ShotgunAmmo.transform.rotation);
+            {
+                Instantiate(ShotgunAmmo, transform.position, ShotgunAmmo.transform.rotation).transform.parent = transform.parent;
+            }
 
             Destroy(this.gameObject);
         }
@@ -195,24 +203,28 @@ public class AI : MonoBehaviour {
         if (other.tag == "Bullet")
         {
             AIHealth -= BulletDamage * HeadshotMuilpler;
+            S.AddScore(1, transform.position, transform.rotation);
             Debug.Log("HEADSHOT");
         }
 
         if (other.tag == "Pellet")
         {
             AIHealth -= PelletDamage * HeadshotMuilpler;
+            S.AddScore(1, transform.position, transform.rotation);
             Debug.Log("HEADSHOT");
         }
 
         if (other.tag == "Laser")
         {
             AIHealth -= LaserDamage * HeadshotMuilpler;
+            S.AddScore(1, transform.position, transform.rotation);
             Debug.Log("HEADSHOT");
         }
 
         if (other.tag == "Sword")
         {
             AIHealth -= SwordDamage * HeadshotMuilpler;
+            S.AddScore(1, transform.position, transform.rotation);
             Debug.Log("HEADSHOT");
         }
 

@@ -86,6 +86,8 @@ public class AISpawner : MonoBehaviour {
                 enemiesRemain.Add(true);
 
                 i++;
+
+                Debug.Log(i + " " + wave);
             }
 
             if (i >= waveList[wave].Enemies.Count)
@@ -98,7 +100,7 @@ public class AISpawner : MonoBehaviour {
                     WaveText.text = "Wave: " + wave.ToString();
 
                     if (wave >= waveList.Count)
-                        tripped = false;
+                        wave = 0;
                 }
             }
         }
@@ -131,5 +133,7 @@ public class AISpawner : MonoBehaviour {
         i = 0;
 
         WaveText.text = "Wave: ";
+
+        Debug.Log(i + " " + wave);
     }
 }

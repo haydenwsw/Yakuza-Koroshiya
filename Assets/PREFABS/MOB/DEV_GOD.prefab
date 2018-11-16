@@ -1104,6 +1104,7 @@ GameObject:
   - component: {fileID: 23638564317331174}
   - component: {fileID: 33644628439384176}
   - component: {fileID: 136264861156643674}
+  - component: {fileID: 136906114825760908}
   m_Layer: 0
   m_Name: Body
   m_TagString: Block
@@ -1355,7 +1356,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1890005343881380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0.14}
+  m_LocalPosition: {x: 0, y: 0.452, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4240303781119652}
@@ -1397,7 +1398,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850223136791254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.038, z: 0}
   m_LocalScale: {x: 0.8, y: 0.7, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4127554678773518}
@@ -1410,7 +1411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956758304220622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.5, y: 0.725, z: -21.3}
+  m_LocalPosition: {x: -41.05, y: 0.725, z: -5.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127554678773518}
@@ -2679,12 +2680,10 @@ MonoBehaviour:
   RifleFireRate: 0.08
   RifleSpread: 0.1
   RifleClipSize: 100
-  RifleSpareAmmo: 60
   RifleAmmoPickup: 10
   ShotgunFireRate: 0.15
   ShotgunSpread: 0.5
   ShotgunClipSize: 100
-  ShotgunSpareAmmo: 60
   ShotgunPellets: 6
   ShotgunAmmoPickup: 20
   LaserDamage: 0.01
@@ -3892,10 +3891,23 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850223136791254}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136906114825760908
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850223136791254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.85
+  m_Height: 1.9999999
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222017069996415778

@@ -26,14 +26,12 @@ public class Controller : MonoBehaviour {
     public float RifleFireRate;
     public float RifleSpread;
     public int RifleClipSize;
-    public int RifleSpareAmmo;
     public int RifleAmmoPickup;
 
     [Header("Shotgun varables")]
     public float ShotgunFireRate;
     public float ShotgunSpread;
     public int ShotgunClipSize;
-    public int ShotgunSpareAmmo;
     public int ShotgunPellets;
     public int ShotgunAmmoPickup;
 
@@ -90,6 +88,9 @@ public class Controller : MonoBehaviour {
     private int rifleAmmo;
     private int shotgunAmmo;
     private float laserHeat = 0;
+
+    private int RifleSpareAmmo = 0;
+    private int ShotgunSpareAmmo = 0;
 
     private Rigidbody rb;
 
@@ -849,7 +850,7 @@ public class Controller : MonoBehaviour {
                 // spawn with kendo stick
                 firingMode = 0;
                 SwitchSword();
-                Kendo = true;
+                WeaponSwitching = true;
                 currentlyHolding.transform.localPosition = KendoStick.transform.position;
 
                 // setting the viability of the ammo texts
