@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour {
 
     public Canvas OptionsCanvas;
 
+    public Canvas RecordsCanvas;    // ADDED BY ERV, 19/11/18
+
     public Slider MusicSlider;
     public Text MusicText;
 
@@ -47,6 +49,12 @@ public class MainMenu : MonoBehaviour {
     {
         MenuCanvas.enabled = false;
         OptionsCanvas.enabled = true;
+    }
+
+    public void Records()           // ADDED BY ERV 19/11/18
+    {
+        MenuCanvas.enabled = false;
+        RecordsCanvas.enabled = true;
     }
 
     public void Credits()

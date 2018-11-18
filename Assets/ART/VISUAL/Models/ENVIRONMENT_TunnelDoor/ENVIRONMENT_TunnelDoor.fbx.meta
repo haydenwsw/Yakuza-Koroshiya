@@ -16,6 +16,10 @@ ModelImporter:
     400008: //RootNode
     400010: handleMetal
     2100000: lambert1
+    2100002: doorBase1
+    2100004: doorHandle1
+    2100006: doorSign1
+    2100008: doorFrame1
     2300000: doorBase
     2300002: doorFrame
     2300004: doorHandle
