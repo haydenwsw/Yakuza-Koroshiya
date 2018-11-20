@@ -31,6 +31,18 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject BGMusic;
 
+    Animator _anim;                 // ADDED BY ERV, 21/11/18
+    
+    private void Start()            // SECTION BY ERV, 21/11/18
+    {
+        _anim = GetComponent<Animator>();
+        _anim.SetBool("TWEEN_MainMenu", true);
+        _anim.SetBool("TWEEN_OptionsMenu", false);
+        _anim.SetBool("TWEEN_RecordsScreen", false);
+        _anim.SetBool("TWEEN_CreditsScreen", false);
+        _anim.SetBool("TWEEN_ExitScreen", false);
+    }
+
     public void Play()
     {
         GameObject player = Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation) as GameObject;
@@ -55,12 +67,16 @@ public class MainMenu : MonoBehaviour {
     {
         MenuCanvas.enabled = false;
         OptionsCanvas.enabled = true;
+        _anim.SetBool("TWEEN_OptionsMenu", true);
+        _anim.SetBool("TWEEN_MainMenu", false);
     }
 
     public void Records()           // ADDED BY ERV 19/11/18
     {
         MenuCanvas.enabled = false;
-        RecordsCanvas.enabled = true;
+        //RecordsCanvas.enabled = true;
+        _anim.SetBool("TWEEN_RecordsScreen", true);
+        _anim.SetBool("TWEEN_MainMenu", false);
     }
 
     public void Credits()
@@ -110,5 +126,13 @@ public class MainMenu : MonoBehaviour {
     {
         MenuCanvas.enabled = true;
         OptionsCanvas.enabled = false;
+
+        //Animator Section by Erv 21/11/18
+        _anim = GetComponent<Animator>();
+        _anim.SetBool("TWEEN_MainMenu", true);
+        _anim.SetBool("TWEEN_OptionsMenu", false);
+        _anim.SetBool("TWEEN_RecordsScreen", false);
+        _anim.SetBool("TWEEN_CreditsScreen", false);
+        _anim.SetBool("TWEEN_ExitScreen", false);
     }
 }
