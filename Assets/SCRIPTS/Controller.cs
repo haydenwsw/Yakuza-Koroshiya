@@ -865,7 +865,7 @@ public class Controller : MonoBehaviour {
                 hasRifle = false;
                 hasShotgun = false;
 
-                transform.position = Spawn.position;
+                GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
                 health = 1;
                 amour = 1;
                 AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);

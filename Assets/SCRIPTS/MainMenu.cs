@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour {
 
     public Camera cam;
 
+    public GameObject BGMusic;
+
     public void Play()
     {
         GameObject player = Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation) as GameObject;
@@ -41,6 +43,10 @@ public class MainMenu : MonoBehaviour {
         Camera.main.fieldOfView = fovSlider.value;
         pause.fovSlider.value = fovSlider.value;
         pause.FOVText.text = fovSlider.value.ToString();
+
+        GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = true;
+
+        Instantiate(BGMusic, Vector3.zero, BGMusic.transform.rotation);
 
         gameObject.SetActive(false);
     }

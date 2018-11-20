@@ -383,7 +383,6 @@ MonoBehaviour:
   AIRotationSpeed: 10
   AIShotgunSpread: 5
   AIShotgunPellets: 10
-  PointGiven: 20
   HeadshotMuilpler: 2
   BulletDamage: 0.07
   PelletDamage: 0.07
@@ -398,6 +397,7 @@ MonoBehaviour:
   ShotgunAmmo: {fileID: 1926263742744516, guid: 6fa2d554d8d763140a4238e43672f0aa,
     type: 2}
   AIHealthBar: {fileID: 1455503152020348}
+  ScoreIndex: 2
 --- !u!195 &195065059984061386
 NavMeshAgent:
   m_ObjectHideFlags: 1

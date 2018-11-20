@@ -30,7 +30,7 @@ public class AISpawner : MonoBehaviour {
     public List<list> waveList = new List<list>();
 
     [Header("AI Prefabs")]
-    public GameObject[] Enemies = new GameObject[4];
+    public GameObject[] Enemies = new GameObject[3];
 
     [Header("Between Waves")]
     public int EnemiesRemaining;
@@ -55,6 +55,10 @@ public class AISpawner : MonoBehaviour {
 
     private int i = 0;
 
+    private int waveCount = 0;
+
+    private bool canSpawn = true;
+
     private void Start()
     {
         int children = transform.childCount;
@@ -72,37 +76,64 @@ public class AISpawner : MonoBehaviour {
         {
             time += Time.deltaTime;
 
-            if (i < waveList[wave].Enemies.Count && time >= waveList[wave].Enemies[i].Delay)
+            if (time >= 2)
             {
                 time = 0;
 
-                GameObject Bot = Instantiate(Enemies[waveList[wave].Enemies[i].Mob],
-                    spawnPoint[waveList[wave].Enemies[i].Location].transform.position,
-                    spawnPoint[waveList[wave].Enemies[i].Location].transform.rotation) as GameObject;
-
-                Bot.GetComponent<AI>().SetTarget(wayPoint[waveList[wave].Enemies[i].Location]);
-                Bot.transform.parent = transform;
-
-                enemiesRemain.Add(true);
-
-                i++;
-
-                Debug.Log(i + " " + wave);
-            }
-
-            if (i >= waveList[wave].Enemies.Count)
-            {
-                if (EnemiesRemainingTime >= enemiesRemain.Count && time >= TimeBeforeWave || EnemiesRemaining >= enemiesRemain.Count)
+                if (canSpawn && i < (wave + 1) * 2)
                 {
-                    wave++;
-                    i = 0;
+                    int rand = Random.Range(0, spawnPoint.Count);
+                    GameObject Bot = Instantiate(Enemies[Random.Range(0, 3)], spawnPoint[rand].transform.position, spawnPoint[rand].transform.rotation);
+                    Bot.GetComponent<AI>().SetTarget(wayPoint[rand]);
+                    Bot.transform.parent = transform;
 
-                    WaveText.text = "Wave: " + wave.ToString();
+                    i++;
 
-                    if (wave >= waveList.Count)
-                        wave = 0;
+                    waveCount++;
+                }
+
+                if (i >= (wave + 1) * 2)
+                {
+                    if (waveCount <= 0)
+                    {
+                        wave++;
+                        i = 0;
+                        WaveText.text = "Wave: " + wave.ToString();
+                    }
                 }
             }
+
+            //if (i < waveList[wave].Enemies.Count && time >= waveList[wave].Enemies[i].Delay)
+            //{
+            //    time = 0;
+
+            //    GameObject Bot = Instantiate(Enemies[waveList[wave].Enemies[i].Mob],
+            //        spawnPoint[waveList[wave].Enemies[i].Location].transform.position,
+            //        spawnPoint[waveList[wave].Enemies[i].Location].transform.rotation) as GameObject;
+
+            //    Bot.GetComponent<AI>().SetTarget(wayPoint[waveList[wave].Enemies[i].Location]);
+            //    Bot.transform.parent = transform;
+
+            //    enemiesRemain.Add(true);
+
+            //    i++;
+
+            //    Debug.Log(i + " " + wave);
+            //}
+
+            //if (i >= waveList[wave].Enemies.Count)
+            //{
+            //    if (EnemiesRemainingTime >= enemiesRemain.Count && time >= TimeBeforeWave || EnemiesRemaining >= enemiesRemain.Count)
+            //    {
+            //        wave++;
+            //        i = 0;
+
+            //        WaveText.text = "Wave: " + wave.ToString();
+
+            //        if (wave >= waveList.Count)
+            //            wave = 0;
+            //    }
+            //}
         }
     }
 
@@ -120,7 +151,7 @@ public class AISpawner : MonoBehaviour {
 
     public void AIDead()
     {
-        enemiesRemain.Remove(true);
+        --waveCount;
     }
 
     public void ResetSpawner()
@@ -131,6 +162,7 @@ public class AISpawner : MonoBehaviour {
 
         wave = 0;
         i = 0;
+        waveCount = 0;
 
         WaveText.text = "Wave: ";
 

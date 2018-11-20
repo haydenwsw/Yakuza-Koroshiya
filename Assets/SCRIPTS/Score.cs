@@ -13,9 +13,15 @@ public class Score : MonoBehaviour {
 
     public GameObject plusOne;
 
+    public GameObject plusFive;
+
+    public GameObject plusTenty;
+
     private float time;
 
     private GameObject obj = null;
+
+    public Canvas score;
 
     public void AddScore(int i, Vector3 pos, Quaternion rot)
     {
@@ -30,6 +36,18 @@ public class Score : MonoBehaviour {
             ScoreCount += 10;
             ScoreText.text = ScoreCount.ToString();
             obj = Instantiate(plusTen, pos + (Vector3.up), rot) as GameObject;
+        }
+        if (i == 2)
+        {
+            ScoreCount += 20;
+            ScoreText.text = ScoreCount.ToString();
+            obj = Instantiate(plusTenty, pos + (Vector3.up), rot) as GameObject;
+        }
+        if (i == 3)
+        {
+            ScoreCount += 5;
+            ScoreText.text = ScoreCount.ToString();
+            obj = Instantiate(plusFive, pos + (Vector3.up), rot) as GameObject;
         }
     }
 

@@ -38,6 +38,9 @@ public class AI : MonoBehaviour {
     [Header("UI Objects")]
     public GameObject AIHealthBar;
 
+    [Header("Erv don't touch this")]
+    public int ScoreIndex;
+
     private GameObject Player;
 
     private Transform Waypoint;
@@ -153,7 +156,7 @@ public class AI : MonoBehaviour {
         {
             GetComponentInParent<AISpawner>().AIDead();
 
-            S.AddScore(0, transform.position, transform.rotation);
+            S.AddScore(ScoreIndex, transform.position, transform.rotation);
 
             if (Weapon == 0)
             {
@@ -204,28 +207,24 @@ public class AI : MonoBehaviour {
         {
             AIHealth -= BulletDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
-            Debug.Log("HEADSHOT");
         }
 
-        if (other.tag == "Pellet")
+        else if (other.tag == "Pellet")
         {
             AIHealth -= PelletDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
-            Debug.Log("HEADSHOT");
         }
 
-        if (other.tag == "Laser")
+        else if (other.tag == "Laser")
         {
             AIHealth -= LaserDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
-            Debug.Log("HEADSHOT");
         }
 
-        if (other.tag == "Sword")
+        else if (other.tag == "Sword")
         {
             AIHealth -= SwordDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
-            Debug.Log("HEADSHOT");
         }
 
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
