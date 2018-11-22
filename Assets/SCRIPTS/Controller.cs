@@ -77,6 +77,10 @@ public class Controller : MonoBehaviour {
     public float MediumHealth;
     public float LargeHealth;
 
+    public Transform AllBullets;
+
+    public int bulletCount = 0;
+
     // movement varables
     private Vector3 velocity = Vector3.zero;
     private Quaternion MouseY;
@@ -134,9 +138,11 @@ public class Controller : MonoBehaviour {
 
     private bool hasShotgun = false;
     private bool hasRifle = false;
+    
+    private Transform[] Bullets = new Transform[100];
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         Anime = GetComponent<Animator>();
 
@@ -148,6 +154,7 @@ public class Controller : MonoBehaviour {
 
         // spawn with kendo stick
         firingMode = 0;
+        currentlyHolding = GameObject.Find("WEAPON_Kendo");
         SwitchSword();
         currentlyHolding.transform.localPosition = KendoStick.transform.position;
 
@@ -165,6 +172,12 @@ public class Controller : MonoBehaviour {
         // setting the health and amour values
         health = 1;
         amour = 1;
+
+        int BulletsCount = AllBullets.childCount;
+        for (int i = 0; i < BulletsCount; i++)
+        {
+            Bullets[i] = AllBullets.GetChild(i);
+        }
     }
 
     // set Velocity
@@ -389,6 +402,13 @@ public class Controller : MonoBehaviour {
                         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
                         bullet.transform.localRotation = Barrel.rotation;
 
+                        //Bullets[bulletCount].position = Barrel.position;
+                        //Bullets[bulletCount].rotation = rot;
+                        //Bullets[bulletCount].GetComponent<Rigidbody>().AddForce(Bullets[bulletCount].transform.forward * BulletSpeed);
+                        //Bullets[bulletCount].transform.localRotation = Barrel.rotation;
+
+                        //bulletCount++;
+
                         time = 0;
 
                         rifleAmmo--;
@@ -558,8 +578,8 @@ public class Controller : MonoBehaviour {
 
     private void SwitchSword()
     {
-        Destroy(currentlyHolding);
-        currentlyHolding = Instantiate(KendoStick, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding = GameObject.Find("WEAPON_Kendo");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         currentlyHolding.transform.localPosition = new Vector3(KendoStick.transform.position.x, KendoStick.transform.position.y - translatedY / 1.4f, KendoStick.transform.position.z - translatedY / 2);
         currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
@@ -577,10 +597,8 @@ public class Controller : MonoBehaviour {
 
     private void SwitchPistol()
     {
-        Destroy(currentlyHolding);
-        Weapon.transform.localPosition = weaponPos;
-        Weapon.transform.localRotation = LaserPistol.transform.rotation;
-        currentlyHolding = Instantiate(LaserPistol, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding = GameObject.Find("WEAPON_Laser");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         currentlyHolding.transform.localPosition = new Vector3(LaserPistol.transform.position.x, LaserPistol.transform.position.y - translatedY, LaserPistol.transform.position.z);
         currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
@@ -593,10 +611,8 @@ public class Controller : MonoBehaviour {
 
     private void SwitchRifle()
     {
-        Destroy(currentlyHolding);
-        Weapon.transform.localPosition = weaponPos;
-        Weapon.transform.localRotation = new Quaternion();
-        currentlyHolding = Instantiate(AssultRifle, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding = GameObject.Find("WEAPON_Rifle");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         currentlyHolding.transform.localPosition = new Vector3(AssultRifle.transform.position.x, AssultRifle.transform.position.y - translatedY, AssultRifle.transform.position.z);
         currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
@@ -612,10 +628,8 @@ public class Controller : MonoBehaviour {
 
     private void SwitchShotgun()
     {
-        Destroy(currentlyHolding);
-        Weapon.transform.localPosition = weaponPos;
-        Weapon.transform.localRotation = new Quaternion();
-        currentlyHolding = Instantiate(AutoShotty, Weapon.position, Weapon.rotation);
+        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding = GameObject.Find("WEAPON_shotty");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         currentlyHolding.transform.localPosition = new Vector3(AutoShotty.transform.position.x, AutoShotty.transform.position.y - translatedY, AutoShotty.transform.position.z);
         currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
