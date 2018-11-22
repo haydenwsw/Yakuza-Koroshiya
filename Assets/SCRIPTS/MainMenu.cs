@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour {
 
     public Canvas MenuCanvas;
-
     public Canvas OptionsCanvas;
-
     public Canvas RecordsCanvas;    // ADDED BY ERV, 19/11/18
+    public Canvas CreditsCanvas;
+    public Canvas ExitCanvas;
 
     public Slider MusicSlider;
     public Text MusicText;
