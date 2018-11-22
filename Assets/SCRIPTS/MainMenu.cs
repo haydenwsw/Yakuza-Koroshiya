@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject BGMusic;
 
-    Animator _anim;                 // ADDED BY ERV, 21/11/18
+    private Animator _anim;                 // ADDED BY ERV, 21/11/18
     
     private void Start()            // SECTION BY ERV, 21/11/18
     {

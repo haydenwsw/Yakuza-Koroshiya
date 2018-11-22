@@ -9,13 +9,28 @@ ModelImporter:
     100006: pCube5
     100008: pCube6
     100010: tableBase
+    100012: pCube4 1
+    100014: tableRoundGroup
+    100016: transform1
+    100018: transform2
+    100020: transform3
+    100022: transform4
+    100024: transform5
     400000: //RootNode
     400002: pCube3
     400004: pCube4
     400006: pCube5
     400008: pCube6
     400010: tableBase
+    400012: pCube4 1
+    400014: tableRoundGroup
+    400016: transform1
+    400018: transform2
+    400020: transform3
+    400022: transform4
+    400024: transform5
     2100000: lambert1
+    2100002: lambert2
     2300000: pCube3
     2300002: pCube4
     2300004: pCube5
@@ -88,7 +103,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

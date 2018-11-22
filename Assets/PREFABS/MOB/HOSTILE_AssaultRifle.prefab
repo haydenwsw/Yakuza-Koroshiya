@@ -321,7 +321,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894440372112918}
-  m_Mesh: {fileID: 4300000, guid: f880680395a29f5428ca27d933d56837, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e410924415915184cba90ca58353bd1b, type: 3}
 --- !u!54 &54079196765041970
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -350,7 +350,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: f880680395a29f5428ca27d933d56837, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 967984431fa5691429bf89fbbecdb139, type: 3}
 --- !u!65 &65412321763206984
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -402,7 +402,6 @@ MonoBehaviour:
   AIRotationSpeed: 10
   AIShotgunSpread: 0
   AIShotgunPellets: 0
-  PointGiven: 10
   HeadshotMuilpler: 2
   BulletDamage: 0.07
   PelletDamage: 0.07
@@ -417,6 +416,7 @@ MonoBehaviour:
   ShotgunAmmo: {fileID: 1926263742744516, guid: 6fa2d554d8d763140a4238e43672f0aa,
     type: 2}
   AIHealthBar: {fileID: 1432990314237000}
+  ScoreIndex: 0
 --- !u!195 &195532797540538022
 NavMeshAgent:
   m_ObjectHideFlags: 1

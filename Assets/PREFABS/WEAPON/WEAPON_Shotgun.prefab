@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4669236450704696}
   - component: {fileID: 33194552648930078}
   - component: {fileID: 23220442376286808}
+  - component: {fileID: 95594154758966040}
   m_Layer: 0
   m_Name: WEAPON_Shotgun
   m_TagString: Untagged
@@ -83,3 +84,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384631071872374}
   m_Mesh: {fileID: 4300000, guid: bec57898b35e89c4c9e8620d6b81c8e6, type: 3}
+--- !u!95 &95594154758966040
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384631071872374}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6237be540a5f284fa588923bb8918a7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

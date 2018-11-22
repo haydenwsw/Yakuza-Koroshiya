@@ -11,6 +11,13 @@ ModelImporter:
     100010: tableLongLeg3
     100012: tableLongLeg4
     100014: tableLongLeg5
+    100016: transform1
+    100018: transform2
+    100020: transform3
+    100022: transform4
+    100024: transform5
+    100026: transform6
+    100028: transform7
     400000: //RootNode
     400002: tableLongBase
     400004: tableLongLeg
@@ -19,7 +26,16 @@ ModelImporter:
     400010: tableLongLeg3
     400012: tableLongLeg4
     400014: tableLongLeg5
+    400016: transform1
+    400018: transform2
+    400020: transform3
+    400022: transform4
+    400024: transform5
+    400026: transform6
+    400028: transform7
     2100000: lambert1
+    2100002: tableBase
+    2100004: tableLeg
     2300000: tableLongBase
     2300002: tableLongLeg
     2300004: tableLongLeg1
@@ -100,7 +116,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

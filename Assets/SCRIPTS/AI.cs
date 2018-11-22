@@ -80,7 +80,7 @@ public class AI : MonoBehaviour {
                 point = true;
         }
 
-        if (point)
+        if (point)  // Movement
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
