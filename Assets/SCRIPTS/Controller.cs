@@ -118,6 +118,8 @@ public class Controller : MonoBehaviour {
 
     private Animator Anime;
 
+    private Animator WeaponAnime;
+
     private bool tooHot = false;
 
     private bool canShoot = true;
@@ -155,6 +157,7 @@ public class Controller : MonoBehaviour {
         // spawn with kendo stick
         firingMode = 0;
         currentlyHolding = GameObject.Find("WEAPON_Kendo");
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         SwitchSword();
         currentlyHolding.transform.localPosition = KendoStick.transform.position;
 
@@ -225,11 +228,12 @@ public class Controller : MonoBehaviour {
             {
                 if (firingMode != 0)
                 {
+                    pressed = false;
                     canShoot = false;
                     WeaponSwitching = true;
-                    WeaponSwitchAnime();
+                    SwitchSword();
                     Kendo = true;
-                    pressed = false;
+                    pressed = true;
                 }
             }
         }
@@ -244,11 +248,11 @@ public class Controller : MonoBehaviour {
             {
                 if (firingMode != 2)
                 {
-                    canShoot = false;
-                    WeaponSwitching = true;
-                    WeaponSwitchAnime();
-                    firingMode = 2;
                     pressed = false;
+                    canShoot = false;
+                    SwitchPistol();
+                    pressed = true;
+                    canShoot = true;
                 }
             }
         }
@@ -263,14 +267,12 @@ public class Controller : MonoBehaviour {
             {
                 if (hasRifle)
                 {
-
                     if (firingMode != 1)
                     {
-                        canShoot = false;
-                        WeaponSwitching = true;
-                        WeaponSwitchAnime();
-                        firingMode = 1;
                         pressed = false;
+                        canShoot = false;
+                        SwitchRifle();
+                        pressed = true;
                     }
                 }
             }
@@ -287,11 +289,11 @@ public class Controller : MonoBehaviour {
                 {
                     if (firingMode != 3)
                     {
-                        canShoot = false;
-                        WeaponSwitching = true;
-                        WeaponSwitchAnime();
-                        firingMode = 3;
                         pressed = false;
+                        canShoot = false;
+                        SwitchShotgun();
+                        pressed = true;
+                        canShoot = true;
                     }
                 }
             }
@@ -307,7 +309,6 @@ public class Controller : MonoBehaviour {
         PreformShoot();
         PreformReload();
         UpdateLaserHeat();
-        WeaponSwitchAnime();
         IsPlayerAlive();
     }
 
@@ -355,9 +356,9 @@ public class Controller : MonoBehaviour {
             {
                 // rifle
                 if (canShoot)
-                { 
+                {
                     if (rifleAmmo > 0)
-                        Anime.SetTrigger("Fire");
+                        WeaponAnime.SetTrigger("_weaponFire");
 
                     Vector3 pos = Vector3.zero;
                     Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -423,7 +424,7 @@ public class Controller : MonoBehaviour {
                 {
                     if (fired)
                     {
-                        Anime.SetTrigger("Fire");
+                        WeaponAnime.SetTrigger("_weaponFire");
 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -437,7 +438,6 @@ public class Controller : MonoBehaviour {
                         else
                         {
                             pos = inputRay.GetPoint(200);
-                            //Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                         }
 
                         Vector3 dir = -cam.transform.forward;
@@ -464,7 +464,7 @@ public class Controller : MonoBehaviour {
                 if (canShoot)
                 {
                     if (shotgunAmmo != 0)
-                    Anime.SetTrigger("Fire");
+                        WeaponAnime.SetTrigger("_weaponFire");
 
                     Vector3 pos = Vector3.zero;
                     Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -515,78 +515,29 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    private void WeaponSwitchAnime()
-    {
-        if (WeaponSwitching)
-        { 
-            if (WeaponSwitched)
-            {
-                currentlyHolding.transform.Translate(0, -GunAnimeSpeed, 0);
-                translatedY += GunAnimeSpeed;
-            }
-            else
-                currentlyHolding.transform.Translate(0, GunAnimeSpeed, 0);
-
-            time2 += Time.deltaTime;
-
-            if (time2 > GunAnimeTime / 2)
-            {
-                WeaponSwitched = false;
-
-                if (Hasweapon)
-                {
-                    if (Kendo)
-                        SwitchSword();
-                    else if (firingMode == 1)
-                        SwitchRifle();
-                    else if (firingMode == 2)                       
-                        SwitchPistol();
-                    else if (firingMode == 3)
-                        SwitchShotgun();
-
-                    translatedY = 0;
-                }
-
-                Hasweapon = false;
-            }
-            if (time2 > GunAnimeTime)
-            {
-                WeaponSwitching = false;
-
-                Hasweapon = true;
-
-                WeaponSwitched = true;
-
-                if (Kendo)
-                {
-                    currentlyHolding.transform.localPosition = KendoStick.transform.position;
-                    Kendo = false;
-                }
-                else if (firingMode == 1)
-                    currentlyHolding.transform.localPosition = AssultRifle.transform.position;
-                else if (firingMode == 2)
-                    currentlyHolding.transform.localPosition = LaserPistol.transform.position;
-                else if (firingMode == 3)
-                    currentlyHolding.transform.localPosition = AutoShotty.transform.position;
-
-                canShoot = true;
-                pressed = true;
-                time2 = 0;
-            }
-        }
-    }
-
     private void SwitchSword()
     {
-        currentlyHolding.transform.position = Vector3.zero;
-        currentlyHolding = GameObject.Find("WEAPON_Kendo");
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = new Vector3(KendoStick.transform.position.x, KendoStick.transform.position.y - translatedY / 1.4f, KendoStick.transform.position.z - translatedY / 2);
-        currentlyHolding.transform.localRotation = KendoStick.transform.rotation;
-        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
-        kendoCollider.enabled = false;
+        if (firingMode == 1)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 2)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 3)
+            WeaponAnime.SetTrigger("_weaponUnequip");
 
         firingMode = 0;
+
+        if (WeaponAnime.GetNextAnimatorStateInfo(0).IsName("_weaponUnequip"))
+        {
+        }
+
+        currentlyHolding.transform.parent = null;
+        currentlyHolding = GameObject.Find("WEAPON_Kendo");
+        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+        WeaponAnime.SetTrigger("_weaponEquip");
+
+        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
+        kendoCollider.enabled = false;
 
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
@@ -597,25 +548,34 @@ public class Controller : MonoBehaviour {
 
     private void SwitchPistol()
     {
-        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Laser");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = new Vector3(LaserPistol.transform.position.x, LaserPistol.transform.position.y - translatedY, LaserPistol.transform.position.z);
-        currentlyHolding.transform.localRotation = LaserPistol.transform.rotation;
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+        WeaponAnime.SetTrigger("_weaponEquip");
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
 
         LaserHearBarBack.enabled = true;
         LaserHeatBar.enabled = true;
+
+        if (firingMode == 0)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 1)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 3)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+
+        firingMode = 2;
     }
 
     private void SwitchRifle()
     {
-        currentlyHolding.transform.position = Vector3.zero;
+        currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Rifle");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = new Vector3(AssultRifle.transform.position.x, AssultRifle.transform.position.y - translatedY, AssultRifle.transform.position.z);
-        currentlyHolding.transform.localRotation = AssultRifle.transform.rotation;
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+        WeaponAnime.SetTrigger("_weaponEquip");
 
         AmmoText.enabled = true;
         AmmoText.text = rifleAmmo.ToString();
@@ -624,15 +584,24 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
+
+        if (firingMode == 2)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 0)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 3)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+
+        firingMode = 1;
     }
 
     private void SwitchShotgun()
     {
-        currentlyHolding.transform.position = Vector3.zero;
-        currentlyHolding = GameObject.Find("WEAPON_shotty");
+        currentlyHolding.transform.parent = null;
+        currentlyHolding = GameObject.Find("WEAPON_Shotgun");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
-        currentlyHolding.transform.localPosition = new Vector3(AutoShotty.transform.position.x, AutoShotty.transform.position.y - translatedY, AutoShotty.transform.position.z);
-        currentlyHolding.transform.localRotation = AutoShotty.transform.rotation;
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+        WeaponAnime.SetTrigger("_weaponEquip");
 
         AmmoText.enabled = true;
         AmmoText.text = shotgunAmmo.ToString();
@@ -641,6 +610,15 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
+
+        if (firingMode == 1)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 2)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+        else if (firingMode == 0)
+            WeaponAnime.SetTrigger("_weaponUnequip");
+
+        firingMode = 3;
     }
 
     void PreformReload()
@@ -648,7 +626,6 @@ public class Controller : MonoBehaviour {
         if (Reloading.enabled)
         {
             time += Time.deltaTime;
-            //Anime.SetTrigger("Reload");
         }
 
         int spareAmmo = Int32.Parse(SpareAmmoText.text);

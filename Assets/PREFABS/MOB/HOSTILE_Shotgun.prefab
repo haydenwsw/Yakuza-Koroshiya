@@ -396,6 +396,8 @@ MonoBehaviour:
   RifleAmmo: {fileID: 1438402921254862, guid: f1eb06a1b4d15b74dba46e26ba420041, type: 2}
   ShotgunAmmo: {fileID: 1926263742744516, guid: 6fa2d554d8d763140a4238e43672f0aa,
     type: 2}
+  SmallHealth: {fileID: 1166890369113190, guid: 4c54c3186ecd9644a9190f1c3cd99389,
+    type: 2}
   AIHealthBar: {fileID: 1455503152020348}
   ScoreIndex: 2
 --- !u!195 &195065059984061386

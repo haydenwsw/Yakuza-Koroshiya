@@ -34,6 +34,7 @@ public class AI : MonoBehaviour {
     public GameObject Pellet;
     public GameObject RifleAmmo;
     public GameObject ShotgunAmmo;
+    public GameObject SmallHealth;
 
     [Header("UI Objects")]
     public GameObject AIHealthBar;
@@ -161,6 +162,11 @@ public class AI : MonoBehaviour {
             if (Weapon == 0)
             {
                 Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation).transform.parent = transform.parent;
+            }
+
+            if (Weapon == 1)
+            {
+                Instantiate(SmallHealth, transform.position, SmallHealth.transform.rotation).transform.parent = transform.parent;
             }
 
             if (Weapon == 2)
