@@ -104,7 +104,7 @@ Material:
     - _FresnelOnLight: 1
     - _FresnelOnShadow: 1
     - _FresnelVisibleOnDarkAmbientLight: 0
-    - _GlossIntensity: 0
+    - _GlossIntensity: 0.1
     - _GlossMapScale: 1
     - _GlossTextureIntensity: 0
     - _Glossiness: 0.5
