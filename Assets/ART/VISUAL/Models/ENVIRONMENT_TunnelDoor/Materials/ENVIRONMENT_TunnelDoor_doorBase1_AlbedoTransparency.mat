@@ -108,7 +108,7 @@ Material:
     - _FresnelOnLight: 1
     - _FresnelOnShadow: 1
     - _FresnelVisibleOnDarkAmbientLight: 0
-    - _GlossIntensity: 0.2
+    - _GlossIntensity: 0
     - _GlossTextureIntensity: 0
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -129,7 +129,7 @@ Material:
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
     - _Saturation: 1
-    - _SelfLitIntensity: 0.1
+    - _SelfLitIntensity: 0
     - _SelfLitPower: 1
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
@@ -148,7 +148,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _TexturePatternStyle: 0
-    - _TextureWashout: 0.1
+    - _TextureWashout: 0
     - _Transparent: 0
     - _UVSec: 0
     - _ZWrite: 1

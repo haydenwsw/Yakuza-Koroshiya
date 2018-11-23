@@ -45,13 +45,6 @@ ModelImporter:
     4300008: rock3
     4300010: fountainPillar
     4300012: fountainToob
-    6400000: fountainPillar
-    6400002: fountainPool
-    6400004: fountainToob
-    6400006: rock0
-    6400008: rock1
-    6400010: rock2
-    6400012: rock3
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -85,7 +78,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

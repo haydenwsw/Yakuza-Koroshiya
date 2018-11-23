@@ -121,7 +121,7 @@ Material:
     - _NormalIntensity: 1
     - _OcclusionStrength: 1
     - _OutlineNoiseIntensity: 0
-    - _OutlineWidth: 0.01
+    - _OutlineWidth: 0.003
     - _Parallax: 0.02
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0

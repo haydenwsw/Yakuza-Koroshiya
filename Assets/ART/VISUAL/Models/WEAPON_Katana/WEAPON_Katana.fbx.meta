@@ -23,30 +23,12 @@ ModelImporter:
     4300000: katanaBlade
     4300002: katanaHilt
     4300004: katanaPommel
-    6400000: katanaBlade
-    6400002: katanaHilt
-    6400004: katanaPommel
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bladeMetal
-    second: {fileID: 2100000, guid: c3c00085b13375d47971e1f912d5927b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: goldMetal
-    second: {fileID: 2100000, guid: 6d1cce9103effb447b0e39e9986d5c5a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: matBlack
-    second: {fileID: 2100000, guid: 6e05b969d55c425409358ca22df46966, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -74,7 +56,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

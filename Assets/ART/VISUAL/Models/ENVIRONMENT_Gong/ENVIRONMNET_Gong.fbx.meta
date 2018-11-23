@@ -10,7 +10,6 @@ ModelImporter:
     100008: gongFrameTop
     100010: gongStands
     100012: gongStrings
-    100014: gongFrameVertical
     400000: //RootNode
     400002: gongBase
     400004: gongFrameBottom
@@ -18,52 +17,31 @@ ModelImporter:
     400008: gongFrameTop
     400010: gongStands
     400012: gongStrings
-    400014: gongFrameVertical
     2100000: lambert1
-    2100002: gongFrame
-    2100004: gongMat
     2300000: gongBase
     2300002: gongFrameBottom
     2300004: gongFrameSide
     2300006: gongFrameTop
     2300008: gongStands
     2300010: gongStrings
-    2300012: gongFrameVertical
     3300000: gongBase
     3300002: gongFrameBottom
     3300004: gongFrameSide
     3300006: gongFrameTop
     3300008: gongStands
     3300010: gongStrings
-    3300012: gongFrameVertical
     4300000: gongFrameTop
     4300002: gongFrameSide
     4300004: gongFrameBottom
     4300006: gongStands
     4300008: gongBase
     4300010: gongStrings
-    4300012: gongFrameVertical
-    6400000: gongBase
-    6400002: gongFrameSide
-    6400004: gongFrameVertical
-    6400006: gongStands
-    6400008: gongStrings
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: gongFrame
-    second: {fileID: 2100000, guid: 436c9453496a81c4a8044ef8275b4d12, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: gongMat
-    second: {fileID: 2100000, guid: eb5f34a7891653e4d983863229de9b2f, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -91,7 +69,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
