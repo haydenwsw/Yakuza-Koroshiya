@@ -130,16 +130,14 @@ public class Controller : MonoBehaviour {
 
     private bool WeaponSwitched = true;
 
-    private MeshCollider kendoCollider;
-
     private bool Kendo = false;
 
     private float translatedY = 0;
 
     private bool pressed = true;
 
-    private bool hasShotgun = false;
-    private bool hasRifle = false;
+    private bool hasShotgun = true;
+    private bool hasRifle = true;
 
     private int weaponIndex = 0;
     
@@ -235,7 +233,7 @@ public class Controller : MonoBehaviour {
                     WeaponSwitching = true;
                     WeaponAnime.SetTrigger("_weaponUnequip");
                     weaponIndex = 0;
-                    Kendo = true;
+                    canShoot = true;
                     pressed = true;
                 }
             }
@@ -279,6 +277,7 @@ public class Controller : MonoBehaviour {
                         WeaponSwitching = true;
                         WeaponAnime.SetTrigger("_weaponUnequip");
                         weaponIndex = 2;
+                        canShoot = true;
                         pressed = true;
                     }
                 }
@@ -357,11 +356,19 @@ public class Controller : MonoBehaviour {
                 // sword
                 if (canShoot)
                 {
-                    WeaponAnime.SetTrigger("_weaponFire");
+                    if (fired)
+                    {
+                        WeaponAnime.SetTrigger("_weaponFire");
 
-                    //Debug.Log("Attack");
+                        Vector3 pos = Vector3.zero;
+                        Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
 
-                    kendoCollider.enabled = true;
+                        pos = inputRay.GetPoint(1);
+
+                        Debug.DrawLine(transform.position, pos);
+
+                        fired = false;
+                    }
                 }
             }
             if (firingMode == 1)
@@ -369,9 +376,6 @@ public class Controller : MonoBehaviour {
                 // rifle
                 if (canShoot)
                 {
-                    if (rifleAmmo > 0)
-                        WeaponAnime.SetTrigger("_weaponFire");
-
                     Vector3 pos = Vector3.zero;
                     Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
@@ -410,6 +414,8 @@ public class Controller : MonoBehaviour {
                         }
 
                         Quaternion rot = Quaternion.LookRotation(dir + Offset);
+
+                        WeaponAnime.SetTrigger("_weaponFire");
 
                         GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
                         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
@@ -475,9 +481,6 @@ public class Controller : MonoBehaviour {
                 // auto shot gun
                 if (canShoot)
                 {
-                    if (shotgunAmmo != 0)
-                        WeaponAnime.SetTrigger("_weaponFire");
-
                     Vector3 pos = Vector3.zero;
                     Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
@@ -506,6 +509,7 @@ public class Controller : MonoBehaviour {
 
                             Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
+                            WeaponAnime.SetTrigger("_weaponFire");
 
                             GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
                             pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
@@ -521,9 +525,6 @@ public class Controller : MonoBehaviour {
         else if (shoot == 0)
         {
             fired = true;
-
-            if (firingMode == 0)
-                kendoCollider.enabled = false;
         }
     }
 
@@ -536,9 +537,6 @@ public class Controller : MonoBehaviour {
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
         WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         WeaponAnime.SetTrigger("_weaponEquip");
-
-        kendoCollider = currentlyHolding.GetComponent<MeshCollider>();
-        kendoCollider.enabled = false;
 
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;

@@ -13767,11 +13767,11 @@ MonoBehaviour:
   GunAnimeTime: 1
   LaserDecayRate: 4
   LaserHeatRate: 0.1
-  RifleFireRate: 0.08
+  RifleFireRate: 0.14
   RifleSpread: 0.1
   RifleClipSize: 100
   RifleAmmoPickup: 10
-  ShotgunFireRate: 0.15
+  ShotgunFireRate: 1
   ShotgunSpread: 0.5
   ShotgunClipSize: 100
   ShotgunPellets: 6
