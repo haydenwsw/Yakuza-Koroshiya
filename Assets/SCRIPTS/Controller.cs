@@ -140,6 +140,8 @@ public class Controller : MonoBehaviour {
 
     private bool hasShotgun = false;
     private bool hasRifle = false;
+
+    private int weaponIndex = 0;
     
     private Transform[] Bullets = new Transform[100];
 
@@ -231,7 +233,8 @@ public class Controller : MonoBehaviour {
                     pressed = false;
                     canShoot = false;
                     WeaponSwitching = true;
-                    SwitchSword();
+                    WeaponAnime.SetTrigger("_weaponUnequip");
+                    weaponIndex = 0;
                     Kendo = true;
                     pressed = true;
                 }
@@ -250,7 +253,9 @@ public class Controller : MonoBehaviour {
                 {
                     pressed = false;
                     canShoot = false;
-                    SwitchPistol();
+                    WeaponSwitching = true;
+                    WeaponAnime.SetTrigger("_weaponUnequip");
+                    weaponIndex = 1;
                     pressed = true;
                     canShoot = true;
                 }
@@ -271,7 +276,9 @@ public class Controller : MonoBehaviour {
                     {
                         pressed = false;
                         canShoot = false;
-                        SwitchRifle();
+                        WeaponSwitching = true;
+                        WeaponAnime.SetTrigger("_weaponUnequip");
+                        weaponIndex = 2;
                         pressed = true;
                     }
                 }
@@ -291,7 +298,9 @@ public class Controller : MonoBehaviour {
                     {
                         pressed = false;
                         canShoot = false;
-                        SwitchShotgun();
+                        WeaponSwitching = true;
+                        WeaponAnime.SetTrigger("_weaponUnequip");
+                        weaponIndex = 3;
                         pressed = true;
                         canShoot = true;
                     }
@@ -310,6 +319,7 @@ public class Controller : MonoBehaviour {
         PreformReload();
         UpdateLaserHeat();
         IsPlayerAlive();
+        SwitchingWeaponAnime();
     }
 
     // movement function
@@ -347,7 +357,9 @@ public class Controller : MonoBehaviour {
                 // sword
                 if (canShoot)
                 {
-                    currentlyHolding.transform.Rotate(22.5f, 0, 0);
+                    WeaponAnime.SetTrigger("_weaponFire");
+
+                    //Debug.Log("Attack");
 
                     kendoCollider.enabled = true;
                 }
@@ -517,18 +529,7 @@ public class Controller : MonoBehaviour {
 
     private void SwitchSword()
     {
-        if (firingMode == 1)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 2)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 3)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-
         firingMode = 0;
-
-        if (WeaponAnime.GetNextAnimatorStateInfo(0).IsName("_weaponUnequip"))
-        {
-        }
 
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Kendo");
@@ -548,6 +549,8 @@ public class Controller : MonoBehaviour {
 
     private void SwitchPistol()
     {
+        firingMode = 2;
+
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Laser");
         currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
@@ -558,15 +561,6 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = true;
         LaserHeatBar.enabled = true;
-
-        if (firingMode == 0)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 1)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 3)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-
-        firingMode = 2;
     }
 
     private void SwitchRifle()
@@ -584,13 +578,6 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
-
-        if (firingMode == 2)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 0)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 3)
-            WeaponAnime.SetTrigger("_weaponUnequip");
 
         firingMode = 1;
     }
@@ -611,14 +598,84 @@ public class Controller : MonoBehaviour {
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
 
-        if (firingMode == 1)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 2)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-        else if (firingMode == 0)
-            WeaponAnime.SetTrigger("_weaponUnequip");
-
         firingMode = 3;
+    }
+
+    private void SwitchingWeaponAnime()
+    {
+        if (WeaponSwitching)
+        {
+            time2 += Time.deltaTime;
+        }
+
+        if (firingMode == 0)
+        {
+            if (time2 > 1)
+            {
+                time2 = 0;
+                WeaponSwitching = false;
+
+                if (weaponIndex == 0)
+                    SwitchSword();
+                else if (weaponIndex == 1)
+                    SwitchPistol();
+                else if (weaponIndex == 2)
+                    SwitchRifle();
+                else if (weaponIndex == 3)
+                    SwitchShotgun();
+            }
+        }
+        else if (firingMode == 1)
+        {
+            if (time2 > 1)
+            {
+                time2 = 0;
+                WeaponSwitching = false;
+
+                if (weaponIndex == 0)
+                    SwitchSword();
+                else if (weaponIndex == 1)
+                    SwitchPistol();
+                else if (weaponIndex == 2)
+                    SwitchRifle();
+                else if (weaponIndex == 3)
+                    SwitchShotgun();
+            }
+        }
+        else if (firingMode == 2)
+        {
+            if (time2 > 1)
+            {
+                time2 = 0;
+                WeaponSwitching = false;
+
+                if (weaponIndex == 0)
+                    SwitchSword();
+                else if (weaponIndex == 1)
+                    SwitchPistol();
+                else if (weaponIndex == 2)
+                    SwitchRifle();
+                else if (weaponIndex == 3)
+                    SwitchShotgun();
+            }
+        }
+        else if (firingMode == 3)
+        {
+            if (time2 > 1)
+            {
+                time2 = 0;
+                WeaponSwitching = false;
+
+                if (weaponIndex == 0)
+                    SwitchSword();
+                else if (weaponIndex == 1)
+                    SwitchPistol();
+                else if (weaponIndex == 2)
+                    SwitchRifle();
+                else if (weaponIndex == 3)
+                    SwitchShotgun();
+            }
+        }
     }
 
     void PreformReload()
