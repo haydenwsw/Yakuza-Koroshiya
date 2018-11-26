@@ -174,6 +174,8 @@ public class AI : MonoBehaviour {
                 Instantiate(ShotgunAmmo, transform.position, ShotgunAmmo.transform.rotation).transform.parent = transform.parent;
             }
 
+            SoundScript.PlaySound("Death");
+
             Destroy(this.gameObject);
         }
 	}

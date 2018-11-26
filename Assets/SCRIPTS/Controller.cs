@@ -359,6 +359,7 @@ public class Controller : MonoBehaviour {
                     if (fired)
                     {
                         WeaponAnime.SetTrigger("_weaponFire");
+                        SoundScript.PlaySound("Kendo");
 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -416,6 +417,7 @@ public class Controller : MonoBehaviour {
                         Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
                         WeaponAnime.SetTrigger("_weaponFire");
+                        SoundScript.PlaySound("Rifle");
 
                         GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
                         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
@@ -443,6 +445,7 @@ public class Controller : MonoBehaviour {
                     if (fired)
                     {
                         WeaponAnime.SetTrigger("_weaponFire");
+                        SoundScript.PlaySound("Laser");
 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -510,6 +513,7 @@ public class Controller : MonoBehaviour {
                             Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
                             WeaponAnime.SetTrigger("_weaponFire");
+                            SoundScript.PlaySound("Shotgun");
 
                             GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
                             pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
