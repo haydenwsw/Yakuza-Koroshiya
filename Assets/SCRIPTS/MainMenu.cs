@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
     public Canvas RecordsCanvas;    // ADDED BY ERV, 19/11/18
     public Canvas CreditsCanvas;
     public Canvas ExitCanvas;
+    public Canvas ControlsCanvas;
 
     public Slider MusicSlider;
     public Text MusicText;
@@ -33,7 +34,7 @@ public class MainMenu : MonoBehaviour {
 
     private Animator _anim;                 // ADDED BY ERV, 21/11/18
     
-    private void Start()            // SECTION BY ERV, 21/11/18
+    private void Start()                    // SECTION BY ERV, 21/11/18
     {
         _anim = GetComponent<Animator>();
         _anim.SetBool("TWEEN_MainMenu", true);
@@ -74,7 +75,7 @@ public class MainMenu : MonoBehaviour {
     public void Records()           // ADDED BY ERV 19/11/18
     {
         MenuCanvas.enabled = false;
-        //RecordsCanvas.enabled = true;
+        RecordsCanvas.enabled = true;
         _anim.SetBool("TWEEN_RecordsScreen", true);
         _anim.SetBool("TWEEN_MainMenu", false);
     }
