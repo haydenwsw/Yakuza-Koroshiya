@@ -359,7 +359,7 @@ public class Controller : MonoBehaviour {
                     if (fired)
                     {
                         WeaponAnime.SetTrigger("_weaponFire");
-                        SoundScript.PlaySound("Kendo");
+                        SoundScript.PlaySound("WEAPON_KendoSwing");
 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);

@@ -82,7 +82,10 @@ public class MainMenu : MonoBehaviour {
 
     public void Credits()
     {
-
+        MenuCanvas.enabled = false;
+        CreditsCanvas.enabled = true;
+        _anim.SetBool("TWEEN_CreditsScreen", true);
+        _anim.SetBool("TWEEN_MainMenu", false);
     }
 
     public void Quit()
@@ -120,20 +123,30 @@ public class MainMenu : MonoBehaviour {
 
     public void Controls()
     {
-
+        ControlsCanvas.enabled = true;
+        OptionsCanvas.enabled = false;
     }
 
-    public void Back()
+    public void BackMain()
     {
-        MenuCanvas.enabled = true;
-        OptionsCanvas.enabled = false;
+        MenuCanvas.enabled      = true;
+        OptionsCanvas.enabled   = false;
+        RecordsCanvas.enabled   = false;
+        CreditsCanvas.enabled   = false;
+        ExitCanvas.enabled      = false;
 
         //Animator Section by Erv 21/11/18
         _anim = GetComponent<Animator>();
-        _anim.SetBool("TWEEN_MainMenu", true);
-        _anim.SetBool("TWEEN_OptionsMenu", false);
-        _anim.SetBool("TWEEN_RecordsScreen", false);
-        _anim.SetBool("TWEEN_CreditsScreen", false);
-        _anim.SetBool("TWEEN_ExitScreen", false);
+        _anim.SetBool("TWEEN_MainMenu",         true);
+        _anim.SetBool("TWEEN_OptionsMenu",      false);
+        _anim.SetBool("TWEEN_RecordsScreen",    false);
+        _anim.SetBool("TWEEN_CreditsScreen",    false);
+        _anim.SetBool("TWEEN_ExitScreen",       false);
+    }
+
+    public void BackControls()
+    {
+        ControlsCanvas.enabled = false;
+        OptionsCanvas.enabled = true;
     }
 }

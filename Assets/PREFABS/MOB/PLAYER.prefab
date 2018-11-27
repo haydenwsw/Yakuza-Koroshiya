@@ -12445,7 +12445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 5
   Sensitivity: 2
-  JumpHeight: 20000
+  JumpHeight: 50000
   MainCanvas: {fileID: 223621481462933414}
   PauseCanvas: {fileID: 223429106450354236}
   OptionsCanvas: {fileID: 223085230617010150}
