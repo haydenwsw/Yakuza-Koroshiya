@@ -12,6 +12,10 @@ public class MainMenu : MonoBehaviour {
     public Canvas ExitCanvas;
     public Canvas ControlsCanvas;
 
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
     public Slider MusicSlider;
     public Text MusicText;
 
@@ -36,6 +40,7 @@ public class MainMenu : MonoBehaviour {
     
     private void Start()                    // SECTION BY ERV, 21/11/18
     {
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         _anim = GetComponent<Animator>();
         _anim.SetBool("TWEEN_MainMenu", true);
         _anim.SetBool("TWEEN_OptionsMenu", false);
