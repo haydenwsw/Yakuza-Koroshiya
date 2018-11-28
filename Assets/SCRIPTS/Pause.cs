@@ -41,6 +41,7 @@ public class Pause : MonoBehaviour {
     public void Retry()
     {
         Control.Retry();
+        GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
         Move.Unpause();
     }
 
@@ -52,7 +53,13 @@ public class Pause : MonoBehaviour {
 
     public void Exit()
     {
-        
+        GameObject g = GameObject.Find("GAME DETAIL").transform.GetChild(1).gameObject;
+        g.SetActive(true);
+        GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
+        Destroy(Control.gameObject);
+        Destroy(GameObject.FindGameObjectsWithTag("Finish")[0]);
+        Time.timeScale = 1;
+        //Destroy(GameObject.FindGameObjectsWithTag("Player")[0]);
     }
 
     public void Music()

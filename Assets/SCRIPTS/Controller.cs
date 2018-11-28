@@ -175,7 +175,7 @@ public class Controller : MonoBehaviour {
         Reloading.enabled = false;
 
         // setting the health and amour values
-        health = 0.1f;
+        health = 1;
         amour = 1;
 
         int BulletsCount = AllBullets.childCount;
@@ -938,8 +938,6 @@ public class Controller : MonoBehaviour {
         HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
         DeathCanvas.enabled = false;
         GetComponent<Movement>().MainCanvas.enabled = true;
-
-        GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
     }
 
     // Optifine meme
