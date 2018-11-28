@@ -165,7 +165,5 @@ public class AISpawner : MonoBehaviour {
         waveCount = 0;
 
         WaveText.text = "Wave: ";
-
-        Debug.Log(i + " " + wave);
     }
 }

@@ -40,7 +40,7 @@ public class Pause : MonoBehaviour {
 
     public void Retry()
     {
-
+        Control.health = 0;
     }
 
     public void Options()

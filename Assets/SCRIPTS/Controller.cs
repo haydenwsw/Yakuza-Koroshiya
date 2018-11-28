@@ -112,7 +112,9 @@ public class Controller : MonoBehaviour {
 
     private float time2 = 0;
 
-    private float health;
+    private float time3 = 0;
+
+    public float health;
 
     private float amour;
 
@@ -173,7 +175,7 @@ public class Controller : MonoBehaviour {
         Reloading.enabled = false;
 
         // setting the health and amour values
-        health = 1;
+        health = 0.1f;
         amour = 1;
 
         int BulletsCount = AllBullets.childCount;
@@ -319,6 +321,11 @@ public class Controller : MonoBehaviour {
         UpdateLaserHeat();
         IsPlayerAlive();
         SwitchingWeaponAnime();
+
+        if (Input.GetKeyDown("q"))
+        {
+            transform.position = new Vector3(-41f, 0.7f, -2.3f);
+        }
     }
 
     // movement function
@@ -892,11 +899,11 @@ public class Controller : MonoBehaviour {
             DeathCanvas.enabled = true;
             GetComponent<Movement>().MainCanvas.enabled = false;
 
-            time2 += Time.deltaTime;
+            time3 += Time.deltaTime;
 
-            if (time2 > 2)
+            if (time3 > 2)
             {
-                time = 0;
+                time3 = 0;
 
                 // setting the ammo varables
                 rifleAmmo = RifleClipSize;
@@ -920,7 +927,8 @@ public class Controller : MonoBehaviour {
                 hasRifle = false;
                 hasShotgun = false;
 
-                GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
+                Vector3 v = GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
+                Debug.Log(v);
                 health = 1;
                 amour = 1;
                 AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
