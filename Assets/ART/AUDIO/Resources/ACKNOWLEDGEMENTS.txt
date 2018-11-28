@@ -1,0 +1,4 @@
+MENU_BLIP: "Little Thing"
+	https://freesound.org/people/LloydEvans09/sounds/185828/
+WEAPON_LaserFire[X]
+	https://freesound.org/people/humanoide9000/sounds/330293/

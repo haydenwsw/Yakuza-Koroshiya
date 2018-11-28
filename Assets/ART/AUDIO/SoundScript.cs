@@ -5,17 +5,17 @@ using UnityEngine;
 public class SoundScript : MonoBehaviour
 {
 
-    public static AudioClip Kendo, Laser, Rifle, Shotgun, EnemyDeath;
+    public static AudioClip WEAPON_KendoSwing, WEAPON_LaserFire, WEAPON_RifleFire, WEAPON_Shotgun, AI_DeathScream;
     static AudioSource audioSrc;
 
 
     void Start()
     {
-        Kendo = Resources.Load<AudioClip>("Kendo");
-        Laser = Resources.Load<AudioClip>("LASER");
-        Rifle = Resources.Load<AudioClip>("Rifle");
-        Shotgun = Resources.Load<AudioClip>("ShotGun");
-        EnemyDeath = Resources.Load<AudioClip>("Scream");
+        WEAPON_KendoSwing = Resources.Load<AudioClip>("WEAPON_KendoSwing");
+        WEAPON_LaserFire = Resources.Load<AudioClip>("WEAPON_LaserFire");
+        WEAPON_RifleFire = Resources.Load<AudioClip>("WEAPON_RifleFire");
+        WEAPON_Shotgun = Resources.Load<AudioClip>("WEAPON_Shotgun");
+        AI_DeathScream = Resources.Load<AudioClip>("AI_DeathScream");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -25,23 +25,23 @@ public class SoundScript : MonoBehaviour
         switch (clip)
         {
             case "Kendo":
-                audioSrc.PlayOneShot(Kendo);
+                audioSrc.PlayOneShot(WEAPON_KendoSwing);
                 break;
 
             case "Laser":
-                audioSrc.PlayOneShot(Laser);
+                audioSrc.PlayOneShot(WEAPON_LaserFire);
                 break;
 
             case "Rifle":
-                audioSrc.PlayOneShot(Rifle);
+                audioSrc.PlayOneShot(WEAPON_RifleFire);
                 break;
 
             case "Shotgun":
-                audioSrc.PlayOneShot(Shotgun);
+                audioSrc.PlayOneShot(WEAPON_Shotgun);
                 break;
 
             case "Death":
-                audioSrc.PlayOneShot(EnemyDeath);
+                audioSrc.PlayOneShot(AI_DeathScream);
                 break;
         }
     }

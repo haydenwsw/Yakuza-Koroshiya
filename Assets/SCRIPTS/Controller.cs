@@ -359,12 +359,14 @@ public class Controller : MonoBehaviour {
                     if (fired)
                     {
                         WeaponAnime.SetTrigger("_weaponFire");
-                        SoundScript.PlaySound("WEAPON_KendoSwing");
+                        SoundScript.PlaySound("Kendo");
 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
 
                         pos = inputRay.GetPoint(1);
+
+                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
 
                         Debug.DrawLine(transform.position, pos);
 
@@ -874,7 +876,10 @@ public class Controller : MonoBehaviour {
         LaserHeatBar.transform.localScale = new Vector3(1, laserHeat, 1);
 
         if (laserHeat > 1)
+        {
             tooHot = true;
+            WeaponAnime.SetTrigger("_weaponOverheat");
+        }
             
         if (tooHot == true)
             fired = false;

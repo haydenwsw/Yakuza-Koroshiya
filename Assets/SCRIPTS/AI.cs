@@ -55,6 +55,8 @@ public class AI : MonoBehaviour {
 
     private Score S;
 
+    private Animator AIanim;
+
     void Start ()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -65,12 +67,16 @@ public class AI : MonoBehaviour {
 
         // get the refecen to the Score script
         S = GetComponentInParent<Score>();
+
+        AIanim = GetComponentInChildren<Animator>();
     }
 	
 	void Update ()
     {
         if (point == false)
         {
+            AIanim.SetFloat("_isWalking", 1);
+
             float dist = Vector3.Distance(Waypoint.transform.position, transform.position);
 
             FaceTarget(Waypoint.transform.position);
@@ -83,6 +89,8 @@ public class AI : MonoBehaviour {
 
         if (point)  // Movement
         {
+            AIanim.SetFloat("_isWalking", 1);
+
             float distance = Vector3.Distance(target.position, transform.position);
 
             FaceTarget(target.position);
@@ -149,6 +157,8 @@ public class AI : MonoBehaviour {
                 if (distance <= InnerRadius)
                 {
                     agent.SetDestination(transform.position);
+
+                    AIanim.SetFloat("_isWalking", 0);
                 }
             }
         }
