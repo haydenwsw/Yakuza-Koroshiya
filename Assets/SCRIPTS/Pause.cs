@@ -40,7 +40,8 @@ public class Pause : MonoBehaviour {
 
     public void Retry()
     {
-        Control.health = 0;
+        Control.Retry();
+        Move.Unpause();
     }
 
     public void Options()

@@ -899,46 +899,47 @@ public class Controller : MonoBehaviour {
             DeathCanvas.enabled = true;
             GetComponent<Movement>().MainCanvas.enabled = false;
 
-            time3 += Time.deltaTime;
+            Cursor.lockState = CursorLockMode.None;
 
-            if (time3 > 2)
-            {
-                time3 = 0;
-
-                // setting the ammo varables
-                rifleAmmo = RifleClipSize;
-                shotgunAmmo = ShotgunClipSize;
-
-                // spawn with kendo stick
-                firingMode = 0;
-                SwitchSword();
-                WeaponSwitching = true;
-                currentlyHolding.transform.localPosition = KendoStick.transform.position;
-
-                // setting the viability of the ammo texts
-                AmmoText.enabled = false;
-                SpareAmmoText.enabled = false;
-                LaserHeatBar.enabled = false;
-                LaserHearBarBack.enabled = false;
-                Reloading.enabled = false;
-
-                RifleSpareAmmo = 0;
-                ShotgunSpareAmmo = 0;
-                hasRifle = false;
-                hasShotgun = false;
-
-                Vector3 v = GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
-                Debug.Log(v);
-                health = 1;
-                amour = 1;
-                AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-                HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
-                DeathCanvas.enabled = false;
-                GetComponent<Movement>().MainCanvas.enabled = true;
-
-                GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
-            }
+            GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
         }
+    }
+
+    public void Retry()
+    {
+        // setting the ammo varables
+        rifleAmmo = RifleClipSize;
+        shotgunAmmo = ShotgunClipSize;
+
+        // spawn with kendo stick
+        firingMode = 0;
+        SwitchSword();
+        WeaponSwitching = true;
+        currentlyHolding.transform.localPosition = KendoStick.transform.position;
+
+        // setting the viability of the ammo texts
+        AmmoText.enabled = false;
+        SpareAmmoText.enabled = false;
+        LaserHeatBar.enabled = false;
+        LaserHearBarBack.enabled = false;
+        Reloading.enabled = false;
+
+        RifleSpareAmmo = 0;
+        ShotgunSpareAmmo = 0;
+        hasRifle = false;
+        hasShotgun = false;
+
+        //Vector3 v = GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
+        //Debug.Log(v);
+        transform.position = new Vector3(-40.5f, 1.5f, -4f);
+        health = 1;
+        amour = 1;
+        AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
+        HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+        DeathCanvas.enabled = false;
+        GetComponent<Movement>().MainCanvas.enabled = true;
+
+        GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
     }
 
     // Optifine meme
