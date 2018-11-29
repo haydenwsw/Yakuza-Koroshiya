@@ -3,30 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System;
+using System.Text;
+using System.Linq;
 
 // <Summary>
 
-    // This script handle score saveing
+// This script handle score saveing
 
 // </Summary>
 
 public class FileSaver
 {
     // saves score to .txt
-    [MenuItem("Tools/Write file")]
+    //[MenuItem("Tools/Write file")]
     public static void WriteString(int Score)
     {
         // get path
         string path = "Assets/ART/AUDIO/Resources/Score.txt";
 
         // sorts the score
-        string[] file = ReadString().Split('\n');
+        //var file = ReadString().Trim(' ').Split('\n').ToList();
 
-        int[] Sorted = new int[file.Length];
-        for (int i = 0; i < file.Length; i++)
-        {
-            //Sorted[i]
-        }
+        //file.Insert(Score.ToString());
+
+        //int s = file.Count - 2;
+        //for (int i = 0; i < s - 1; i++)
+        //{
+        //    for (int ii = 0; ii < s - i - 1; ii++)
+        //    {
+        //        if (Int32.Parse(file[ii]) > Int32.Parse(file[ii + 1]))
+        //        {
+        //            string temp = file[ii];
+        //            file[ii] = file[ii + 1];
+        //            file[ii + 1] = temp;
+        //        }
+        //    }
+        //}
+
+        //file.RemoveAt(s);
 
         // write score to file
         StreamWriter writer = new StreamWriter(path, true);
@@ -38,7 +53,7 @@ public class FileSaver
         TextAsset asset = Resources.Load<TextAsset>("Score");
     }
 
-    [MenuItem("Tools/Read file")]
+    //[MenuItem("Tools/Read file")]
     public static string ReadString()
     {
         // get path

@@ -187,6 +187,7 @@ public class Movement : MonoBehaviour {
                     Time.timeScale = 0;
                     MainCanvas.enabled = false;
                     PauseCanvas.enabled = true;
+                    GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = false;
                     Cursor.lockState = CursorLockMode.None;
                     isPaused = !isPaused;
                 }
@@ -197,12 +198,12 @@ public class Movement : MonoBehaviour {
         if (Input.GetKeyDown("c"))
         {
             zoom = true;
-            con.cameraZoom(zoom);
+            //con.cameraZoom(zoom);
         }
         else if (Input.GetKeyUp("c"))
         {
             zoom = false;
-            con.cameraZoom(zoom);
+            //con.cameraZoom(zoom);
         }
     }
 
@@ -231,6 +232,7 @@ public class Movement : MonoBehaviour {
         PauseCanvas.enabled = false;
         OptionsCanvas.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
+        GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = true;
         isPaused = !isPaused;
     }
 }

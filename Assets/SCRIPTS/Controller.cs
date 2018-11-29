@@ -626,7 +626,7 @@ public class Controller : MonoBehaviour {
         LaserHeatBar.enabled = false;
 
         KendoIm.enabled = true;
-        KendoGr.enabled = true;
+        KendoGr.enabled = false;
         LaserIm.enabled = false;
         LaserGr.enabled = true;
         RifleIm.enabled = false;
@@ -654,7 +654,7 @@ public class Controller : MonoBehaviour {
         KendoIm.enabled = false;
         KendoGr.enabled = true;
         LaserIm.enabled = true;
-        LaserGr.enabled = true;
+        LaserGr.enabled = false;
         RifleIm.enabled = false;
         RifleGr.enabled = true;
         ShotgunIm.enabled = false;
@@ -685,7 +685,7 @@ public class Controller : MonoBehaviour {
         LaserIm.enabled = false;
         LaserGr.enabled = true;
         RifleIm.enabled = true;
-        RifleGr.enabled = true;
+        RifleGr.enabled = false;
         ShotgunIm.enabled = false;
         ShotgunGr.enabled = true;
     }
@@ -716,7 +716,7 @@ public class Controller : MonoBehaviour {
         RifleIm.enabled = false;
         RifleGr.enabled = true;
         ShotgunIm.enabled = true;
-        ShotgunGr.enabled = true;
+        ShotgunGr.enabled = false;
     }
 
     // waiting for the animtion for switching weapons to finish before the player can fire
@@ -1042,6 +1042,8 @@ public class Controller : MonoBehaviour {
                 move.CanPause = false;
             }
 
+            Score.score.enabled = false;
+
             Score.DestroyAI();
         }
     }
@@ -1080,15 +1082,17 @@ public class Controller : MonoBehaviour {
         move.MainCanvas.enabled = true;
         move.CanPause = true;
 
+        GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = true;
+
         pressed = true;
     }
 
-    // i wanna keep this but erv won't let me
-    public void cameraZoom(bool b)
-    {
-        if (b)
-            cam.fieldOfView = 20;
-        else
-            cam.fieldOfView = 100;
-    }
+    // Zooming in with "C"
+    //public void cameraZoom(bool b)
+    //{
+    //    if (b)
+    //        cam.fieldOfView = 20;
+    //    else
+    //        cam.fieldOfView = 100;
+    //}
 }
