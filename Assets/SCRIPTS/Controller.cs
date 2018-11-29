@@ -73,6 +73,14 @@ public class Controller : MonoBehaviour {
     public Image LaserHeatBar;
     public Text Reloading;
     public Canvas DeathCanvas;
+    public Image KendoIm;
+    public Image KendoGr;
+    public Image LaserIm;
+    public Image LaserGr;
+    public Image RifleIm;
+    public Image RifleGr;
+    public Image ShotgunIm;
+    public Image ShotgunGr;
 
     [Header("Players values")]
     public float AmourPerentage;
@@ -178,6 +186,11 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
+
+        KendoGr.enabled = false;
+        LaserIm.enabled = false;
+        RifleIm.enabled = false;
+        ShotgunIm.enabled = false;
 
         // setting the ammo varables
         rifleAmmo = RifleClipSize;
@@ -607,6 +620,15 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
+
+        KendoIm.enabled = true;
+        KendoGr.enabled = true;
+        LaserIm.enabled = false;
+        LaserGr.enabled = true;
+        RifleIm.enabled = false;
+        RifleGr.enabled = true;
+        ShotgunIm.enabled = false;
+        ShotgunGr.enabled = true;
     }
 
     private void SwitchPistol()
@@ -623,6 +645,15 @@ public class Controller : MonoBehaviour {
 
         LaserHearBarBack.enabled = true;
         LaserHeatBar.enabled = true;
+
+        KendoIm.enabled = false;
+        KendoGr.enabled = true;
+        LaserIm.enabled = true;
+        LaserGr.enabled = true;
+        RifleIm.enabled = false;
+        RifleGr.enabled = true;
+        ShotgunIm.enabled = false;
+        ShotgunGr.enabled = true;
     }
 
     private void SwitchRifle()
@@ -642,6 +673,15 @@ public class Controller : MonoBehaviour {
         LaserHeatBar.enabled = false;
 
         firingMode = 1;
+
+        KendoIm.enabled = false;
+        KendoGr.enabled = true;
+        LaserIm.enabled = false;
+        LaserGr.enabled = true;
+        RifleIm.enabled = true;
+        RifleGr.enabled = true;
+        ShotgunIm.enabled = false;
+        ShotgunGr.enabled = true;
     }
 
     private void SwitchShotgun()
@@ -661,6 +701,15 @@ public class Controller : MonoBehaviour {
         LaserHeatBar.enabled = false;
 
         firingMode = 3;
+
+        KendoIm.enabled = false;
+        KendoGr.enabled = true;
+        LaserIm.enabled = false;
+        LaserGr.enabled = true;
+        RifleIm.enabled = false;
+        RifleGr.enabled = true;
+        ShotgunIm.enabled = true;
+        ShotgunGr.enabled = true;
     }
 
     private void SwitchingWeaponAnime()
