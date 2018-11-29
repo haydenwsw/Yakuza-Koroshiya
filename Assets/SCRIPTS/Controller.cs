@@ -18,6 +18,7 @@ public class Controller : MonoBehaviour {
 
     [Header("Laser stick varables")]
     public float KendoStickRange;
+    public float KendoTiming;
 
     [Header("Laser Pistol varables")]
     public float LaserDecayRate;
@@ -43,6 +44,7 @@ public class Controller : MonoBehaviour {
 
     // Gun projectiles
     [Header("Gun projectiles prefabs")]
+    public GameObject KendoHit;
     public GameObject Bullet;
     public GameObject Laser;
     public GameObject LaserHit;
@@ -135,6 +137,8 @@ public class Controller : MonoBehaviour {
 
     private bool Kendo = false;
 
+    private bool Shootgun = false;
+
     private float translatedY = 0;
 
     private bool pressed = true;
@@ -160,15 +164,9 @@ public class Controller : MonoBehaviour {
         // get Movement controller script
         move = GetComponent<Movement>();
 
-        // Save weapon position
-        weaponPos = Weapon.transform.localPosition;
-
         // spawn with kendo stick
-        firingMode = 0;
         currentlyHolding = GameObject.Find("WEAPON_Kendo");
-        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         SwitchSword();
-        currentlyHolding.transform.localPosition = KendoStick.transform.position;
 
         // setting the ammo varables
         rifleAmmo = RifleClipSize;
@@ -329,6 +327,7 @@ public class Controller : MonoBehaviour {
         IsPlayerAlive();
         SwitchingWeaponAnime();
         KendoSwing();
+        ShotgunTime();
     }
 
     // movement function
@@ -362,24 +361,24 @@ public class Controller : MonoBehaviour {
         if (Kendo)
         {
             time += Time.deltaTime;
-        }
 
-        if (time > 0.75)
-        {
-            time = 0;
+            if (time > KendoTiming)
+            {
+                time = 0;
 
-            Vector3 pos = Vector3.zero;
-            Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+                Vector3 pos = Vector3.zero;
+                Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
 
-            pos = inputRay.GetPoint(KendoStickRange);
+                pos = inputRay.GetPoint(KendoStickRange);
 
-            Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+                Instantiate(KendoHit, pos, LaserHit.transform.rotation);
 
-            Debug.DrawLine(transform.position, pos);
+                Debug.DrawLine(transform.position, pos);
 
-            SoundScript.PlaySound("Kendo");
+                SoundScript.PlaySound("Kendo");
 
-            Kendo = false;
+                Kendo = false;
+            }
         }
     }
 
@@ -514,44 +513,48 @@ public class Controller : MonoBehaviour {
                 // auto shot gun
                 if (canShoot)
                 {
-                    Vector3 pos = Vector3.zero;
-                    Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(inputRay, out hit))
+                    if (fired)
                     {
-                        pos = hit.point;
-                    }
-                    else
-                    {
-                        pos = inputRay.GetPoint(20);
-                    }
+                        Vector3 pos = Vector3.zero;
+                        Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
 
-                    Vector3 dir = (inputRay.GetPoint(20) - Barrel.transform.position);
-
-                    time += Time.deltaTime;
-
-                    if (time >= ShotgunFireRate && shotgunAmmo > 0)
-                    {
-                        for (int i = 0; i < ShotgunPellets; i++)
+                        if (Physics.Raycast(inputRay, out hit))
                         {
-                            Vector3 Offset = new Vector3(
-                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
-                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
-                                UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread));
-
-                            Quaternion rot = Quaternion.LookRotation(dir + Offset);
-
-                            WeaponAnime.SetTrigger("_weaponFire");
-                            SoundScript.PlaySound("Shotgun");
-
-                            GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
-                            pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
+                            pos = hit.point;
                         }
-                        time = 0;
+                        else
+                        {
+                            pos = inputRay.GetPoint(20);
+                        }
 
-                        shotgunAmmo--;
-                        AmmoText.text = shotgunAmmo.ToString();
+                        Vector3 dir = (inputRay.GetPoint(20) - Barrel.transform.position);
+
+                        if (shotgunAmmo > 0)
+                        {
+                            for (int i = 0; i < ShotgunPellets; i++)
+                            {
+                                Vector3 Offset = new Vector3(
+                                    UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
+                                    UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
+                                    UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread));
+
+                                Quaternion rot = Quaternion.LookRotation(dir + Offset);
+
+                                WeaponAnime.SetTrigger("_weaponFire");
+                                SoundScript.PlaySound("Shotgun");
+
+                                GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
+                                pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
+                            }
+
+                            shotgunAmmo--;
+                            AmmoText.text = shotgunAmmo.ToString();
+
+                            Shootgun = true;
+
+                            fired = false;
+                        }
                     }
                 }
             }
@@ -559,6 +562,23 @@ public class Controller : MonoBehaviour {
         else if (shoot == 0)
         {
             fired = true;
+        }
+    }
+
+    void ShotgunTime()
+    {
+        if (Shootgun)
+        {
+            time += Time.deltaTime;
+
+
+            if (time > 0.5)
+            {
+                time = 0;
+                Debug.Log("STOP");
+                fired = true;
+                Shootgun = false;
+            }
         }
     }
 

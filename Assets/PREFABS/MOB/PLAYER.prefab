@@ -12353,6 +12353,7 @@ MonoBehaviour:
   MainCanvas: {fileID: 223621481462933414}
   PauseCanvas: {fileID: 223429106450354236}
   OptionsCanvas: {fileID: 223085230617010150}
+  CanPause: 1
 --- !u!114 &114089133994695812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13569,9 +13570,8 @@ MonoBehaviour:
   cam: {fileID: 20594403128389432}
   BulletSpeed: 1600
   ReloadDelay: 1.5
-  GunsPersonalSpace: 1
-  GunAnimeSpeed: 0.03
-  GunAnimeTime: 1
+  KendoStickRange: 1
+  KendoTiming: 0.8
   LaserDecayRate: 4
   LaserHeatRate: 0.1
   RifleFireRate: 0.14
@@ -13586,6 +13586,7 @@ MonoBehaviour:
   LaserDamage: 0.01
   RifleDamage: 0.01
   ShotgunDamage: 0.01
+  KendoHit: {fileID: 1723558424657694, guid: 1fb35f6a95157ba4489c1d039fa3f0a4, type: 2}
   Bullet: {fileID: 1376597009366104, guid: 648198c3aa3869f48a9d5d86d75d96cf, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
   LaserHit: {fileID: 1894534823233034, guid: e1ef045832d58f14fa3d87100298a61f, type: 2}
@@ -13613,7 +13614,7 @@ MonoBehaviour:
   LargeHealth: 1
   AllBullets: {fileID: 4295826565828258}
   bulletCount: 0
-  health: 0
+  currentlyHolding: {fileID: 0}
 --- !u!114 &114546465948916344
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1841,7 +1841,7 @@ MonoBehaviour:
   HeadshotMuilpler: 2
   BulletDamage: 0.07
   PelletDamage: 0.07
-  SwordDamage: 0.07
+  SwordDamage: 0.34
   LaserDamage: 0.07
   Barrel: {fileID: 4433272804018946}
   Bullet: {fileID: 1919970842314540, guid: fd5c56e1d0d66fb4dbbd7d3deee78ef3, type: 2}
