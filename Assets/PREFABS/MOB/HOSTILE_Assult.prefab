@@ -1832,17 +1832,17 @@ MonoBehaviour:
   InnerRadius: 2
   WaypointRadius: 10
   Weapon: 0
-  AIBulletSpeed: 800
-  AIFireRate: 0.15
+  AIBulletSpeed: 750
+  AIFireRate: 0.14
   AIHealth: 1
   AIRotationSpeed: 10
   AIShotgunSpread: 0
   AIShotgunPellets: 0
   HeadshotMuilpler: 2
-  BulletDamage: 0.07
-  PelletDamage: 0.07
-  SwordDamage: 0.34
-  LaserDamage: 0.07
+  BulletDamage: 0.1
+  PelletDamage: 0.1
+  SwordDamage: 0.45
+  LaserDamage: 0.175
   Barrel: {fileID: 4982500928094250}
   Bullet: {fileID: 1919970842314540, guid: fd5c56e1d0d66fb4dbbd7d3deee78ef3, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}

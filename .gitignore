@@ -36,3 +36,6 @@ sysinfo.txt
 *.unitypackage
 Assets/ART/VISUAL/Models/CHARACTER_Yakuza/Anim/Walk_Cycle_Rifle.fbx.meta
 Assets/ART/VISUAL/Models/CHARACTER_Yakuza/Anim/Walk_Cycle_Rifle.fbx.meta
+Assets/PREFABS/MOB/HOSTILE_Assult.prefab
+Assets/PREFABS/MOB/HOSTILE_LaserPistol.prefab
+Assets/PREFABS/MOB/HOSTILE_Shotgun.prefab
