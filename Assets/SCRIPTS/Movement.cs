@@ -19,6 +19,8 @@ public class Movement : MonoBehaviour {
 
     public Canvas OptionsCanvas;
 
+    public bool CanPause = true;
+
     private Controller con;
 
     private bool zoom;
@@ -139,19 +141,22 @@ public class Movement : MonoBehaviour {
             con.Get4(Weapon4);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (CanPause)
         {
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Unpause();
-            }
-            else
-            {
-                Time.timeScale = 0;
-                MainCanvas.enabled = false;
-                PauseCanvas.enabled = true;
-                Cursor.lockState = CursorLockMode.None;
-                isPaused = !isPaused;
+                if (isPaused)
+                {
+                    Unpause();
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                    MainCanvas.enabled = false;
+                    PauseCanvas.enabled = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    isPaused = !isPaused;
+                }
             }
         }
 

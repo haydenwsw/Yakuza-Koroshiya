@@ -53,23 +53,26 @@ public class Pause : MonoBehaviour {
 
     public void Exit()
     {
+        Control.currentlyHolding.transform.parent = null;
         GameObject g = GameObject.Find("GAME DETAIL").transform.GetChild(1).gameObject;
         g.SetActive(true);
         GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
-        Destroy(Control.gameObject);
+        //Destroy(Control.gameObject);
         Destroy(GameObject.FindGameObjectsWithTag("Finish")[0]);
         Time.timeScale = 1;
-        //Destroy(GameObject.FindGameObjectsWithTag("Player")[0]);
+        Destroy(GameObject.FindGameObjectsWithTag("Player")[0]);
     }
 
     public void Music()
     {
         MusicText.text = MusicSlider.value.ToString() + "%";
+        GameObject.FindGameObjectsWithTag("Finish")[0].GetComponent<AudioSource>().volume = MusicSlider.value;
     }
 
     public void Sound()
     {
         Soundtext.text = SounderSlider.value.ToString() + "%";
+        GameObject.Find("SoundManager").GetComponent<AudioSource>().volume = SounderSlider.value;
     }
 
     public void FOV()

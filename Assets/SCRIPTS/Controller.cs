@@ -14,9 +14,10 @@ public class Controller : MonoBehaviour {
     [Header("Global Gun Varables")]
     public float BulletSpeed;
     public float ReloadDelay;
-    public float GunsPersonalSpace;
-    public float GunAnimeSpeed;
-    public float GunAnimeTime;
+    private float GunsPersonalSpace;
+
+    [Header("Laser stick varables")]
+    public float KendoStickRange;
 
     [Header("Laser Pistol varables")]
     public float LaserDecayRate;
@@ -81,6 +82,8 @@ public class Controller : MonoBehaviour {
 
     public int bulletCount = 0;
 
+    public GameObject currentlyHolding;
+
     // movement varables
     private Vector3 velocity = Vector3.zero;
     private Quaternion MouseY;
@@ -98,8 +101,6 @@ public class Controller : MonoBehaviour {
 
     private Rigidbody rb;
 
-    private GameObject currentlyHolding;
-
     private Vector3 weaponPos;
 
     private bool Hasweapon = true;
@@ -114,7 +115,7 @@ public class Controller : MonoBehaviour {
 
     private float time3 = 0;
 
-    public float health;
+    private float health;
 
     private float amour;
 
@@ -145,13 +146,19 @@ public class Controller : MonoBehaviour {
     
     private Transform[] Bullets = new Transform[100];
 
+    private Movement move;
+
     // Use this for initialization
     void Awake()
     {
+        // Get Animator component
         Anime = GetComponent<Animator>();
 
         // Get component Rigidbody
         rb = GetComponent<Rigidbody>();
+
+        // get Movement controller script
+        move = GetComponent<Movement>();
 
         // Save weapon position
         weaponPos = Weapon.transform.localPosition;
@@ -321,11 +328,7 @@ public class Controller : MonoBehaviour {
         UpdateLaserHeat();
         IsPlayerAlive();
         SwitchingWeaponAnime();
-
-        if (Input.GetKeyDown("q"))
-        {
-            transform.position = new Vector3(-41f, 0.7f, -2.3f);
-        }
+        KendoSwing();
     }
 
     // movement function
@@ -354,6 +357,32 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    void KendoSwing()
+    {
+        if (Kendo)
+        {
+            time += Time.deltaTime;
+        }
+
+        if (time > 0.75)
+        {
+            time = 0;
+
+            Vector3 pos = Vector3.zero;
+            Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
+
+            pos = inputRay.GetPoint(KendoStickRange);
+
+            Instantiate(LaserHit, pos, LaserHit.transform.rotation);
+
+            Debug.DrawLine(transform.position, pos);
+
+            SoundScript.PlaySound("Kendo");
+
+            Kendo = false;
+        }
+    }
+
     void PreformShoot()
     {
         if (shoot == 1)
@@ -366,16 +395,8 @@ public class Controller : MonoBehaviour {
                     if (fired)
                     {
                         WeaponAnime.SetTrigger("_weaponFire");
-                        SoundScript.PlaySound("Kendo");
 
-                        Vector3 pos = Vector3.zero;
-                        Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
-
-                        pos = inputRay.GetPoint(1);
-
-                        Instantiate(LaserHit, pos, LaserHit.transform.rotation);
-
-                        Debug.DrawLine(transform.position, pos);
+                        Kendo = true;
 
                         fired = false;
                     }
@@ -897,11 +918,21 @@ public class Controller : MonoBehaviour {
         if (health < 0)
         {
             DeathCanvas.enabled = true;
-            GetComponent<Movement>().MainCanvas.enabled = false;
+            move.MainCanvas.enabled = false;
+
+            pressed = false;
+            firingMode = -1;
 
             Cursor.lockState = CursorLockMode.None;
 
-            GameObject.Find("SPAWNS").GetComponent<Score>().DestroyAI();
+            Score Score = GameObject.Find("SPAWNS").GetComponent<Score>();
+            if (move.CanPause)
+            {
+                FileSaver.WriteString(Score.ScoreCount);
+                move.CanPause = false;
+            }
+
+            Score.DestroyAI();
         }
     }
 
@@ -937,7 +968,10 @@ public class Controller : MonoBehaviour {
         AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
         HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
         DeathCanvas.enabled = false;
-        GetComponent<Movement>().MainCanvas.enabled = true;
+        move.MainCanvas.enabled = true;
+        move.CanPause = true;
+
+        pressed = true;
     }
 
     // Optifine meme

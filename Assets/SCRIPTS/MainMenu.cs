@@ -36,7 +36,11 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject BGMusic;
 
+    public Text ScoreData;
+
     private Animator _anim;                 // ADDED BY ERV, 21/11/18
+
+    private AudioSource Audio;
     
     private void Start()                    // SECTION BY ERV, 21/11/18
     {
@@ -47,11 +51,14 @@ public class MainMenu : MonoBehaviour {
         _anim.SetBool("TWEEN_RecordsScreen", false);
         _anim.SetBool("TWEEN_CreditsScreen", false);
         _anim.SetBool("TWEEN_ExitScreen", false);
+
+        Audio = GetComponent<AudioSource>();
     }
 
     public void Play()
     {
         GameObject player = Instantiate(Player, PlayerSpawn.position, PlayerSpawn.rotation) as GameObject;
+        player.GetComponent<Controller>().enabled = true;
         Pause pause = player.GetComponentInChildren<Pause>();
 
         player.GetComponent<Movement>().Sensitivity = SensSlider.value;
@@ -64,7 +71,13 @@ public class MainMenu : MonoBehaviour {
 
         GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = true;
 
-        Instantiate(BGMusic, Vector3.zero, BGMusic.transform.rotation);
+        Instantiate(BGMusic, Vector3.zero, BGMusic.transform.rotation).GetComponent<AudioSource>().volume = MusicSlider.value;
+        pause.MusicText.text = MusicSlider.value.ToString();
+        pause.MusicSlider.value = MusicSlider.value;
+
+        GameObject.Find("SoundManager").GetComponent<AudioSource>().volume = SounderSlider.value;
+        pause.Soundtext.text = SounderSlider.value.ToString();
+        pause.SounderSlider.value = SounderSlider.value;
 
         gameObject.SetActive(false);
     }
@@ -83,6 +96,8 @@ public class MainMenu : MonoBehaviour {
         RecordsCanvas.enabled = true;
         _anim.SetBool("TWEEN_RecordsScreen", true);
         _anim.SetBool("TWEEN_MainMenu", false);
+
+        ScoreData.text = FileSaver.ReadString();
     }
 
     public void Credits()
@@ -101,6 +116,7 @@ public class MainMenu : MonoBehaviour {
     public void Music()
     {
         MusicText.text = MusicSlider.value.ToString() + "%";
+        Audio.volume = MusicSlider.value;
     }
 
     public void Sound()

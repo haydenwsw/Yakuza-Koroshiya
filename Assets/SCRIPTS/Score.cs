@@ -7,7 +7,7 @@ public class Score : MonoBehaviour {
 
     public Text ScoreText;
 
-    private int ScoreCount = 0;
+    public int ScoreCount = 0;
 
     public GameObject plusTen;
 
@@ -17,11 +17,11 @@ public class Score : MonoBehaviour {
 
     public GameObject plusTenty;
 
+    public Canvas score;
+
     private float time;
 
     private GameObject obj = null;
-
-    public Canvas score;
 
     public void AddScore(int i, Vector3 pos, Quaternion rot)
     {
