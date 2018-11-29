@@ -4,17 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// <Summary>
+
+    // This script controls the players Weapons, health, UI and movment
+
+// </Summary>
+
 [RequireComponent(typeof(Rigidbody))]
 public class Controller : MonoBehaviour {
 
-    // camera
+    // Refence to the camera
     public Camera cam;
 
-    // global bulet speed
     [Header("Global Gun Varables")]
     public float BulletSpeed;
     public float ReloadDelay;
-    private float GunsPersonalSpace;
 
     [Header("Laser stick varables")]
     public float KendoStickRange;
@@ -81,17 +85,14 @@ public class Controller : MonoBehaviour {
     public Image RifleGr;
     public Image ShotgunIm;
     public Image ShotgunGr;
-
+ 
     [Header("Players values")]
     public float AmourPerentage;
     public float SmallHealth;
     public float MediumHealth;
     public float LargeHealth;
 
-    public Transform AllBullets;
-
-    public int bulletCount = 0;
-
+    // Refence to the weapon that the player is currently equiped
     public GameObject currentlyHolding;
 
     // movement varables
@@ -99,67 +100,86 @@ public class Controller : MonoBehaviour {
     private Quaternion MouseY;
     private Quaternion MouseX;
     private Vector3 jump = Vector3.zero;
+
+    // left mouse button input varable
     private float shoot = 0;
+
+    // reload input varable
     private float reload = 0;
 
+    // current rifle clip
     private int rifleAmmo;
+
+    // current shotgun clip
     private int shotgunAmmo;
+
+    // laser overheat varable
     private float laserHeat = 0;
 
+    // rifle spare ammo pool varable
     private int RifleSpareAmmo = 0;
+
+    // shotgun spare ammo pool varable
     private int ShotgunSpareAmmo = 0;
 
+    // Refence to the player rigibody component
     private Rigidbody rb;
 
-    private Vector3 weaponPos;
-
-    private bool Hasweapon = true;
-
+    // used for controller what shoots 
     private int firingMode;
 
+    // used for semi-auto weapons 
     private bool fired = true;
 
+    // weapon firing delta time
     private float time = 0;
 
+    // weapon switching delta time
     private float time2 = 0;
 
-    private float time3 = 0;
-
+    // players health
     private float health;
 
+    // player amour
     private float amour;
 
+    // used for weapon sway
     private Animator Anime;
 
+    // used for all the weapon animations
     private Animator WeaponAnime;
 
+    // for when the laser pistol over heats so the player can't fire
     private bool tooHot = false;
 
+    // used for weapon switching so the player can't shoot while the weapons are switching
     private bool canShoot = true;
 
-    private bool canJump = false;
-
+    // used for toggling when the weapon switching animation is finished
     private bool WeaponSwitching = false;
 
-    private bool WeaponSwitched = true;
-
+    // used for toggling when the kendo sword swinging animation is finished
     private bool Kendo = false;
 
+    // used to time the shooting animation to the firing of the weapon
     private bool Shootgun = false;
 
+    // used to time the shooting animation to the firing of the weapon
     private bool firedShotgun = true;
 
-    private float translatedY = 0;
-
+    // used so the player dosn't switch to another weapon with the swiching animation is playing
     private bool pressed = true;
 
+    // used to know if the player has pickup the shotgun
     private bool hasShotgun = true;
+
+    // used to know if the player has pickup the rifle
     private bool hasRifle = true;
 
+    // so the script knows what weapon switch animations to play when switching weapons
     private int weaponIndex = 0;
-    
-    //private Transform[] Bullets = new Transform[100];
 
+    // refence to the movement script
     private Movement move;
 
     // Use this for initialization
@@ -175,22 +195,24 @@ public class Controller : MonoBehaviour {
         move = GetComponent<Movement>();
 
         // spawn with kendo stick
-        firingMode = 0;
-        currentlyHolding = GameObject.Find("WEAPON_Kendo");
-        currentlyHolding.transform.parent = Weapon.transform;
-        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
-        WeaponAnime.SetTrigger("_weaponEquip");
+        {
+            firingMode = 0;
+            currentlyHolding = GameObject.Find("WEAPON_Kendo");
+            currentlyHolding.transform.parent = Weapon.transform;
+            WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+            WeaponAnime.SetTrigger("_weaponEquip");
 
-        AmmoText.enabled = false;
-        SpareAmmoText.enabled = false;
+            AmmoText.enabled = false;
+            SpareAmmoText.enabled = false;
 
-        LaserHearBarBack.enabled = false;
-        LaserHeatBar.enabled = false;
+            LaserHearBarBack.enabled = false;
+            LaserHeatBar.enabled = false;
 
-        KendoGr.enabled = false;
-        LaserIm.enabled = false;
-        RifleIm.enabled = false;
-        ShotgunIm.enabled = false;
+            KendoGr.enabled = false;
+            LaserIm.enabled = false;
+            RifleIm.enabled = false;
+            ShotgunIm.enabled = false;
+        }
 
         // setting the ammo varables
         rifleAmmo = RifleClipSize;
@@ -344,7 +366,6 @@ public class Controller : MonoBehaviour {
     {
         PerformMovement();
         PerformRotation();
-        PerformJump();
         PreformShoot();
         PreformReload();
         UpdateLaserHeat();
@@ -371,15 +392,7 @@ public class Controller : MonoBehaviour {
         cam.transform.localRotation = MouseX;
     }
 
-    // jumping function
-    void PerformJump()
-    {
-        if (jump != Vector3.zero && canJump)
-        {
-            rb.AddForce(jump);
-        }
-    }
-
+    // attack for the kendo sword
     void KendoSwing()
     {
         if (Kendo)
@@ -406,6 +419,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // shooting function
     void PreformShoot()
     {
         if (shoot == 1)
@@ -452,12 +466,6 @@ public class Controller : MonoBehaviour {
 
                         Vector3 Offset = Vector3.zero;
 
-                        //float Mag = (Barrel.transform.position - pos).magnitude;
-                        //if (Mag < GunsPersonalSpace)
-                        //{
-                        //    Debug.Log("Too Close personal space plz");
-                        //}
-                        //else
                         {
                             Offset = new Vector3(
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread),
@@ -516,12 +524,6 @@ public class Controller : MonoBehaviour {
 
                         Vector3 dir = -cam.transform.forward;
 
-                        //float Mag = (Barrel.transform.position - pos).magnitude;
-                        //if (Mag < GunsPersonalSpace)
-                        //{
-                        //    Debug.Log("Too Close personal space plz");
-                        //}
-                        //else
                          dir = (Barrel.transform.position - pos);
 
                         Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
@@ -589,6 +591,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // waits for the shotgun animtion to finish before firing again
     void ShotgunTime()
     {
         if (Shootgun)
@@ -605,6 +608,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // weapon switch for the kend stick
     private void SwitchSword()
     {
         firingMode = 0;
@@ -631,6 +635,7 @@ public class Controller : MonoBehaviour {
         ShotgunGr.enabled = true;
     }
 
+    // weapon switch for the laser pistol
     private void SwitchPistol()
     {
         firingMode = 2;
@@ -656,6 +661,7 @@ public class Controller : MonoBehaviour {
         ShotgunGr.enabled = true;
     }
 
+    // weapon switching for the rifle
     private void SwitchRifle()
     {
         currentlyHolding.transform.parent = null;
@@ -684,6 +690,7 @@ public class Controller : MonoBehaviour {
         ShotgunGr.enabled = true;
     }
 
+    // weapon switching for the shotgun
     private void SwitchShotgun()
     {
         currentlyHolding.transform.parent = null;
@@ -712,13 +719,16 @@ public class Controller : MonoBehaviour {
         ShotgunGr.enabled = true;
     }
 
+    // waiting for the animtion for switching weapons to finish before the player can fire
     private void SwitchingWeaponAnime()
     {
+        // delta time
         if (WeaponSwitching)
         {
             time2 += Time.deltaTime;
         }
 
+        // sword
         if (firingMode == 0)
         {
             if (time2 > 1)
@@ -736,6 +746,8 @@ public class Controller : MonoBehaviour {
                     SwitchShotgun();
             }
         }
+
+        // rifle
         else if (firingMode == 1)
         {
             if (time2 > 1)
@@ -753,6 +765,8 @@ public class Controller : MonoBehaviour {
                     SwitchShotgun();
             }
         }
+
+        // laser pistol
         else if (firingMode == 2)
         {
             if (time2 > 1)
@@ -770,6 +784,8 @@ public class Controller : MonoBehaviour {
                     SwitchShotgun();
             }
         }
+
+        // auto shotgun
         else if (firingMode == 3)
         {
             if (time2 > 1)
@@ -789,6 +805,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // weapon reloading function
     void PreformReload()
     {
         if (Reloading.enabled)
@@ -838,6 +855,8 @@ public class Controller : MonoBehaviour {
                     SpareAmmoText.text = RifleSpareAmmo.ToString();
                 }
             }
+
+            // auto shotgun
             else if (firingMode == 3)
             {
                 if (shotgunAmmo != ShotgunClipSize)
@@ -859,8 +878,10 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // take damge function
     public void TakeDamge(float damage)
     {
+        // if the there is armour deduct a percentage of the health 
         if (amour > 0)
         {
             amour -= damage;
@@ -869,15 +890,19 @@ public class Controller : MonoBehaviour {
         }
         else
         {
+            // if the amour is deplted the player take full damage
             AmourBar.rectTransform.localScale = new Vector3(0, 1, 1);
             health -= damage;
         }
+
+        // stops having minus health that is bad
         if (health > 0)
             HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);       
         else
             HealthBar.rectTransform.localScale = new Vector3(0, 1, 1);
     }
 
+    // Health function
     private void Heal(float food, GameObject obj)
     {
         if (health != 1)
@@ -891,20 +916,24 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // take damge from the AI
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
+        // take Laser pistol damage
         if (collision.gameObject.tag == "AILaser")
         {
             TakeDamge(LaserDamage);
             Destroy(collision.gameObject);
         }
 
+        // take Rifle damage
         if (collision.gameObject.tag == "AIBullet")
         {
             TakeDamge(RifleDamage);
             Destroy(collision.gameObject);
         }
 
+        // take shotgun damage
         if (collision.gameObject.tag == "AIPellet")
         {
             TakeDamge(ShotgunDamage);
@@ -912,14 +941,10 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    private void OnCollisionStay(UnityEngine.Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-            canJump = true;
-    }
-
+    // This is for all the pick ups
     private void OnTriggerEnter(Collider other)
     {
+        // armout pick up
         if (other.gameObject.tag == "Armour")
         {
             if (amour != 1)
@@ -930,21 +955,25 @@ public class Controller : MonoBehaviour {
             }
         }
 
+        // small health (dumpling)
         if (other.gameObject.tag == "HealthSmall")
         {
             Heal(SmallHealth, other.gameObject);
         }
 
+        // medium health  (Suishi rolls)
         if (other.gameObject.tag == "HealthMedium")
         {
             Heal(MediumHealth, other.gameObject);
         }
 
+        // Large health (Bento box)
         if (other.gameObject.tag == "HealthLarge")
         {
             Heal(LargeHealth, other.gameObject);
         }
 
+        // Rifle ammo (Rifle gun)
         if (other.gameObject.tag == "RifleAmmo")
         {
             hasRifle = true;
@@ -954,6 +983,7 @@ public class Controller : MonoBehaviour {
             Destroy(other.gameObject);
         }
 
+        // shot gun ammo (Shot gun)
         if (other.gameObject.tag == "ShotgunAmmo")
         {
             hasShotgun = true;
@@ -964,24 +994,22 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    private void OnCollisionExit(UnityEngine.Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-            canJump = false;
-    }
-
+    // laser overheat function
     private void UpdateLaserHeat()
     {
         laserHeat -= Time.deltaTime / LaserDecayRate;
 
+        // making sure the over heat bar dosn't goto minus values
         if (laserHeat < 0)
         {
             laserHeat = 0;
             tooHot = false;
         }
 
+        // updating the bar in the UI
         LaserHeatBar.transform.localScale = new Vector3(1, laserHeat, 1);
 
+        // check if the the laser pistol overheats
         if (laserHeat > 1)
         {
             tooHot = true;
@@ -992,8 +1020,10 @@ public class Controller : MonoBehaviour {
             fired = false;
     }
 
+    // Death function
     private void IsPlayerAlive()
     {
+        // check if the player is dead or not
         if (health < 0)
         {
             DeathCanvas.enabled = true;
@@ -1004,6 +1034,7 @@ public class Controller : MonoBehaviour {
 
             Cursor.lockState = CursorLockMode.None;
 
+            // saving score and destroying all the AI
             Score Score = GameObject.Find("SPAWNS").GetComponent<Score>();
             if (move.CanPause)
             {
@@ -1015,11 +1046,16 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    // retry function
     public void Retry()
     {
-        // setting the ammo varables
+        // setting the ammo/weapon varables
         rifleAmmo = RifleClipSize;
         shotgunAmmo = ShotgunClipSize;
+        RifleSpareAmmo = 0;
+        ShotgunSpareAmmo = 0;
+        hasRifle = false;
+        hasShotgun = false;
 
         // spawn with kendo stick
         firingMode = 0;
@@ -1034,13 +1070,7 @@ public class Controller : MonoBehaviour {
         LaserHearBarBack.enabled = false;
         Reloading.enabled = false;
 
-        RifleSpareAmmo = 0;
-        ShotgunSpareAmmo = 0;
-        hasRifle = false;
-        hasShotgun = false;
-
-        //Vector3 v = GameObject.Find("PLAYER_SPAWN").transform.position = transform.position;
-        //Debug.Log(v);
+        // reseting player values and postion
         transform.position = new Vector3(-40.5f, 1.5f, -4f);
         health = 1;
         amour = 1;
@@ -1053,7 +1083,7 @@ public class Controller : MonoBehaviour {
         pressed = true;
     }
 
-    // Optifine meme
+    // i wanna keep this but erv won't let me
     public void cameraZoom(bool b)
     {
         if (b)

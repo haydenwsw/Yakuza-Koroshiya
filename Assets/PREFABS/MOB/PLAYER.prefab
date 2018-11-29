@@ -12668,7 +12668,7 @@ MonoBehaviour:
   JumpHeight: 0
   MainCanvas: {fileID: 223621481462933414}
   PauseCanvas: {fileID: 223429106450354236}
-  OptionsCanvas: {fileID: 0}
+  OptionsCanvas: {fileID: 223102642636660626}
   CanPause: 1
 --- !u!114 &114086550521893352
 MonoBehaviour:
@@ -16595,7 +16595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -490.99988, y: 71.50018}
+  m_AnchoredPosition: {x: -491, y: 71.5}
   m_SizeDelta: {x: 160, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224018176510241632
@@ -17698,7 +17698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -565, y: 48.8}
+  m_AnchoredPosition: {x: -565, y: 48.800293}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224675708421116398

@@ -2,40 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// <Summary>
+
+    // This script dose all the keyinputs
+
+// </Summary>
+
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour {
 
+    //player walking speed
     [SerializeField]
     private float Speed;
 
+    // looking sensitivity
     public float Sensitivity;
 
-    [SerializeField]
-    private float JumpHeight;
-
+    // Refence to the players UI
     public Canvas MainCanvas;
 
+    // Refence to the pause canvas
     public Canvas PauseCanvas;
 
+    // Refence to the options canvas
     public Canvas OptionsCanvas;
 
+    // toggle if the player can pause or not
     public bool CanPause = true;
 
+    // Refence to the controller script
     private Controller con;
 
+    // "C" input
     private bool zoom;
 
+    //  "1" input
     private bool Weapon1;
 
+    //  "2" input
     private bool Weapon2;
 
+    //  "3" input
     private bool Weapon3;
 
+    // "4" input
     private bool Weapon4;
 
+    // so the script knows if the game is paused or not
     private bool isPaused = false;
 
+    // players camera rotation
     private Quaternion CameraRot;
+
+    // players Character rotation
     private Quaternion CharacterRot;
 
     // Use this for initialization
@@ -47,7 +66,10 @@ public class Movement : MonoBehaviour {
         // Lock the mouse
         Cursor.lockState = CursorLockMode.Locked;
 
+        // sets the camera rotation varable
         CameraRot = Camera.main.transform.localRotation;
+
+        // sets the Character rotation varable
         CharacterRot = transform.localRotation;
     }
 
@@ -80,67 +102,78 @@ public class Movement : MonoBehaviour {
         con.moveMouseX(CameraRot);
         con.moveMouseY(CharacterRot);
 
-        // jump
-        float jump = Input.GetAxisRaw("Jump");
-
-        Vector3 vecUP = new Vector3(0f, jump, 0f) * JumpHeight;
-
-        con.Jump(vecUP);
 
         // Fire weapon
-        float fire = Input.GetAxisRaw("Fire1");
+        {
+            float fire = Input.GetAxisRaw("Fire1");
 
-        con.Shoot(fire);
+            con.Shoot(fire);
+        }
 
         // reload weapon
-        float reload = Input.GetAxisRaw("Reload");
-
-        con.Reload(reload);
-
-        if (Input.GetKeyDown("1"))
         {
-            Weapon1 = true;
-            con.Get1(Weapon1);
-        }
-        else if (Input.GetKeyUp("1"))
-        {
-            Weapon1 = false;
-            con.Get1(Weapon1);
+            float reload = Input.GetAxisRaw("Reload");
+
+            con.Reload(reload);
         }
 
-        if (Input.GetKeyDown("2"))
+        // 1st weapon 
         {
-            Weapon2 = true;
-            con.Get2(Weapon2);
-        }
-        else if (Input.GetKeyUp("2"))
-        {
-            Weapon2 = false;
-            con.Get2(Weapon2);
-        }
-
-        if (Input.GetKeyDown("3"))
-        {
-            Weapon3 = true;
-            con.Get3(Weapon3);
-        }
-        else if (Input.GetKeyUp("3"))
-        {
-            Weapon3 = false;
-            con.Get3(Weapon3);
+            if (Input.GetKeyDown("1"))
+            {
+                Weapon1 = true;
+                con.Get1(Weapon1);
+            }
+            else if (Input.GetKeyUp("1"))
+            {
+                Weapon1 = false;
+                con.Get1(Weapon1);
+            }
         }
 
-        if (Input.GetKeyDown("4"))
+        // 2nd weapon
         {
-            Weapon4 = true;
-            con.Get4(Weapon4);
-        }
-        else if (Input.GetKeyUp("4"))
-        {
-            Weapon4 = false;
-            con.Get4(Weapon4);
+            if (Input.GetKeyDown("2"))
+            {
+                Weapon2 = true;
+                con.Get2(Weapon2);
+            }
+            else if (Input.GetKeyUp("2"))
+            {
+                Weapon2 = false;
+                con.Get2(Weapon2);
+            }
         }
 
+        // 3rd weapon
+        {
+            if (Input.GetKeyDown("3"))
+            {
+                Weapon3 = true;
+                con.Get3(Weapon3);
+            }
+            else if (Input.GetKeyUp("3"))
+            {
+                Weapon3 = false;
+                con.Get3(Weapon3);
+            }
+        }
+
+        // 4th weapon
+        {
+            if (Input.GetKeyDown("4"))
+            {
+                Weapon4 = true;
+                con.Get4(Weapon4);
+            }
+            else if (Input.GetKeyUp("4"))
+            {
+                Weapon4 = false;
+                con.Get4(Weapon4);
+            }
+        }
+
+        // pause function "esc"
         if (CanPause)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -173,6 +206,7 @@ public class Movement : MonoBehaviour {
         }
     }
 
+    // fuction to lock the camera rotaion 
     Quaternion ClampRotationAroundXAxis(Quaternion q)
     {
         q.x /= q.w;
@@ -189,6 +223,7 @@ public class Movement : MonoBehaviour {
         return q;
     }
 
+    // Unpause funtion 
     public void Unpause()
     {
         Time.timeScale = 1;

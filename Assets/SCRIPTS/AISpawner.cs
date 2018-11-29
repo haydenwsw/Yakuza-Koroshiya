@@ -3,62 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// AI spawner class
-[System.Serializable]
-public struct Wave
-{
-    public int Mob;
-    public int Location;
-    public float Delay;
+// <Summary>
 
-    public Wave(int mob, int location, float delay)
-    {
-        Mob = mob;
-        Location = location;
-        Delay = delay;
-    }
-}
+// This script controls The AI spawning
 
-[System.Serializable]
-public class list
-{
-    public List<Wave> Enemies = new List<Wave>();
-}
+// </Summary>
 
 public class AISpawner : MonoBehaviour {
 
-    public List<list> waveList = new List<list>();
-
+    // Different AI types
     [Header("AI Prefabs")]
     public GameObject[] Enemies = new GameObject[3];
 
-    [Header("Between Waves")]
-    public int EnemiesRemaining;
-
-    public int EnemiesRemainingTime;
-
-    public float TimeBeforeWave;
-
+    // use to display what wave the player us currently on
     public Text WaveText;
-
+     
+    // used to collect all AI spawn points
     private List<Transform> spawnPoint = new List<Transform>();
 
+    // used to collect all AI way points
     private List<Transform> wayPoint = new List<Transform>();
-
-    private List<bool> enemiesRemain = new List<bool>();
-
+     
+    // AI delta time
     private float time = 0;
-
+    
+    // to toggle if the AI can spawn of not
     private bool tripped = false;
 
+    // use to count the waves
     private int wave = 0;
-
+    
+    // used to spawn an amount of AI per wave
     private int i = 0;
 
+    // used to count the ammount of AI in game
     private int waveCount = 0;
 
-    private bool canSpawn = true;
-
+    // it counts all the AI spawn points and way points
     private void Start()
     {
         int children = transform.childCount;
@@ -80,8 +61,10 @@ public class AISpawner : MonoBehaviour {
             {
                 time = 0;
 
-                if (canSpawn && i < (wave + 1) * 2)
+                // spawns AI based on the current wave
+                if (i < (wave + 1) * 2)
                 {
+                    // spawn AI
                     int rand = Random.Range(0, spawnPoint.Count);
                     GameObject Bot = Instantiate(Enemies[Random.Range(0, 3)], spawnPoint[rand].transform.position, spawnPoint[rand].transform.rotation);
                     Bot.GetComponent<AI>().SetTarget(wayPoint[rand]);
@@ -92,6 +75,7 @@ public class AISpawner : MonoBehaviour {
                     waveCount++;
                 }
 
+                // handles the ticking up to the next wave
                 if (i >= (wave + 1) * 2)
                 {
                     if (waveCount <= 0)
@@ -102,41 +86,10 @@ public class AISpawner : MonoBehaviour {
                     }
                 }
             }
-
-            //if (i < waveList[wave].Enemies.Count && time >= waveList[wave].Enemies[i].Delay)
-            //{
-            //    time = 0;
-
-            //    GameObject Bot = Instantiate(Enemies[waveList[wave].Enemies[i].Mob],
-            //        spawnPoint[waveList[wave].Enemies[i].Location].transform.position,
-            //        spawnPoint[waveList[wave].Enemies[i].Location].transform.rotation) as GameObject;
-
-            //    Bot.GetComponent<AI>().SetTarget(wayPoint[waveList[wave].Enemies[i].Location]);
-            //    Bot.transform.parent = transform;
-
-            //    enemiesRemain.Add(true);
-
-            //    i++;
-
-            //    Debug.Log(i + " " + wave);
-            //}
-
-            //if (i >= waveList[wave].Enemies.Count)
-            //{
-            //    if (EnemiesRemainingTime >= enemiesRemain.Count && time >= TimeBeforeWave || EnemiesRemaining >= enemiesRemain.Count)
-            //    {
-            //        wave++;
-            //        i = 0;
-
-            //        WaveText.text = "Wave: " + wave.ToString();
-
-            //        if (wave >= waveList.Count)
-            //            wave = 0;
-            //    }
-            //}
         }
     }
 
+    // used if the player has started the game or not ans should start spawning that AI
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -149,11 +102,13 @@ public class AISpawner : MonoBehaviour {
         }
     }
 
+    // the counter to track how many AI are left
     public void AIDead()
     {
         --waveCount;
     }
 
+    // Resets the AI spawner so the player can retry
     public void ResetSpawner()
     {
         GetComponent<BoxCollider>().enabled = true;

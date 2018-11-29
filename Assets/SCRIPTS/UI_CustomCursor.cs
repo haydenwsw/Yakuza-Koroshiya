@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// <Summary>
+
+    // erv comment your script plz
+
+// </Summary>
+
 public class UI_CustomCursor : MonoBehaviour
 {
 

@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// <Summary>
+
+    // This script Delets the bullets and pellets
+
+// </Summary>
+
 public class Deleter : MonoBehaviour {
 
+    // bullet delta time
     private float time = 0;
 
+    // destoys it self after 2 seconds
     void Update ()
     {
         time += Time.deltaTime;
@@ -14,6 +22,8 @@ public class Deleter : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+    // destorys itself if it hits a something that isn't the player
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (collision.gameObject.tag != "Player")

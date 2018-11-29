@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// <Summary>
+
+// This script controls The AI and the behaviour
+
+// </Summary>
+
 public class AI : MonoBehaviour {
 
     [Header("Radius Values")]
@@ -39,26 +45,37 @@ public class AI : MonoBehaviour {
     [Header("UI Objects")]
     public GameObject AIHealthBar;
 
+    // handles how what score prefab spawns when the eneme dies
     [Header("Erv don't touch this")]
     public int ScoreIndex;
 
+    // location of the player
     private GameObject Player;
 
+    // location of the waypoint
     private Transform Waypoint;
 
+    // toggles if the AI has reached the way point or not
     bool point = false;
 
+    // AI delta time
     private float time;
 
+    // sets the player position
     private Transform target;
+
+    // handles the navmesh
     private NavMeshAgent agent;
 
+    // refence to the Score script
     private Score S;
 
+    // hanldes the AI animations
     private Animator AIanim;
 
     void Start ()
     {
+        // geting refence to the player
         Player = GameObject.FindGameObjectWithTag("Player");
 
         // set target 
@@ -68,11 +85,13 @@ public class AI : MonoBehaviour {
         // get the refecen to the Score script
         S = GetComponentInParent<Score>();
 
+        // geting animator component
         AIanim = GetComponentInChildren<Animator>();
     }
 	
 	void Update ()
     {
+        // first walk to the way point
         if (point == false)
         {
             AIanim.SetFloat("_isWalking", 1);
@@ -87,6 +106,7 @@ public class AI : MonoBehaviour {
                 point = true;
         }
 
+        // if the player is in range or the has reached the way point track down the player
         if (point)  // Movement
         {
             AIanim.SetFloat("_isWalking", 1);
@@ -163,33 +183,40 @@ public class AI : MonoBehaviour {
             }
         }
 
+        // death
         if (AIHealth < 0)
         {
+            // remove one from the counter
             GetComponentInParent<AISpawner>().AIDead();
 
             S.AddScore(ScoreIndex, transform.position, transform.rotation);
 
+            // spawn rifle ammo (rifle enemie)
             if (Weapon == 0)
             {
                 Instantiate(RifleAmmo, transform.position, RifleAmmo.transform.rotation).transform.parent = transform.parent;
             }
 
+            // spawn smallhealth (lase pistol enemie)
             if (Weapon == 1)
             {
                 Instantiate(SmallHealth, transform.position, SmallHealth.transform.rotation).transform.parent = transform.parent;
             }
 
+            // spawn shotgun ammo (shotgun enemie)
             if (Weapon == 2)
             {
                 Instantiate(ShotgunAmmo, transform.position, ShotgunAmmo.transform.rotation).transform.parent = transform.parent;
             }
 
+            // player death sound
             SoundScript.PlaySound("Death");
 
             Destroy(this.gameObject);
         }
 	}
 
+    // face target
     private void FaceTarget(Vector3 face)
     {
         Vector3 dir = (face - transform.position).normalized;
@@ -197,57 +224,71 @@ public class AI : MonoBehaviour {
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * AIRotationSpeed);
     }
 
+    // set the way point position
     public void SetTarget(Transform way)
     {
         Waypoint = way;
     }
 
+    // recive damager from player
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
+        // rifle
         if (collision.collider.tag == "Bullet")
             AIHealth -= BulletDamage;
 
+        // shotgun
         if (collision.collider.tag == "Pellet")
             AIHealth -= PelletDamage;
 
+        // laser pistol
         if (collision.collider.tag == "Laser")
             AIHealth -= LaserDamage;
 
+        // kendo stick
         if (collision.collider.tag == "Sword")
             AIHealth -= SwordDamage;
 
+        // update AI health bar
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
     }
 
+    // hand head shots
     private void OnTriggerEnter(Collider other)
     {
+        // rifle
         if (other.tag == "Bullet")
         {
             AIHealth -= BulletDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
         }
 
+        // shotgun
         else if (other.tag == "Pellet")
         {
             AIHealth -= PelletDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
         }
 
+        // laser pistol
         else if (other.tag == "Laser")
         {
             AIHealth -= LaserDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
         }
 
+        // kendo stick
         else if (other.tag == "Sword")
         {
             AIHealth -= SwordDamage * HeadshotMuilpler;
             S.AddScore(1, transform.position, transform.rotation);
         }
 
+        // update health bar
         AIHealthBar.transform.localScale = new Vector3(0.1f, 0.1f, AIHealth);
     }
 
+    // draw dection radius for debugging
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
