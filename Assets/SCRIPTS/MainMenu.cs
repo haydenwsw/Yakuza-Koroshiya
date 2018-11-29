@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour {
     private Animator _anim;                 // ADDED BY ERV, 21/11/18
 
     private AudioSource Audio;
-    
+
     private void Start()                    // SECTION BY ERV, 21/11/18
     {
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);

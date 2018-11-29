@@ -139,6 +139,8 @@ public class Controller : MonoBehaviour {
 
     private bool Shootgun = false;
 
+    private bool firedShotgun = true;
+
     private float translatedY = 0;
 
     private bool pressed = true;
@@ -148,7 +150,7 @@ public class Controller : MonoBehaviour {
 
     private int weaponIndex = 0;
     
-    private Transform[] Bullets = new Transform[100];
+    //private Transform[] Bullets = new Transform[100];
 
     private Movement move;
 
@@ -165,8 +167,17 @@ public class Controller : MonoBehaviour {
         move = GetComponent<Movement>();
 
         // spawn with kendo stick
+        firingMode = 0;
         currentlyHolding = GameObject.Find("WEAPON_Kendo");
-        SwitchSword();
+        currentlyHolding.transform.parent = Weapon.transform;
+        WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
+        WeaponAnime.SetTrigger("_weaponEquip");
+
+        AmmoText.enabled = false;
+        SpareAmmoText.enabled = false;
+
+        LaserHearBarBack.enabled = false;
+        LaserHeatBar.enabled = false;
 
         // setting the ammo varables
         rifleAmmo = RifleClipSize;
@@ -183,11 +194,11 @@ public class Controller : MonoBehaviour {
         health = 1;
         amour = 1;
 
-        int BulletsCount = AllBullets.childCount;
-        for (int i = 0; i < BulletsCount; i++)
-        {
-            Bullets[i] = AllBullets.GetChild(i);
-        }
+        //int BulletsCount = AllBullets.childCount;
+        //for (int i = 0; i < BulletsCount; i++)
+        //{
+        //    Bullets[i] = AllBullets.GetChild(i);
+        //}
     }
 
     // set Velocity
@@ -428,12 +439,12 @@ public class Controller : MonoBehaviour {
 
                         Vector3 Offset = Vector3.zero;
 
-                        float Mag = (Barrel.transform.position - pos).magnitude;
-                        if (Mag < GunsPersonalSpace)
-                        {
-                            Debug.Log("Too Close personal space plz");
-                        }
-                        else
+                        //float Mag = (Barrel.transform.position - pos).magnitude;
+                        //if (Mag < GunsPersonalSpace)
+                        //{
+                        //    Debug.Log("Too Close personal space plz");
+                        //}
+                        //else
                         {
                             Offset = new Vector3(
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread),
@@ -492,13 +503,13 @@ public class Controller : MonoBehaviour {
 
                         Vector3 dir = -cam.transform.forward;
 
-                        float Mag = (Barrel.transform.position - pos).magnitude;
-                        if (Mag < GunsPersonalSpace)
-                        {
-                            Debug.Log("Too Close personal space plz");
-                        }
-                        else
-                            dir = (Barrel.transform.position - pos);
+                        //float Mag = (Barrel.transform.position - pos).magnitude;
+                        //if (Mag < GunsPersonalSpace)
+                        //{
+                        //    Debug.Log("Too Close personal space plz");
+                        //}
+                        //else
+                         dir = (Barrel.transform.position - pos);
 
                         Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
 
@@ -513,7 +524,7 @@ public class Controller : MonoBehaviour {
                 // auto shot gun
                 if (canShoot)
                 {
-                    if (fired)
+                    if (firedShotgun)
                     {
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -553,7 +564,7 @@ public class Controller : MonoBehaviour {
 
                             Shootgun = true;
 
-                            fired = false;
+                            firedShotgun = false;
                         }
                     }
                 }
@@ -571,12 +582,11 @@ public class Controller : MonoBehaviour {
         {
             time += Time.deltaTime;
 
-
-            if (time > 0.5)
+            if (time > 0.6)
             {
                 time = 0;
-                Debug.Log("STOP");
-                fired = true;
+
+                firedShotgun = true;
                 Shootgun = false;
             }
         }
@@ -588,7 +598,7 @@ public class Controller : MonoBehaviour {
 
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Kendo");
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.parent = Weapon.transform;
         WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         WeaponAnime.SetTrigger("_weaponEquip");
 
@@ -605,7 +615,7 @@ public class Controller : MonoBehaviour {
 
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Laser");
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.parent = Weapon.transform;
         WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         WeaponAnime.SetTrigger("_weaponEquip");
         AmmoText.enabled = false;
@@ -619,7 +629,7 @@ public class Controller : MonoBehaviour {
     {
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Rifle");
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.parent = Weapon.transform;
         WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         WeaponAnime.SetTrigger("_weaponEquip");
 
@@ -638,7 +648,7 @@ public class Controller : MonoBehaviour {
     {
         currentlyHolding.transform.parent = null;
         currentlyHolding = GameObject.Find("WEAPON_Shotgun");
-        currentlyHolding.transform.parent = GameObject.Find("Weapon").transform;
+        currentlyHolding.transform.parent = Weapon.transform;
         WeaponAnime = currentlyHolding.GetComponentInChildren<Animator>();
         WeaponAnime.SetTrigger("_weaponEquip");
 
