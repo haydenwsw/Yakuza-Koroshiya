@@ -442,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1124789479515558
 GameObject:
   m_ObjectHideFlags: 1
@@ -3341,7 +3341,6 @@ GameObject:
   - component: {fileID: 54539504334929846}
   - component: {fileID: 114085242020525650}
   - component: {fileID: 114540672905098292}
-  - component: {fileID: 114531252737963298}
   - component: {fileID: 95226990453833036}
   m_Layer: 0
   m_Name: PLAYER
@@ -7312,7 +7311,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 996c65836786f9c42a183e8894c44228, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13647,13 +13646,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 250
-    m_Alignment: 2
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Your Final Score was
+  m_Text: 'Your Final Score was:'
 --- !u!114 &114305089134641756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14423,19 +14422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf87d88dd5a097540a503a474cd1a63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114531252737963298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1956758304220622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3790cca6b2b20e54ba7caf52d4d343eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onhand: {fileID: 4865546760588190}
-  force: 1000
 --- !u!114 &114533844165229940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14472,9 +14458,9 @@ MonoBehaviour:
   ShotgunFireRate: 1
   ShotgunSpread: 0.5
   ShotgunClipSize: 7
-  ShotgunPellets: 5
+  ShotgunPellets: 4
   ShotgunAmmoPickup: 5
-  LaserDamage: 0.015
+  LaserDamage: 0.01
   RifleDamage: 0.01
   ShotgunDamage: 0.01
   KendoHit: {fileID: 1723558424657694, guid: 1fb35f6a95157ba4489c1d039fa3f0a4, type: 2}
@@ -14957,7 +14943,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 250
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -16882,7 +16868,7 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1089455317218920}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -17239,7 +17225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -142.9, y: 61.400024}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224233398543134720
@@ -17258,7 +17244,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224243135711750244
 RectTransform:
@@ -17947,7 +17933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 169.8, y: 66.4}
+  m_AnchoredPosition: {x: 0, y: 83.7}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224598104733065946
