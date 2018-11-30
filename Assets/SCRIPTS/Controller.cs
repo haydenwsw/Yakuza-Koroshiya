@@ -1084,7 +1084,7 @@ public class Controller : MonoBehaviour {
             if (move.CanPause)
             {
                 ScoreText.text = Score.ScoreCount.ToString();
-                FileSaver.WriteString(Score.ScoreCount);
+                //FileSaver.WriteString(Score.ScoreCount);
                 move.CanPause = false;
             }
 

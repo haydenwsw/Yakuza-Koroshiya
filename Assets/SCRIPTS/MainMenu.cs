@@ -143,7 +143,7 @@ public class MainMenu : MonoBehaviour {
         _anim.SetBool("TWEEN_RecordsScreen", true);
         _anim.SetBool("TWEEN_MainMenu", false);
 
-        ScoreData.text = FileSaver.ReadString();
+        //ScoreData.text = FileSaver.ReadString();
     }
 
     // got the credits menu
