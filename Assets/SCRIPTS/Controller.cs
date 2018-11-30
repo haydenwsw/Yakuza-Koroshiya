@@ -1104,8 +1104,8 @@ public class Controller : MonoBehaviour {
         shotgunAmmo = ShotgunClipSize;
         RifleSpareAmmo = 0;
         ShotgunSpareAmmo = 0;
-        hasRifle = false;
-        hasShotgun = false;
+        hasRifle = true;
+        hasShotgun = true;
 
         // spawn with kendo stick
         firingMode = 0;
@@ -1118,7 +1118,7 @@ public class Controller : MonoBehaviour {
         SpareAmmoText.enabled = false;
         LaserHeatBar.enabled = false;
         Reloading.enabled = false;
-
+        
         // reseting player values and postion
         transform.position = new Vector3(-40.5f, 1.5f, -4f);
         health = 1;
