@@ -117,7 +117,7 @@ public class Movement : MonoBehaviour {
             con.Reload(reload);
         }
 
-        // 1st weapon 
+        // key input for switch to the kendo stick
         {
             if (Input.GetKeyDown("1"))
             {
@@ -131,7 +131,7 @@ public class Movement : MonoBehaviour {
             }
         }
 
-        // 2nd weapon
+        // key input for switch to the laser psitol
         {
             if (Input.GetKeyDown("2"))
             {
@@ -145,7 +145,7 @@ public class Movement : MonoBehaviour {
             }
         }
 
-        // 3rd weapon
+        // key input for switch to the rifle
         {
             if (Input.GetKeyDown("3"))
             {
@@ -159,7 +159,7 @@ public class Movement : MonoBehaviour {
             }
         }
 
-        // 4th weapon
+        // key input for switch to the shotgun
         {
             if (Input.GetKeyDown("4"))
             {

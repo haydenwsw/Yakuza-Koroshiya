@@ -133,7 +133,7 @@ public class AI : MonoBehaviour {
                         {
                             if (Weapon == 0)
                             {
-                                // Rifle
+                                // Rifle firing
                                 GameObject bullet = Instantiate(Bullet, Barrel.position, Barrel.rotation) as GameObject;
                                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * AIBulletSpeed);
                                 bullet.transform.Rotate(90, 0, 0);
@@ -216,7 +216,7 @@ public class AI : MonoBehaviour {
         }
 	}
 
-    // face target
+    // face towards target
     private void FaceTarget(Vector3 face)
     {
         Vector3 dir = (face - transform.position).normalized;

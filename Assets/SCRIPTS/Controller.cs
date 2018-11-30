@@ -58,7 +58,6 @@ public class Controller : MonoBehaviour {
     [Header("Real world positions for objects")]
     public Transform Barrel;
     public Transform Weapon;
-    public Transform Spawn;
 
     // all the weapons
     [Header("All weapons prefabs")]
@@ -73,7 +72,6 @@ public class Controller : MonoBehaviour {
     public Text SpareAmmoText;
     public Image HealthBar;
     public Image AmourBar;
-    public Image LaserHearBarBack;
     public Image LaserHeatBar;
     public Text Reloading;
     public Canvas DeathCanvas;
@@ -85,7 +83,8 @@ public class Controller : MonoBehaviour {
     public Image RifleGr;
     public Image ShotgunIm;
     public Image ShotgunGr;
- 
+    public Text ScoreText;
+
     [Header("Players values")]
     public float AmourPerentage;
     public float SmallHealth;
@@ -205,7 +204,6 @@ public class Controller : MonoBehaviour {
             AmmoText.enabled = false;
             SpareAmmoText.enabled = false;
 
-            LaserHearBarBack.enabled = false;
             LaserHeatBar.enabled = false;
 
             KendoGr.enabled = false;
@@ -222,7 +220,6 @@ public class Controller : MonoBehaviour {
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
         LaserHeatBar.enabled = false;
-        LaserHearBarBack.enabled = false;
         Reloading.enabled = false;
 
         // setting the health and amour values
@@ -274,7 +271,7 @@ public class Controller : MonoBehaviour {
 
     public void Get1(bool b)
     {
-        // sword
+        // getting the '1' key input for switch to the kendo sword
         if (b)
         {
             if (pressed)
@@ -284,6 +281,7 @@ public class Controller : MonoBehaviour {
                     pressed = false;
                     canShoot = false;
                     WeaponSwitching = true;
+                    // triggering the animation for equiping
                     WeaponAnime.SetTrigger("_weaponUnequip");
                     weaponIndex = 0;
                     canShoot = true;
@@ -295,7 +293,7 @@ public class Controller : MonoBehaviour {
 
     public void Get2(bool b)
     {
-        // laser pistol
+        // getting the '2' key input for switch to the kendo sword
         if (b)
         {
             if (pressed)
@@ -305,6 +303,7 @@ public class Controller : MonoBehaviour {
                     pressed = false;
                     canShoot = false;
                     WeaponSwitching = true;
+                    // triggering the animation for equiping
                     WeaponAnime.SetTrigger("_weaponUnequip");
                     weaponIndex = 1;
                     pressed = true;
@@ -316,7 +315,7 @@ public class Controller : MonoBehaviour {
 
     public void Get3(bool b)
     {
-        // rifle
+        // getting the '3' key input for switch to the kendo sword
         if (b)
         {
             if (pressed)
@@ -328,6 +327,7 @@ public class Controller : MonoBehaviour {
                         pressed = false;
                         canShoot = false;
                         WeaponSwitching = true;
+                        // triggering the animation for equiping
                         WeaponAnime.SetTrigger("_weaponUnequip");
                         weaponIndex = 2;
                         canShoot = true;
@@ -339,7 +339,7 @@ public class Controller : MonoBehaviour {
     }
     public void Get4(bool b)
     {
-        // auto shotty
+        // getting the '4' key input for switch to the kendo sword
         if (b)
         {
             if (pressed)
@@ -351,6 +351,7 @@ public class Controller : MonoBehaviour {
                         pressed = false;
                         canShoot = false;
                         WeaponSwitching = true;
+                        // triggering the animation for equiping
                         WeaponAnime.SetTrigger("_weaponUnequip");
                         weaponIndex = 3;
                         pressed = true;
@@ -364,14 +365,31 @@ public class Controller : MonoBehaviour {
     // update
     void FixedUpdate()
     {
+        // Moving the player on key input
         PerformMovement();
+
+        // Moving the player's camera for looking
         PerformRotation();
+
+        // Shoot function for the player
         PreformShoot();
+
+        // realoading function for the rifle and shotgun weapons
         PreformReload();
+
+        // the overheat function for the laser pistol
         UpdateLaserHeat();
+
+        // checking if the player is dead or not
         IsPlayerAlive();
+
+        // waiting for the weapon switching animations
         SwitchingWeaponAnime();
+
+        // Waiting for the kendo stick's swinging animation
         KendoSwing();
+
+        // Waiting for the shotgun's firing animation
         ShotgunTime();
     }
 
@@ -399,19 +417,21 @@ public class Controller : MonoBehaviour {
         {
             time += Time.deltaTime;
 
+            // waiting for the kendo stick's swinging animation
             if (time > KendoTiming)
             {
                 time = 0;
 
+                // casting a raycast
                 Vector3 pos = Vector3.zero;
                 Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
 
                 pos = inputRay.GetPoint(KendoStickRange);
 
+                // instantiating a hit box
                 Instantiate(KendoHit, pos, LaserHit.transform.rotation);
 
-                Debug.DrawLine(transform.position, pos);
-
+                // play hit sound
                 SoundScript.PlaySound("Kendo");
 
                 Kendo = false;
@@ -426,13 +446,15 @@ public class Controller : MonoBehaviour {
         {
             if (firingMode == 0)
             {
-                // sword
+                // kendo stick
                 if (canShoot)
                 {
                     if (fired)
                     {
+                        // playing firing aniamation
                         WeaponAnime.SetTrigger("_weaponFire");
 
+                        // telling the script that the kendo script that the kendo stick is being swung
                         Kendo = true;
 
                         fired = false;
@@ -444,6 +466,7 @@ public class Controller : MonoBehaviour {
                 // rifle
                 if (canShoot)
                 {
+                    // casting a ray cast
                     Vector3 pos = Vector3.zero;
                     Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
@@ -459,6 +482,7 @@ public class Controller : MonoBehaviour {
 
                     time += Time.deltaTime;
 
+                    // fire rate
                     if (time >= RifleFireRate && rifleAmmo > 0)
                     {
 
@@ -466,6 +490,7 @@ public class Controller : MonoBehaviour {
 
                         Vector3 Offset = Vector3.zero;
 
+                        // randomzing the spay pattern
                         {
                             Offset = new Vector3(
                                 UnityEngine.Random.Range(-RifleSpread, RifleSpread),
@@ -480,16 +505,10 @@ public class Controller : MonoBehaviour {
                         WeaponAnime.SetTrigger("_weaponFire");
                         SoundScript.PlaySound("Rifle");
 
+                        // instantiating the projectile
                         GameObject bullet = Instantiate(Bullet, Barrel.position, rot) as GameObject;
                         bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletSpeed);
                         bullet.transform.localRotation = Barrel.rotation;
-
-                        //Bullets[bulletCount].position = Barrel.position;
-                        //Bullets[bulletCount].rotation = rot;
-                        //Bullets[bulletCount].GetComponent<Rigidbody>().AddForce(Bullets[bulletCount].transform.forward * BulletSpeed);
-                        //Bullets[bulletCount].transform.localRotation = Barrel.rotation;
-
-                        //bulletCount++;
 
                         time = 0;
 
@@ -508,6 +527,7 @@ public class Controller : MonoBehaviour {
                         WeaponAnime.SetTrigger("_weaponFire");
                         SoundScript.PlaySound("Laser");
 
+                        // ray casting the laser
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                         RaycastHit hit;
@@ -515,6 +535,7 @@ public class Controller : MonoBehaviour {
                         if (Physics.Raycast(inputRay, out hit))
                         {
                             pos = hit.point;
+                            //instantiating the hitbox of the laser
                             Instantiate(LaserHit, pos, LaserHit.transform.rotation);
                         }
                         else
@@ -526,6 +547,7 @@ public class Controller : MonoBehaviour {
 
                          dir = (Barrel.transform.position - pos);
 
+                        // instantiating the laser projectile
                         Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
 
                         laserHeat += LaserHeatRate;
@@ -622,7 +644,6 @@ public class Controller : MonoBehaviour {
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
 
-        LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
 
         KendoIm.enabled = true;
@@ -648,7 +669,6 @@ public class Controller : MonoBehaviour {
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
 
-        LaserHearBarBack.enabled = true;
         LaserHeatBar.enabled = true;
 
         KendoIm.enabled = false;
@@ -675,7 +695,6 @@ public class Controller : MonoBehaviour {
         SpareAmmoText.enabled = true;
         SpareAmmoText.text = RifleSpareAmmo.ToString();
 
-        LaserHearBarBack.enabled = false;
         LaserHeatBar.enabled = false;
 
         firingMode = 1;
@@ -704,7 +723,7 @@ public class Controller : MonoBehaviour {
         SpareAmmoText.enabled = true;
         SpareAmmoText.text = ShotgunSpareAmmo.ToString();
 
-        LaserHearBarBack.enabled = false;
+
         LaserHeatBar.enabled = false;
 
         firingMode = 3;
@@ -837,6 +856,7 @@ public class Controller : MonoBehaviour {
 
             canShoot = true;
 
+            // rifle reload
             if (firingMode == 1)
             {
                 if (rifleAmmo != RifleClipSize)
@@ -856,7 +876,7 @@ public class Controller : MonoBehaviour {
                 }
             }
 
-            // auto shotgun
+            // auto shotgun reload
             else if (firingMode == 3)
             {
                 if (shotgunAmmo != ShotgunClipSize)
@@ -951,7 +971,8 @@ public class Controller : MonoBehaviour {
             {
                 amour = 1;
                 AmourBar.rectTransform.localScale = new Vector3(amour, 1, 1);
-                Destroy(other.gameObject);
+                other.gameObject.transform.position = Vector3.zero;
+                other.gameObject.GetComponent<Consumeable>().eaten = true;
             }
         }
 
@@ -1036,8 +1057,10 @@ public class Controller : MonoBehaviour {
 
             // saving score and destroying all the AI
             Score Score = GameObject.Find("SPAWNS").GetComponent<Score>();
+
             if (move.CanPause)
             {
+                ScoreText.text = Score.ScoreCount.ToString();
                 FileSaver.WriteString(Score.ScoreCount);
                 move.CanPause = false;
             }
@@ -1069,7 +1092,6 @@ public class Controller : MonoBehaviour {
         AmmoText.enabled = false;
         SpareAmmoText.enabled = false;
         LaserHeatBar.enabled = false;
-        LaserHearBarBack.enabled = false;
         Reloading.enabled = false;
 
         // reseting player values and postion

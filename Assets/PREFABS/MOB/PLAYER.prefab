@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 222658606263878330}
   - component: {fileID: 114637412169136004}
   m_Layer: 0
-  m_Name: ScoreDisplay
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2185,7 +2185,7 @@ GameObject:
   - component: {fileID: 222307449420426566}
   - component: {fileID: 114225038454240064}
   m_Layer: 0
-  m_Name: Image (1)
+  m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2392,7 +2392,7 @@ GameObject:
   - component: {fileID: 222116554909522212}
   - component: {fileID: 114290532800285214}
   m_Layer: 0
-  m_Name: ScoreDisplay (1)
+  m_Name: ScoreDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14507,6 +14507,7 @@ MonoBehaviour:
   RifleGr: {fileID: 114685670388767582}
   ShotgunIm: {fileID: 114944763803094510}
   ShotgunGr: {fileID: 114872969038307376}
+  ScoreText: {fileID: 114637412169136004}
   AmourPerentage: 0.3
   SmallHealth: 0.1
   MediumHealth: 0.25
@@ -17481,7 +17482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185.59998, y: -283.7}
+  m_AnchoredPosition: {x: 185.59961, y: -283.7002}
   m_SizeDelta: {x: 460, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224383374791616624
@@ -18071,7 +18072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -565, y: 48.80005}
+  m_AnchoredPosition: {x: -565, y: 48.799805}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224675708421116398

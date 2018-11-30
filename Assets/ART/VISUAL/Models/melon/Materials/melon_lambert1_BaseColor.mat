@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Bleck
+  m_Name: melon_lambert1_BaseColor
   m_Shader: {fileID: 4800000, guid: de5e83de0d8fa8e45bfa3a69adeae480, type: 3}
   m_ShaderKeywords: _FRESNELONLIGHT_ON _FRESNELONSHADOW_ON _SHADOWMASKGLOSSTEXTURE_ON
     _SHOWSHADOWTONLIGHT_ON
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 00e73ae1661562f47b0f09126e8cc721, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskFReflection:
@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskSelfLit:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7fc8fa884ffb7284c873d25dd954f861, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4b16e137f6706cc458a4ee939a8c420e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -88,7 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 00e73ae1661562f47b0f09126e8cc721, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -107,7 +107,7 @@ Material:
     - _GlossIntensity: 0
     - _GlossMapScale: 1
     - _GlossTextureIntensity: 0
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _HardEdgeFresnel: 0
     - _MainTextureColorGloss: 0
@@ -121,12 +121,12 @@ Material:
     - _NormalIntensity: 1
     - _OcclusionStrength: 1
     - _OutlineNoiseIntensity: 0
-    - _OutlineWidth: 0.003
+    - _OutlineWidth: 0.0001
     - _Parallax: 0.02
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
-    - _Saturation: 1
-    - _SelfLitIntensity: 0
+    - _Saturation: 2
+    - _SelfLitIntensity: 0.151
     - _SelfLitPower: 1
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1
@@ -151,7 +151,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}

@@ -11,12 +11,24 @@ using UnityEngine;
 public class Consumeable : MonoBehaviour
 {
     // Item rotation speed
-    public float Speed;
+    public float Speed = 2;
 
     // bobing disance
-    public float bob;
+    public float bob; // = 0.01f;
 
-    // delta time
+    // Toggle weather to item spawns back or not
+    public bool Spawn;
+
+    // how long until the item respawns back
+    public float spawnTime;
+
+    // weather or not the item has been consumed by the player or not
+    public bool eaten = false;
+
+    // Respawn timer delat time
+    private float time2 = 0;
+
+    // movement delta time
     private float time = 0;
 
     // oringal position of the game object
@@ -35,7 +47,24 @@ public class Consumeable : MonoBehaviour
 
         // stops the object from floating upwards infinatly when game is paused
         if (Time.timeScale != 0)
-            Bob();
+            if (!eaten)
+                Bob();
+
+        // so the item can spawn back into the world
+        if (Spawn)
+        {
+            if (eaten)
+            {
+                time2 += Time.deltaTime;
+
+                if (time2 > spawnTime)
+                {
+                    time2 = 0;
+                    transform.position = pos;
+                    eaten = false;
+                }
+            }
+        }
     }
 
     // rotate the game object at a set speed
