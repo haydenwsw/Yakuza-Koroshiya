@@ -431,7 +431,7 @@ public class Controller : MonoBehaviour {
                 // instantiating a hit box
                 Instantiate(KendoHit, pos, LaserHit.transform.rotation);
 
-                // play hit sound
+                // kendo stick hit sound FX
                 SoundScript.PlaySound("Kendo");
 
                 Kendo = false;
@@ -451,7 +451,7 @@ public class Controller : MonoBehaviour {
                 {
                     if (fired)
                     {
-                        // playing firing aniamation
+                        // playing the kendo stick firing aniamation
                         WeaponAnime.SetTrigger("_weaponFire");
 
                         // telling the script that the kendo script that the kendo stick is being swung
@@ -502,7 +502,10 @@ public class Controller : MonoBehaviour {
 
                         Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
+                        // rifle firing animation
                         WeaponAnime.SetTrigger("_weaponFire");
+
+                        // rifle sound FX
                         SoundScript.PlaySound("Rifle");
 
                         // instantiating the projectile
@@ -512,7 +515,10 @@ public class Controller : MonoBehaviour {
 
                         time = 0;
 
+                        // deducing the amuntion
                         rifleAmmo--;
+
+                        // updaing the UI text
                         AmmoText.text = rifleAmmo.ToString();
                     }
                 }
@@ -524,7 +530,9 @@ public class Controller : MonoBehaviour {
                 {
                     if (fired)
                     {
+                        // firing animation
                         WeaponAnime.SetTrigger("_weaponFire");
+                        // laser sound FX
                         SoundScript.PlaySound("Laser");
 
                         // ray casting the laser
@@ -550,6 +558,7 @@ public class Controller : MonoBehaviour {
                         // instantiating the laser projectile
                         Instantiate(Laser, Barrel.transform.position, Quaternion.LookRotation(dir));
 
+                        // adding the the over heat bar
                         laserHeat += LaserHeatRate;
 
                         fired = false;
@@ -563,6 +572,7 @@ public class Controller : MonoBehaviour {
                 {
                     if (firedShotgun)
                     {
+                        // ray cast 
                         Vector3 pos = Vector3.zero;
                         Ray inputRay = cam.ScreenPointToRay(Input.mousePosition);
                         RaycastHit hit;
@@ -580,8 +590,10 @@ public class Controller : MonoBehaviour {
 
                         if (shotgunAmmo > 0)
                         {
+                            // spawn the amount of pellest
                             for (int i = 0; i < ShotgunPellets; i++)
                             {
+                                // randomizing the spread
                                 Vector3 Offset = new Vector3(
                                     UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
                                     UnityEngine.Random.Range(-ShotgunSpread, ShotgunSpread),
@@ -589,14 +601,20 @@ public class Controller : MonoBehaviour {
 
                                 Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
+                                // shotgun firing animation
                                 WeaponAnime.SetTrigger("_weaponFire");
+
+                                // shotgun firing sound FX
                                 SoundScript.PlaySound("Shotgun");
 
+                                // instantiating the pellets for the shotgn
                                 GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
                                 pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * BulletSpeed);
                             }
 
+                            // deducing the amuntion
                             shotgunAmmo--;
+                            // upadating the UI text
                             AmmoText.text = shotgunAmmo.ToString();
 
                             Shootgun = true;
@@ -646,6 +664,7 @@ public class Controller : MonoBehaviour {
 
         LaserHeatBar.enabled = false;
 
+        // weapon swithcing UI visual
         KendoIm.enabled = true;
         KendoGr.enabled = false;
         LaserIm.enabled = false;
@@ -671,6 +690,7 @@ public class Controller : MonoBehaviour {
 
         LaserHeatBar.enabled = true;
 
+        // weapon swithcing UI visual
         KendoIm.enabled = false;
         KendoGr.enabled = true;
         LaserIm.enabled = true;
@@ -699,6 +719,7 @@ public class Controller : MonoBehaviour {
 
         firingMode = 1;
 
+        // weapon swithcing UI visual
         KendoIm.enabled = false;
         KendoGr.enabled = true;
         LaserIm.enabled = false;
@@ -723,11 +744,11 @@ public class Controller : MonoBehaviour {
         SpareAmmoText.enabled = true;
         SpareAmmoText.text = ShotgunSpareAmmo.ToString();
 
-
         LaserHeatBar.enabled = false;
 
         firingMode = 3;
 
+        // weapon swithcing UI visual
         KendoIm.enabled = false;
         KendoGr.enabled = true;
         LaserIm.enabled = false;
@@ -741,13 +762,13 @@ public class Controller : MonoBehaviour {
     // waiting for the animtion for switching weapons to finish before the player can fire
     private void SwitchingWeaponAnime()
     {
-        // delta time
+        // weapon switching delta time
         if (WeaponSwitching)
         {
             time2 += Time.deltaTime;
         }
 
-        // sword
+        // kendo stick switching animation
         if (firingMode == 0)
         {
             if (time2 > 1)
@@ -766,7 +787,7 @@ public class Controller : MonoBehaviour {
             }
         }
 
-        // rifle
+        // rifle switching animation
         else if (firingMode == 1)
         {
             if (time2 > 1)
@@ -785,7 +806,7 @@ public class Controller : MonoBehaviour {
             }
         }
 
-        // laser pistol
+        // laser pistol switching animation
         else if (firingMode == 2)
         {
             if (time2 > 1)
@@ -804,7 +825,7 @@ public class Controller : MonoBehaviour {
             }
         }
 
-        // auto shotgun
+        // auto shotgun switching animation
         else if (firingMode == 3)
         {
             if (time2 > 1)
@@ -827,6 +848,7 @@ public class Controller : MonoBehaviour {
     // weapon reloading function
     void PreformReload()
     {
+        // realoading delta time
         if (Reloading.enabled)
         {
             time += Time.deltaTime;
@@ -842,6 +864,7 @@ public class Controller : MonoBehaviour {
         else if (firingMode == 3)
             clip = ShotgunClipSize;
 
+        // while realoading the player can't shoot
         if (reload == 1 && spareAmmo != 0 && ammo != clip)
         {
             Reloading.enabled = true;

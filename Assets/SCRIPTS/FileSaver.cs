@@ -22,27 +22,6 @@ public class FileSaver
         // get path
         string path = "Assets/ART/AUDIO/Resources/Score.txt";
 
-        // sorts the score
-        //var file = ReadString().Trim(' ').Split('\n').ToList();
-
-        //file.Insert(Score.ToString());
-
-        //int s = file.Count - 2;
-        //for (int i = 0; i < s - 1; i++)
-        //{
-        //    for (int ii = 0; ii < s - i - 1; ii++)
-        //    {
-        //        if (Int32.Parse(file[ii]) > Int32.Parse(file[ii + 1]))
-        //        {
-        //            string temp = file[ii];
-        //            file[ii] = file[ii + 1];
-        //            file[ii + 1] = temp;
-        //        }
-        //    }
-        //}
-
-        //file.RemoveAt(s);
-
         // write score to file
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(Score);

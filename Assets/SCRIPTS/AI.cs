@@ -141,7 +141,7 @@ public class AI : MonoBehaviour {
                             }
                             else if (Weapon == 1)
                             {
-                                // Laser Pistol
+                                // Laser Pistol firing
                                 pos = hit.point;
                                 Instantiate(LaserHit, pos, LaserHit.transform.rotation);
 
@@ -150,10 +150,10 @@ public class AI : MonoBehaviour {
                             }
                             else if (Weapon == 2)
                             {
-                                // Shotgun
+                                // Shotgun firing
                                 for (int i = 0; i < AIShotgunPellets; i++)
                                 {
-      
+                                    // offset the pellets projectiles
                                     Vector3 Offset = new Vector3(
                                         UnityEngine.Random.Range(-AIShotgunSpread, AIShotgunSpread),
                                         UnityEngine.Random.Range(-AIShotgunSpread, AIShotgunSpread),
@@ -163,6 +163,7 @@ public class AI : MonoBehaviour {
 
                                     Quaternion rot = Quaternion.LookRotation(dir + Offset);
 
+                                    // instantiate the pellet projectiles
                                     GameObject pellet = Instantiate(Pellet, Barrel.position, rot) as GameObject;
                                     pellet.GetComponent<Rigidbody>().AddForce(pellet.transform.forward * AIBulletSpeed);
                                 }
@@ -173,9 +174,10 @@ public class AI : MonoBehaviour {
                     }
                 }
 
-                // personal space
+                // radius the AI spot walking toawrds the player
                 if (distance <= InnerRadius)
                 {
+                    // person space
                     agent.SetDestination(transform.position);
 
                     AIanim.SetFloat("_isWalking", 0);
@@ -216,7 +218,7 @@ public class AI : MonoBehaviour {
         }
 	}
 
-    // face towards target
+    // face towards the player
     private void FaceTarget(Vector3 face)
     {
         Vector3 dir = (face - transform.position).normalized;

@@ -94,11 +94,16 @@ public class Movement : MonoBehaviour {
         // camera x axis
         float xRot = Input.GetAxisRaw("Mouse Y");
 
+        // calulating Charater rotation
         CharacterRot *= Quaternion.Euler(0f, yRot * Sensitivity, 0f);
+
+        // calulating player's look rotation
         CameraRot *= Quaternion.Euler(-xRot * Sensitivity, 0f, 0f);
 
+        // clamp the look rotation
         CameraRot = ClampRotationAroundXAxis(CameraRot);
 
+        // appling rotation
         con.moveMouseX(CameraRot);
         con.moveMouseY(CharacterRot);
 
