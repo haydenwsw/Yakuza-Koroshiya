@@ -65,6 +65,7 @@ public class Movement : MonoBehaviour {
 
         // Lock the mouse
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         // sets the camera rotation varable
         CameraRot = Camera.main.transform.localRotation;
@@ -194,6 +195,7 @@ public class Movement : MonoBehaviour {
                     PauseCanvas.enabled = true;
                     GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = false;
                     Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     isPaused = !isPaused;
                 }
             }
@@ -237,6 +239,7 @@ public class Movement : MonoBehaviour {
         PauseCanvas.enabled = false;
         OptionsCanvas.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         GameObject.Find("SPAWNS").GetComponent<Score>().score.enabled = true;
         isPaused = !isPaused;
     }
