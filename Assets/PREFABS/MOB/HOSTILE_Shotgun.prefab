@@ -1505,7 +1505,7 @@ Transform:
   m_GameObject: {fileID: 1009912262162530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4818812880023322}
   - {fileID: 4309023597196484}
@@ -1833,16 +1833,16 @@ MonoBehaviour:
   WaypointRadius: 10
   Weapon: 2
   AIBulletSpeed: 750
-  AIFireRate: 0.15
+  AIFireRate: 0.6
   AIHealth: 1
   AIRotationSpeed: 10
-  AIShotgunSpread: 5
-  AIShotgunPellets: 10
-  HeadshotMuilpler: 2
+  AIShotgunSpread: 6
+  AIShotgunPellets: 4
+  HeadshotMuilpler: 1
   BulletDamage: 0.1
-  PelletDamage: 0.1
-  SwordDamage: 0.45
-  LaserDamage: 0.175
+  PelletDamage: 0.45
+  SwordDamage: 0.6
+  LaserDamage: 0.1
   Barrel: {fileID: 4433272804018946}
   Bullet: {fileID: 1919970842314540, guid: fd5c56e1d0d66fb4dbbd7d3deee78ef3, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}

@@ -126,7 +126,7 @@ Material:
     - _ReceiveShadowsIntensity: 1
     - _ReduceWhite: 0
     - _Saturation: 2
-    - _SelfLitIntensity: 0.151
+    - _SelfLitIntensity: 0.4
     - _SelfLitPower: 1
     - _SelfShadowHardness: 1
     - _SelfShadowIntensity: 1

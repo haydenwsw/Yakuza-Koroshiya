@@ -1078,7 +1078,7 @@ public class Controller : MonoBehaviour {
 
             Cursor.lockState = CursorLockMode.None;
 
-            Cursor.visible = false;
+            Cursor.visible = true;
 
             // saving score and destroying all the AI
             Score Score = GameObject.Find("SPAWNS").GetComponent<Score>();

@@ -202,7 +202,7 @@ public class AI : MonoBehaviour {
             // spawn smallhealth (lase pistol enemie)
             if (Weapon == 1)
             {
-                Instantiate(SmallHealth, transform.position, SmallHealth.transform.rotation).transform.parent = transform.parent;
+                Instantiate(SmallHealth, transform.position + new Vector3(0,0.5f,0), SmallHealth.transform.rotation).transform.parent = transform.parent;
             }
 
             // spawn shotgun ammo (shotgun enemie)

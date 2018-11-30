@@ -14463,7 +14463,7 @@ MonoBehaviour:
   ReloadDelay: 1.5
   KendoStickRange: 1
   KendoTiming: 0.8
-  LaserDecayRate: 4
+  LaserDecayRate: 5
   LaserHeatRate: 0.1
   RifleFireRate: 0.14
   RifleSpread: 0.1
@@ -14471,12 +14471,12 @@ MonoBehaviour:
   RifleAmmoPickup: 10
   ShotgunFireRate: 1
   ShotgunSpread: 0.5
-  ShotgunClipSize: 100
-  ShotgunPellets: 4
+  ShotgunClipSize: 7
+  ShotgunPellets: 5
   ShotgunAmmoPickup: 5
-  LaserDamage: 0.02
-  RifleDamage: 0.02
-  ShotgunDamage: 0.02
+  LaserDamage: 0.015
+  RifleDamage: 0.01
+  ShotgunDamage: 0.01
   KendoHit: {fileID: 1723558424657694, guid: 1fb35f6a95157ba4489c1d039fa3f0a4, type: 2}
   Bullet: {fileID: 1376597009366104, guid: 648198c3aa3869f48a9d5d86d75d96cf, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
@@ -14484,7 +14484,6 @@ MonoBehaviour:
   Pellet: {fileID: 1793765493058572, guid: c82b7443b86ca6a40b7264457acf9572, type: 2}
   Barrel: {fileID: 4910919328184956}
   Weapon: {fileID: 4240303781119652}
-  Spawn: {fileID: 0}
   KendoStick: {fileID: 1691512340086530, guid: 9fc01ee54b90af849a94ade2023e8f88, type: 2}
   LaserPistol: {fileID: 1470604625557212, guid: 2f9838bb0084d3243878043ebf56dd1a,
     type: 2}
@@ -14495,7 +14494,6 @@ MonoBehaviour:
   SpareAmmoText: {fileID: 114364426568071728}
   HealthBar: {fileID: 114054584086889384}
   AmourBar: {fileID: 114524797951163548}
-  LaserHearBarBack: {fileID: 114803890528582690}
   LaserHeatBar: {fileID: 114472391965429832}
   Reloading: {fileID: 114148201518697696}
   DeathCanvas: {fileID: 223964695648762282}

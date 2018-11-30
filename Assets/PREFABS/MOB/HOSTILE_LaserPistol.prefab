@@ -1203,7 +1203,7 @@ Transform:
   m_GameObject: {fileID: 1231440888822698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4718176051877854}
   - {fileID: 4114612468895808}
@@ -1784,7 +1784,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
-  m_CookingOptions: -2
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: eaef143aaa6054546b24bf006570bd43, type: 3}
 --- !u!65 &65823165157853326
@@ -1838,11 +1838,11 @@ MonoBehaviour:
   AIRotationSpeed: 10
   AIShotgunSpread: 0
   AIShotgunPellets: 0
-  HeadshotMuilpler: 2
+  HeadshotMuilpler: 1
   BulletDamage: 0.1
-  PelletDamage: 0.1
-  SwordDamage: 0.45
-  LaserDamage: 0.175
+  PelletDamage: 0.45
+  SwordDamage: 0.6
+  LaserDamage: 0.1
   Barrel: {fileID: 4220907362026272}
   Bullet: {fileID: 1919970842314540, guid: fd5c56e1d0d66fb4dbbd7d3deee78ef3, type: 2}
   Laser: {fileID: 1588764347841614, guid: 5556e465a4f9f4a4dad6ea3437947547, type: 2}
