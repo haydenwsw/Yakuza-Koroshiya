@@ -129,7 +129,7 @@ public class Pause : MonoBehaviour {
 
     }
 
-    // gose back to the pause menu froms the pause menu
+    // gose back to the pause menu from the options menu
     public void Back()
     {
         PauseCanvas.enabled = true;

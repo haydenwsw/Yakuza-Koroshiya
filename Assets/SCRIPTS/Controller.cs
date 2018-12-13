@@ -959,7 +959,7 @@ public class Controller : MonoBehaviour {
         }
     }
 
-    // take damge from the AI
+    // take damage from the AI
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         // take Laser pistol damage
@@ -1008,7 +1008,16 @@ public class Controller : MonoBehaviour {
         // medium health  (Suishi rolls)
         if (other.gameObject.tag == "HealthMedium")
         {
-            Heal(MediumHealth, other.gameObject);
+            if (health != 1)
+            {
+                health += MediumHealth;
+                if (health >= 1)
+                    health = 1;
+                HealthBar.rectTransform.localScale = new Vector3(health, 1, 1);
+
+                other.gameObject.transform.position = Vector3.zero;
+                other.gameObject.GetComponent<Consumeable>().eaten = true;
+            }
         }
 
         // Large health (Bento box)
